@@ -1,0 +1,492 @@
+name: 一杯茶的时间，上手 Taro 跨端小程序开发
+id: 34a473b9e9e5e3dafcc619ab152750af
+created: '2019-12-25T10:16:40.222Z'
+updated: 2019-12-25T14:48:04.849Z
+github: 'https://github.com/tuture-dev/ultra-club'
+steps:
+  - name: 起步
+    commit: aaead19
+    diff:
+      - file: .editorconfig
+      - file: .eslintrc
+      - file: .gitignore
+      - file: .prettierrc
+      - file: config/dev.js
+        display: false
+        explain:
+          pre: ''
+      - file: config/index.js
+        display: false
+      - file: config/prod.js
+        display: false
+      - file: package.json
+        display: false
+      - file: project.config.json
+        display: false
+      - file: src/app.jsx
+        display: true
+        explain:
+          pre: |-
+            ### 初探脚手架代码
+
+            `src/app.jsx` 定义了项目的根组件 `App`，它的代码如下：
+          post: >-
+            如果你熟悉 React 的话，那么上面这段代码一定不难理解，只不过是把相应的地方（导包、渲染）从之前的 `React` 以及
+            `ReactDOM` 改成 `Taro`。
+
+
+
+            ::: warning
+
+            **注意**
+
+
+            可以看到这个组件还多了一个 `config` 属性，这个属性是小程序应用专属的。其中要重点关注的是 `pages`
+            数组，列出了所有的页面模块，例如这里的 `pages/index/index` 就对应
+            src/pages/index/index.jsx。后面在实现路由时还会用到 `pages` 属性。
+
+            :::
+      - file: src/app.scss
+        display: false
+      - file: src/index.html
+        display: false
+      - file: src/pages/index/index.jsx
+        display: true
+        explain:
+          pre: >-
+            我们再看看 `src/pages/index/index.jsx`。按照最佳实践，Taro 项目中一般把页面组件放到
+            `src/pages` 目录中，`src/pages/index` 就是 `index` 页面组件模块，其中 index.jsx
+            的代码如下：
+          post: >-
+            依旧是熟悉的 React 组件风格，只不过与普通的 React 相比，在 `render` 函数中我们用的不再是 `div` 和 `p`
+            标签，而是 Taro 为我们准备好的 `View` 和 `Text` 组件。为什么 Taro 要自己搞一套组件库呢？因为 Taro
+            的目标是星辰大海……sorry，是能够编译到各个平台。**只有通过制订 Taro
+            自己的组件库，才能在各个平台的原生组件库上盖了一层抽象层，进而实现跨平台的目标**。
+
+
+
+            ::: info
+
+            **提示**
+
+
+            如果你有过 React Native 的开发经验，那么一定对 Taro 组件库不陌生。
+
+            :::
+      - file: src/pages/index/index.scss
+        display: false
+      - file: yarn.lock
+    explain:
+      pre: "对于国内 React 开发者来说，[Taro](https://taro.jd.com/) 的出现无疑是福音——它能够让我们用熟悉的 React 代码去搭建各类小程序，并且一份代码可以编译成多个平台的应用（目前包括微信小程序、支付宝小程序、React Native、H5 等等）。随着 Taro 的不断进化，它对 React 代码的支持程度越来越好，所支持的目标平台也越来越多，学习的价值自然不必多言。正值 Taro 进入 2.0.0 版本的 beta 阶段，我们在这一篇教程将手把手带你实现一个能够部署到多端的小程序，让你感受 Taro 的强大与魅力！\n\n### 我们将构建什么？\n\n 我们将构建一个具有多页面的多端小程序应用——奥特曼俱乐部（Ultraman Club）。项目的 GIF 动图展示如下：\n\n你也可以用微信扫这个二维码体验 demo：\n\n具体有三个页面：\n\n1. **主页**：展示了所有帖子，以及添加新帖子的按钮。\n2. **帖子详情**：展示单个帖子的全部内容。\n3. **个人主页**：展示当前用户的个人信息，如果未登录则提示登录。\n\n在部署方面，我们最终会将应用编译成微信小程序、支付宝小程序以及 React Native。\n\n### 你将学会什么？\n\n读完这篇教程，你将学会在 Taro 框架下：\n\n- 用熟悉的 React 代码编写界面\n- 使用 React Hooks 重构状态管理\n- 用自带路由功能搭建多页面应用\n- 利用 [taro-ui](https://taro-ui.jd.com/#/) 组件库，让界面专业美观\n- 利用小程序云进行后端开发\n- 编译为多端应用，并进行部署\n\n### 前提条件\n\n在阅读这篇教程之前，我们希望你已经具备以下知识：\n\n- 了解 HTML、CSS、JavaScript 的基础知识\n- 了解 React 框架的基础知识，可以参考[这篇教程](https://tuture.co/2019/11/18/07acf61/)进行学习；如果接触过 React Native 以及 Hooks 则更好了\n- 了解并已经安装好 Node 与 npm，可以参考[这篇教程](https://tuture.co/2019/12/03/892fa12/)进行学习\n\n除此之外，你还需要下载并安装微信开发者工具，这里是[下载地址](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)。\n\n### 用 Taro 脚手架初始化项目\n\n首先安装 Taro CLI：\n\n```bash\nnpm install -g @tarojs/cli\n```\n\n然后创建我们的项目：\n\n```bash\ntaro init ultra-club\n```\n\n之后会出现一系列选项，按照下图所示进行选择即可（CSS 预处理器选择 [Sass](https://www.sass.hk/)，模板选择“默认模板”，老司机可自行选择使用 TS）：\n\n![](tuture-assets/taro-init.png)\n\n\n::: info\n**提示**\n\n本项目使用 [Sass](https://www.sass.hk/) 主要是为了兼容 taro-ui 的样式，并没有使用到 Sass 的高级特性，如果你不熟悉的话也不用担心哦，就当成是常规的 CSS 代码。\n:::\n\n\n进入到我们的项目目录 ultra-club 之后，可以看到项目模板包括以下文件：\n\n```text\n.\n├── config                    # 项目配置\n│\_\_ ├── dev.js                # 开发环境配置文件\n│\_\_ ├── index.js              # 主配置文件\n│\_\_ └── prod.js               # 生产环境配置文件\n├── package.json\n├── project.config.json       # 微信小程序项目配置\n└── src                       # 项目源码目录\n    ├── app.scss               # 根组件样式\n    ├── app.jsx               # 根组件 app\n    ├── index.html            # 等待被嵌入代码的 HTML 文档\n    └── pages                 # 页面目录\n        └── index             # index 页面模块\n            ├── index.scss     # index 页面样式\n            └── index.jsx     # index 页面组件\n```\n\n我们主要看一下两个代码文件：`src/app.jsx` 以及 `src/pages/index/index.jsx`。"
+      post: >-
+        ### 运行小程序
+
+
+        Taro 提供的模板代码直接可以运行。打开终端，运行以下命令：
+
+
+        ```bash
+
+        npm run dev:weapp
+
+        ```
+
+
+        会出现以下提示信息：
+
+
+        ![](tuture-assets/dev-weapp.png)
+
+
+        当看到“监听文件修改中...”的提示后，我们就可以打开微信开发者工具，用微信扫码登录后界面如下：
+
+
+        ![](tuture-assets/wechat-dev-new.png)
+
+
+        点击那个硕大的➕号，开始导入我们刚才创建的 ultra-club 项目：
+
+
+        ![](tuture-assets/import-project.png)
+
+
+        如上图所示，首先切换到”导入项目“一栏，然后点击”目录“输入栏右侧的按钮选择刚才创建的 ultra-club
+        文件夹，最后点击右下角的”导入“按钮即可。
+
+
+        导入成功后，微信开发者工具的界面如下图所示：
+
+
+        ![](tuture-assets/devtool-ui.png)
+
+
+        在模拟器页面中，看到了我们 `index` 页面渲染的 Hello
+        world；编辑器能够查看所有代码，不过通常我们用自己习惯的代码编辑器来开发（VSCode 真香！）；调试器则是类似 Chrome
+        的开发者工具。
+
+
+        一切就绪，让我们开始动工吧！
+
+
+        ::: info
+
+        **提示**
+
+
+        从这一步开始，我们的主要开发目标将是微信小程序，但是不要担心，我们会在文章的最后演示怎么编译到其他平台哦。
+
+        :::
+  - name: React 代码，熟悉的味道
+    commit: 9dbcafa
+    diff:
+      - file: src/components/PostCard/index.jsx
+        display: true
+        explain:
+          pre: >-
+            ### 实现 PostCard 组件
+
+
+            首先创建 `src/components` 目录，我们的通用组件都会放在这里面。然后创建
+            `src/components/PostCard` 组件目录，在其中分别创建 `index.jsx` 和
+            `index.scss`。`index.jsx` 代码如下：
+          post: 正如之前所说，`PostCard` 组件包含两个 props：标题 `title` 和内容 `content`。
+      - file: src/components/PostCard/index.scss
+        display: true
+        explain:
+          pre: PostCard 组件的样式 `index.scss` 代码如下：
+      - file: src/components/PostForm/index.jsx
+        display: true
+        explain:
+          pre: >-
+            ### 实现 PostForm 组件
+
+
+            接着我们实现用于创建新帖子的 PostForm 组件。在 `src/components` 中创建 `PostForm`
+            目录，并在其中添加 `index.jsx` 和 `index.scss` 文件。`index.jsx` 代码如下：
+          post: >
+            `PostForm` 组件一共定义了个 prop，分别如下：
+
+
+            - `formTitle`：当前编辑中帖子的标题
+
+            - `formContent`：当前编辑中帖子的内容
+
+            - `handleSubmit`：处理提交表单的回调函数
+
+            - `handleTitleInput`：处理标题接收到用户输入时的回调函数
+
+            - `handleContentInput`：处理内容接收到用户输入时的回调函数
+
+
+
+            ::: info
+
+            **提示**
+
+
+            如果你不熟悉 React，可能会对上面编写表单的方式有点困惑。实际上，React
+            推荐用”受控组件“的方式编写表单，可参考[这篇文档](https://zh-hans.reactjs.org/docs/forms.html)。
+
+            :::
+      - file: src/components/PostForm/index.scss
+        display: true
+        explain:
+          pre: PostForm 的样式文件 `index.scss` 的代码如下：
+      - file: src/components/index.jsx
+        display: true
+        explain:
+          pre: >-
+            为了方便在页面组件中使用 `PostCard` 和 `PostForm` 组件，我们把 `src/components`
+            变成一个模块。具体地，创建 `src/components/index.jsx`，代码如下：
+      - file: src/pages/index/index.jsx
+        display: true
+        explain:
+          pre: >-
+            ### 在 index 页面中接入 PostCard 和 PostForm
+
+
+            最后在 `src/pages/index/index.jsx` 文件中加入之前写好的 PostCard 和 PostForm
+            组件，代码如下：
+          post: |-
+            可以看到，除了接入之前定义的两个组件外，我们还加入了一些状态：
+
+            - `posts`：当前所有的帖子，每个帖子是一个包含 `title` 和 `content` 的对象
+            - `formTitle`：当前正在编辑的帖子的标题
+            - `formContent`：当前正在编辑的帖子的内容
+
+            以及定义了 `PostForm` 组件中所需要的三个回调函数。
+    explain:
+      pre: |-
+        从这一步开始，我们就来实现”奥特曼俱乐部“小程序。按照 React 中”万物皆组件“的思想，我们抽象出两个组件：
+
+        - `PostCard`：用于展示一篇帖子，包括标题 `title` 和内容 `content`
+        - `PostForm`：用于发布新帖子的表单
+      post: >
+        ### 查看效果
+
+
+        如果之前的开发服务器还打开着，那么微信开发者工具应该就能直接看到效果了（如果刚才关了，可以运行 `npm run dev:weapp`
+        再次打开哦）：
+
+
+        ![](tuture-assets/ultra-club-demo1.gif)
+
+
+
+        ::: warning
+
+        **注意**
+
+
+        有时候 Taro 可能会出现样式加载失败的问题。如果你遇到了，可以关闭开发服务器，重新运行 `npm run dev:weapp`。
+
+        :::
+  - name: Hooks 轻装上阵
+    commit: c262228
+    diff:
+      - file: src/pages/index/index.jsx
+        display: true
+        explain:
+          pre: >-
+            ### 动手环节
+
+
+            到了动手环节，我们用 `useState` 来重构我们的 index 页面。具体地，我们将整个 `Index`
+            组件转换成函数式组件，然后之前的三个状态都用 `useState` 来创建，代码如下：
+          post: >
+
+            ::: warning
+
+            **注意**
+
+
+            由于我们把 `Index` 从类组件改造成了函数组件，所以挂载 `config` 要在 `Index` 组件定义之后直接挂载在
+            `Index` 上面。
+
+            :::
+    explain:
+      pre: >-
+        自从 React 团队在 2018 年的 React Conf 引入了 Hooks 之后，前端圈无疑是经历了一场地震。仅仅只需几个
+        API，就轻松地用**纯函数**的方式搞定了组件的状态管理和数据流，这是何等的神仙操作？
+
+
+        幸运的是，Taro 团队也在 v1.3.0 版本中添加了[对 Hooks
+        的支持](http://taro-docs.jd.com/taro/docs/hooks.html)。因此，我们也将在本项目中用 Hooks
+        解决状态管理和数据流的问题。
+
+
+        ### Hooks 快速复习
+
+
+        本文在这里简单地过一遍 Hooks 最重要的知识点，如果你已经很熟悉了，请直接移步下面的代码环节。
+
+
+        #### useState：轻松管理状态
+
+
+        比如我们之前有这么一个类组件 `ClickMe`，它会抱怨你点了它多少次：
+
+
+        ```javascript
+
+        class ClickMe extends Component {
+          state = { count: 0 }
+
+          render() {
+            return (
+              <div>
+                <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+                  你点了我 {this.state.count} 次！
+                </button>
+              </div>
+            )
+          }
+        }
+
+        ```
+
+
+        用 Hooks 改写之后，就变成了一个函数式组件：
+
+
+        ```javascript
+
+        // 记得导入 useState 函数
+
+        import Taro, { useState } from '@tarojs/taro'
+
+
+        function ClickMe() {
+          const [count, setCount] = useState(0)
+
+          return (
+            <div>
+              <button onClick={() => setCount(count + 1)}>你点了我 {count} 次！</button>
+            </div>
+          )
+        }
+
+        ```
+
+
+        可以看到，`useState` 函数返回了两个值：
+
+
+        - **状态**（也就是上面的 `count`）：可以在渲染时直接使用
+
+        - **修改状态的函数**（也就是上面的 `setCount`）：用于在处理相应事件时，通过传入新的状态来更新状态
+
+
+        还注意到 `useState` 接受一个参数，即**状态的初始值**。这里我们取了一个 `Number`
+        类型，事实上还可以是字符串、数组、对象等等。
+
+
+        #### useEffect：轻松管理“副作用”
+
+
+        在前端开发的语境下，“副作用”通常包括获取数据、修改 DOM 元素等等操作。在 Hooks
+        诞生之前，我们通常用[生命周期方法](https://zh-hans.reactjs.org/docs/state-and-lifecycle.html#adding-lifecycle-methods-to-a-class)来管理”副作用“。但是
+        Hooks 出现之后，一切都变得优雅很多。
+
+
+        还是以上面的 `ClickMe` 组件为例：
+
+
+        ```javascript
+
+        import Taro, { useState, useEffect } from '@tarojs/taro'
+
+
+        function ClickMe() {
+          const [count, setCount] = useState(0)
+
+          useEffect(() => {
+            axios.post('/click', { count })
+          })
+
+          return (
+            <div>
+              <button onClick={() => setCount(count + 1)}>你点了我 {count} 次！</button>
+            </div>
+          )
+        }
+
+        ```
+
+
+        这里的 `useEffect` 函数
+      post: 你尽可以打开模拟器试一下重构之后效果，看看功能是否与上一步完全一致哦！
+  - name: 来一打页面
+    commit: 7de9625
+    diff:
+      - file: src/app.jsx
+        display: true
+        explain:
+          pre: |-
+            ### 配置全部页面
+
+            首先在入口文件 `src/app.jsx` 中配置好所有页面：
+          post: 注意到我们还在 `config` 中注册了导航栏 `tabBar`，用来在底部切换 `index` 页面和 `mine` 页面。
+      - file: src/components/PostCard/index.jsx
+        display: true
+        explain:
+          pre: >-
+            ### 在 PostCard 中添加跳转逻辑
+
+
+            我们首先在 `PostCard` 组件中添加跳转逻辑，使得它被点击后将进入该帖子的详情页面。将
+            `src/components/PostCard/index.jsx` 按如下代码进行修改：
+          post: >
+            可以看到，我们在 `PostCard` 中注册了 `handleClick` 用于响应点击事件。在 `handleClick`
+            函数中，我们通过新引入的 `isList` 属性判断这个组件是否展示在首页列表中。如果是的话，就通过 `Taro.navigateTo`
+            进行跳转。
+
+
+
+            ::: info
+
+            **提示**
+
+
+            眼尖的你一定发现了我们在调用 `navigateTo`
+            时还加上了**查询字符串**用于传递参数。在接下来实现帖子详情页面时，我们就可以接收到传递进来的 `title` 和 `content`
+            的值啦。
+
+            :::
+      - file: src/pages/index/index.jsx
+        display: true
+        explain:
+          pre: >-
+            接着我们需要在首页模块中给 `PostCard` 组件加上 `isList`。修改
+            `src/pages/index/index.jsx`，代码如下：
+      - file: src/pages/post/post.jsx
+        display: true
+        explain:
+          pre: >-
+            ### 实现“帖子详情”页面
+
+
+            在 `src/pages` 中创建 `post` 目录，然后在其中创建 post.jsx 和
+            post.scss，分别为页面模块和样式文件。post.jsx 代码如下：
+          post: >-
+            注意到我们用了 `useRouter` 这个 Hook（Taro 专有），它用来在函数组件中获取 `router`，等同于之前类组件中的
+            `this.$router`。有了 `router`，我们就可以获取到在刚才 `PostCard` 组件跳转时传进来的 `title`
+            和 `content` 参数了。
+      - file: src/pages/post/post.scss
+        display: true
+        explain:
+          pre: post.scss 的代码如下：
+      - file: src/pages/mine/mine.jsx
+        display: true
+        explain:
+          pre: >-
+            ### 实现“我的”页面
+
+
+            接着我们实现“我的”页面。创建 `src/pages/mine` 目录，在其中创建 mine.jsx 和 mine.scss。页面组件
+            mine.jsx 代码如下：
+      - file: src/pages/mine/mine.scss
+        display: true
+        explain:
+          pre: 样式文件 mine.scss 代码如下：
+      - file: src/images/avatar.png
+      - file: src/images/home.png
+      - file: src/images/homeSelected.png
+      - file: src/images/mine.png
+      - file: src/images/mineSelected.png
+    explain:
+      pre: >-
+        在这一步中，我们将开始实现项目的其他页面，包括：
+
+
+        - 帖子详情 `post`：进入单篇帖子的详情页面
+
+        - 我的 `mine`：显示当前用户的个人信息（在后面的步骤中将实现登录注册哦）
+
+
+        其中，帖子详情页面中将复用前面编写的 `PostCard` 组件。为了方便管理，我们需要引入一个新的
+        prop（`isList`），用于判断此组件是显示在首页列表中，还是在帖子详情页面中。
+
+
+        ### Taro 的路由功能
+
+
+        路由功能是实现多页面应用的核心，幸运的是 Taro 已经自带了。具体而言，在 Taro 中实现页面跳转只需两个步骤：
+
+
+        1. 在入口文件（`src/app.jsx`）中在 `App` 组件的 `config` 中配置之前提到的 `pages` 属性
+
+        2. 在任意组件中通过 `Taro.navigateTo` 或 `Taro.redirectTo` 即可实现页面的跳转或重定向
+
+
+        感觉不够直观？OK，我们直接撸起袖子写起来。
+      post: |-
+        ### 查看效果
+
+        又到了激动人心的验收环节。我们应该能看到下面所示的效果：
+
+        ![](tuture-assets/taro-demo2.gif)
+description: >-
+  正当移动互联网进入白热化阶段时，以微信小程序为代表的一类“轻应用”异军突起。它们无需下载，使用方便，“用完即走”，同时功能也较为完备，一经推出即得到了各大平台和及用户的热烈追捧。但是问题也随之而来——开发者们要同时维护
+  Web 端、移动端、微信小程序、支付宝小程序等等多套用户界面，其维护成本可以想象。作为一个优秀的多端统一开发解决方案，Taro 的出现则改变了这一情况。正值
+  Taro 2.x 进入 beta 阶段，让我们沏上一杯茶，开始我们的 Taro 多端小程序开发之旅吧。
