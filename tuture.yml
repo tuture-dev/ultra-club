@@ -1,7 +1,7 @@
 name: 一杯茶的时间，上手 Taro 多端小程序开发
 id: 34a473b9e9e5e3dafcc619ab152750af
 created: '2019-12-25T10:16:40.222Z'
-updated: 2019-12-26T08:26:23.495Z
+updated: 2019-12-26T10:59:10.409Z
 github: 'https://github.com/tuture-dev/ultra-club'
 description: >-
   正当移动互联网进入白热化阶段时，以微信小程序为代表的一类“轻应用”异军突起。它们无需下载，使用方便，“用完即走”，同时功能也较为完备，一经推出即得到了各大平台和及用户的热烈追捧。但是问题也随之而来——开发者们要同时维护
@@ -441,6 +441,19 @@ steps:
 
         其中，帖子详情页面中将复用前面编写的 `PostCard` 组件。为了方便管理，我们需要引入一个新的
         prop（`isList`），用于判断此组件是显示在首页列表中，还是在帖子详情页面中。
+
+
+
+        ::: info
+
+        **提示**
+
+
+        项目中所需用到的图片可以从[这个链接](https://github.com/tuture-dev/ultra-club/releases/download/v0.0.1/images.zip)下载，下载后解压并将所有图片放到
+        `src/images` 目录下。
+
+        :::
+
 
 
         ### Taro 的路由功能
