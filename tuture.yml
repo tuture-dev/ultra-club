@@ -482,7 +482,6 @@ steps:
 
 
         ![](tuture-assets/taro-demo2.gif)
-<<<<<<< Updated upstream
 
 
         至此，《Taro 一杯茶》上篇也就结束啦。我们会马上推出下篇，手把手带大家用 Taro UI 升级界面，用 Redux
@@ -612,9 +611,8 @@ steps:
         }
 
         ```
-=======
-  - name: '加速开发, taro-ui 帮帮忙'
-    commit: 1f31a53
+  - name: '多端登录,群魔乱舞'
+    commit: ea264c6
     diff:
       - file: config/index.js
         display: true
@@ -622,23 +620,38 @@ steps:
         display: true
       - file: src/app.scss
         display: true
-      - file: src/components/PostCard/index.jsx
+      - file: src/components/AlipayLoginButton/index.js
         display: true
-      - file: src/components/PostCard/index.scss
+      - file: src/components/AlipayLoginButton/index.scss
         display: true
-      - file: src/components/PostForm/index.jsx
+      - file: src/components/Footer/index.js
         display: true
-      - file: src/components/PostForm/index.scss
+      - file: src/components/Footer/index.scss
         display: true
-      - file: src/custom-theme.scss
+      - file: src/components/Header/index.js
         display: true
-      - file: src/pages/index/index.jsx
+      - file: src/components/Header/index.scss
         display: true
-      - file: src/pages/index/index.scss
+      - file: src/components/LoggedMine/index.jsx
+        display: true
+      - file: src/components/LoggedMine/index.scss
+        display: true
+      - file: src/components/LoginButton/index.js
+        display: true
+      - file: src/components/LoginForm/index.jsx
+        display: true
+      - file: src/components/LoginForm/index.scss
+        display: true
+      - file: src/components/Logout/index.js
+        display: true
+      - file: src/components/WeappLoginButton/index.js
+        display: true
+      - file: src/components/WeappLoginButton/index.scss
+        display: true
+      - file: src/components/index.jsx
+        display: true
+      - file: src/pages/mine/mine.jsx
+        display: true
+      - file: src/pages/mine/mine.scss
         display: true
       - file: yarn.lock
-description: >-
-  正当移动互联网进入白热化阶段时，以微信小程序为代表的一类“轻应用”异军突起。它们无需下载，使用方便，“用完即走”，同时功能也较为完备，一经推出即得到了各大平台和及用户的热烈追捧。但是问题也随之而来——开发者们要同时维护
-  Web 端、移动端、微信小程序、支付宝小程序等等多套用户界面，其维护成本可以想象。作为一个优秀的多端统一开发解决方案，Taro 的出现则改变了这一情况。正值
-  Taro 2.x 进入 beta 阶段，让我们沏上一杯茶，开始我们的 Taro 多端小程序开发之旅吧。
->>>>>>> Stashed changes
