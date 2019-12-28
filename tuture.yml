@@ -1,7 +1,7 @@
 name: 一杯茶的时间，上手 Taro 多端小程序开发
 id: 34a473b9e9e5e3dafcc619ab152750af
 created: '2019-12-25T10:16:40.222Z'
-updated: 2019-12-26T12:54:00.251Z
+updated: 2019-12-27T15:25:51.329Z
 github: 'https://github.com/tuture-dev/ultra-club'
 topics:
   - Taro
@@ -554,13 +554,69 @@ steps:
 
             接着我们来调整 `PostCard`
             在不同页面的样式。[classnames](https://www.npmjs.com/package/classnames)
-            是最常用的 CSS 类组合库，可以让你用 JavaScript 表达式灵活地进行 CSS 类的组合。
+            是最常用的 CSS 类组合库，可以让你用 JavaScript 表达式灵活地进行 CSS 类的组合。例如我们有三个 CSS 类
+            `foo`、`bar` 和 `foo-bar`，可以通过 `classNames` 函数进行条件式组合：
+
+
+            ```javascript
+
+            import classNames from 'classnames`;
+
+
+            classNames('foo', 'bar'); // => 'foo bar'
+
+            classNames('foo', { bar: true }); // => 'foo bar'
+
+            classNames({ 'foo-bar': true }); // => 'foo-bar'
+
+            classNames({ 'foo-bar': false }); // => ''
+
+            classNames({ foo: true }, { bar: true }); // => 'foo bar'
+
+            classNames({ foo: true, bar: true }); // => 'foo bar'
+
+            ```
+
+
+            我们也新增加一个 CSS 类 `postcard__isList`，用于表示在帖子列表中的样式。修改
+            `src/components/PostCard/index.jsx` 代码如下：
       - file: src/components/PostCard/index.scss
         display: true
+        explain:
+          pre: 修改 `PostCard` 组件的样式，代码如下：
       - file: src/custom-theme.scss
         display: true
+        explain:
+          pre: >-
+            ### 定制主题颜色
+
+
+            Taro UI
+            支持一定程度的[主题定制](https://taro-ui.jd.com/#/docs/customizetheme)，这里我们采用最简单却也十分有效的
+            **SCSS 变量覆盖**。我们创建 `src/custom-theme.scss`，代码如下：
+          post: >
+            可以看到，我们定义了三个 SCSS 变量 `$color-brand`、`$color-brand-light` 和
+            `$color-brand-dark`，覆盖了 Taro UI 的默认主题色。
+
+
+
+            ::: info
+
+            **提示**
+
+
+            欲查看所有可以覆盖的 SCSS 变量，请参考 Taro UI
+            的[默认样式文件](https://github.com/NervJS/taro-ui/blob/dev/src/style/variables/default.scss)。如果不熟悉
+            SCSS 变量，这份[指南](https://www.sass.hk/guide/)是不错的资料。
+
+            :::
       - file: src/app.scss
         display: true
+        explain:
+          pre: 紧接着我们需要在项目的全局样式文件 `src/app.scss` 中导入自定义颜色主题文件，代码如下：
+          post: >-
+            可以看到，除了导入了刚刚创建的 `custom-theme.scss`，我们还**按需引入**了 Taro UI
+            中所用到组件的样式，这样可以有效减少打包后应用体积的大小哦。
       - file: yarn.lock
     explain:
       pre: >
@@ -571,7 +627,7 @@ steps:
         升级界面，让它看上去更像一个成熟的小程序。
 
 
-        不过与之前的小节不同，我们将先贴出完成这一步后的 demo 展示（鼓励你继续看下去哈哈）：
+        不过与之前不同，我们将先贴出完成这一步后的 demo 展示：
 
 
         ![](tuture-assets/taro-demo3.gif)
@@ -611,22 +667,42 @@ steps:
         }
 
         ```
-  - name: '多端登录,群魔乱舞'
+      post: 完成这一步的代码后，记得在模拟器里面看看运行起来是不是跟开头的 GIF demo 效果完全一致哦！
+  - name: 多端登录，群魔乱舞
     commit: ea264c6
     diff:
       - file: config/index.js
         display: true
+        explain:
+          pre: >-
+            ### 配置 Babel 插件
+
+
+            从这一步开始，我们将首次开始写异步代码。这个项目将采用流行的 async/await 来编写异步逻辑，因此我们配置一下相应的 Babel
+            插件：
+
+
+            ```bash
+
+            npm install babel-plugin-transform-runtime --save-dev
+
+            # yarn add babel-plugin-transform-runtime -D
+
+            ```
+
+
+            然后在 `config/index.js` 中为 `config.babel.plugins` 添加相应的配置如下：
       - file: package.json
-        display: true
+        display: false
       - file: src/app.scss
         display: true
       - file: src/components/AlipayLoginButton/index.js
         display: true
       - file: src/components/AlipayLoginButton/index.scss
         display: true
-      - file: src/components/Footer/index.js
+      - file: src/components/WeappLoginButton/index.js
         display: true
-      - file: src/components/Footer/index.scss
+      - file: src/components/WeappLoginButton/index.scss
         display: true
       - file: src/components/Header/index.js
         display: true
@@ -644,14 +720,16 @@ steps:
         display: true
       - file: src/components/Logout/index.js
         display: true
-      - file: src/components/WeappLoginButton/index.js
-        display: true
-      - file: src/components/WeappLoginButton/index.scss
-        display: true
       - file: src/components/index.jsx
+        display: true
+      - file: src/components/Footer/index.js
+        display: true
+      - file: src/components/Footer/index.scss
         display: true
       - file: src/pages/mine/mine.jsx
         display: true
       - file: src/pages/mine/mine.scss
         display: true
       - file: yarn.lock
+    explain:
+      pre: 与普通的 Web 应用相比，小程序能够在所在的平台实现一键登录，非常方便。这一步，我们也将实现多端登录（主要包括微信登录和支付宝登录）。
