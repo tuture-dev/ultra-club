@@ -1,18 +1,27 @@
+@import '~taro-ui/dist/style/components/article.scss';
+
 .postcard {
   margin: 30px;
   padding: 20px;
 }
 
 .postcard__isList {
-  border: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
 }
 
-.post-title {
-  font-weight: bolder;
-  margin-bottom: 10px;
+.post-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.post-content {
-  font-size: medium;
-  color: #666;
+.profile-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.post-nickName {
+  color: #777;
 }

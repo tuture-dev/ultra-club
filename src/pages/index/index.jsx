@@ -1,62 +1,70 @@
-import Taro, { useState } from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import Taro, { useEffect } from '@tarojs/taro'
+import { View, Text } from '@tarojs/components'
 import { AtFab, AtFloatLayout, AtMessage } from 'taro-ui'
+import { useSelector, useDispatch } from '@tarojs/redux'
 
 import { PostCard, PostForm } from '../../components'
 import './index.scss'
+import { SET_POST_FORM_IS_OPENED, SET_LOGIN_INFO } from '../../constants'
 
 export default function Index() {
-  const [posts, setPosts] = useState([
-    {
-      title: '泰罗奥特曼',
-      content: '泰罗是奥特之父和奥特之母唯一的亲生儿子。',
-    },
-  ])
-  const [formTitle, setFormTitle] = useState('')
-  const [formContent, setFormContent] = useState('')
-  const [isOpened, setIsOpened] = useState(false)
+  const posts = useSelector(state => state.post.posts) || []
+  const isOpened = useSelector(state => state.post.isOpened)
+  const nickName = useSelector(state => state.user.nickName)
 
-  function handleSubmit(e) {
-    e.preventDefault()
+  const isLogged = !!nickName
 
-    const newPosts = posts.concat({ title: formTitle, content: formContent })
-    setPosts(newPosts)
-    setFormTitle('')
-    setFormContent('')
-    setIsOpened(false)
+  const dispatch = useDispatch()
 
-    Taro.atMessage({
-      message: '发表文章成功',
-      type: 'success',
-    })
+  useEffect(() => {
+    async function getStorage() {
+      try {
+        const { data } = await Taro.getStorage({ key: 'userInfo' })
+
+        const { nickName, avatar } = data
+
+        // 更新 Redux Store 数据
+        dispatch({ type: SET_LOGIN_INFO, payload: { nickName, avatar } })
+      } catch (err) {
+        console.log('getStorage ERR: ', err)
+      }
+    }
+
+    getStorage()
+  })
+
+  function setIsOpened(isOpened) {
+    dispatch({ type: SET_POST_FORM_IS_OPENED, payload: { isOpened } })
   }
+
+  function handleClickEdit() {
+    if (!isLogged) {
+      Taro.atMessage({
+        type: 'warning',
+        message: '您还未登录哦！',
+      })
+    } else {
+      setIsOpened(true)
+    }
+  }
+
+  console.log('posts', posts)
 
   return (
     <View className="index">
       <AtMessage />
       {posts.map((post, index) => (
-        <PostCard
-          key={index}
-          title={post.title}
-          content={post.content}
-          isList
-        />
+        <PostCard key={index} postId={index} post={post} isList />
       ))}
       <AtFloatLayout
         isOpened={isOpened}
         title="发表新文章"
         onClose={() => setIsOpened(false)}
       >
-        <PostForm
-          formTitle={formTitle}
-          formContent={formContent}
-          handleSubmit={e => handleSubmit(e)}
-          handleTitleInput={e => setFormTitle(e.target.value)}
-          handleContentInput={e => setFormContent(e.target.value)}
-        />
+        <PostForm />
       </AtFloatLayout>
       <View className="post-button">
-        <AtFab onClick={() => setIsOpened(true)}>
+        <AtFab onClick={handleClickEdit}>
           <Text className="at-fab__icon at-icon at-icon-edit"></Text>
         </AtFab>
       </View>

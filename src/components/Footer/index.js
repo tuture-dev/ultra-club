@@ -1,64 +1,38 @@
-import Taro, { useState } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { AtFloatLayout } from 'taro-ui'
+import { useSelector, useDispatch } from '@tarojs/redux'
 
 import Logout from '../Logout'
 import LoginForm from '../LoginForm'
 import './index.scss'
+import { SET_IS_OPENED } from '../../constants'
 
 export default function Footer(props) {
-  // Login Form 登录数据
-  const [formNickName, setFormNickName] = useState('')
-  const [files, setFiles] = useState([])
+  const nickName = useSelector(state => state.user.nickName)
 
-  async function handleSubmit(e) {
-    e.preventDefault()
+  const dispatch = useDispatch()
 
-    // 鉴权数据
-    if (!formNickName || !files.length) {
-      Taro.atMessage({
-        type: 'error',
-        message: '您还有内容没有填写！',
-      })
+  // 双取反来构造字符串对应的布尔值，用于标志此时是否用户已经登录
+  const isLogged = !!nickName
 
-      return
-    }
-
-    // 提示登录成功
-    Taro.atMessage({
-      type: 'success',
-      message: '恭喜您，登录成功！',
-    })
-
-    // 缓存在 storage 里面
-    const userInfo = { avatar: files[0].url, nickName: formNickName }
-    await props.handleSubmit(userInfo)
-
-    // 清空表单状态
-    setFiles([])
-    setFormNickName('')
-  }
+  // 使用 useSelector Hooks 获取 Redux Store 数据
+  const isOpened = useSelector(state => state.user.isOpened)
 
   return (
     <View className="mine-footer">
-      {props.isLogged && (
-        <Logout loading={props.isLogout} handleLogout={props.handleLogout} />
-      )}
+      {isLogged && <Logout />}
       <View className="tuture-motto">
-        {props.isLogged ? 'From 图雀社区 with Love ❤' : '您还未登录'}
+        {isLogged ? 'From 图雀社区 with Love ❤' : '您还未登录'}
       </View>
       <AtFloatLayout
-        isOpened={props.isOpened}
+        isOpened={isOpened}
         title="登录"
-        onClose={() => props.handleSetIsOpened(false)}
+        onClose={() =>
+          dispatch({ type: SET_IS_OPENED, payload: { isOpened: false } })
+        }
       >
-        <LoginForm
-          formNickName={formNickName}
-          files={files}
-          handleSubmit={e => handleSubmit(e)}
-          handleNickNameInput={e => setFormNickName(e.target.value)}
-          handleFilesSelect={files => setFiles(files)}
-        />
+        <LoginForm />
       </AtFloatLayout>
     </View>
   )

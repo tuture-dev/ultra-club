@@ -1,35 +1,28 @@
 import Taro from '@tarojs/taro'
 import { View, Image } from '@tarojs/components'
-import PropTypes from 'prop-types'
+import { useSelector } from '@tarojs/redux'
+import { AtAvatar } from 'taro-ui'
 
 import './index.scss'
-import avatar from '../../images/avatar.png'
 
 export default function LoggedMine(props) {
-  const { userInfo = {} } = props
+  const nickName = useSelector(state => state.user.nickName)
+  const avatar = useSelector(state => state.user.avatar)
+
   function onImageClick() {
     Taro.previewImage({
-      urls: [userInfo.avatar],
+      urls: [avatar],
     })
   }
 
   return (
     <View className="logged-mine">
-      <Image
-        src={userInfo.avatar ? userInfo.avatar : avatar}
-        className="mine-avatar"
-        onClick={onImageClick}
-      />
-      <View className="mine-nickName">
-        {userInfo.nickName ? userInfo.nickName : '图雀酱'}
-      </View>
-      <View className="mine-username">{userInfo.username}</View>
+      {avatar ? (
+        <Image src={avatar} className="mine-avatar" onClick={onImageClick} />
+      ) : (
+        <AtAvatar size="large" circle text="雀" />
+      )}
+      <View className="mine-nickName">{nickName}</View>
     </View>
   )
-}
-
-LoggedMine.propTypes = {
-  avatar: PropTypes.string,
-  nickName: PropTypes.string,
-  username: PropTypes.string,
 }

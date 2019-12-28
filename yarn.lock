@@ -996,6 +996,24 @@
     node-sass "^4.12.0"
     scss-bundle "^2.5.1"
 
+"@tarojs/redux-h5@^2.0.0-beta.12":
+  version "2.0.0-beta.12"
+  resolved "http://r.cnpmjs.org/@tarojs/redux-h5/download/@tarojs/redux-h5-2.0.0-beta.12.tgz#473b6a23a7e55721a72f524ef97b686300aa6719"
+  integrity sha1-RztqI6flVyGnL1JO+XtoYwCqZxk=
+  dependencies:
+    hoist-non-react-statics "^2.5.0"
+    invariant "^2.2.4"
+    loose-envify "^1.1.0"
+    prop-types "^15.6.1"
+
+"@tarojs/redux@^2.0.0-beta.12":
+  version "2.0.0-beta.12"
+  resolved "http://r.cnpmjs.org/@tarojs/redux/download/@tarojs/redux-2.0.0-beta.12.tgz#0b98af0801704ee4b2200de58055526e23109e90"
+  integrity sha1-C5ivCAFwTuSyIA3lgFVSbiMQnpA=
+  dependencies:
+    "@tarojs/taro" "2.0.0-beta.12"
+    "@tarojs/utils" "2.0.0-beta.12"
+
 "@tarojs/router@2.0.0-beta.10":
   version "2.0.0-beta.10"
   resolved "https://registry.npm.taobao.org/@tarojs/router/download/@tarojs/router-2.0.0-beta.10.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40tarojs%2Frouter%2Fdownload%2F%40tarojs%2Frouter-2.0.0-beta.10.tgz#5e875221c7ce024de75fb9b92aeec3959688c468"
@@ -1116,6 +1134,13 @@
   dependencies:
     "@tarojs/utils" "2.0.0-beta.10"
 
+"@tarojs/taro@2.0.0-beta.12":
+  version "2.0.0-beta.12"
+  resolved "http://r.cnpmjs.org/@tarojs/taro/download/@tarojs/taro-2.0.0-beta.12.tgz#7192028ed0c112ebd1e5923502b864bc6c4e40aa"
+  integrity sha1-cZICjtDBEuvR5ZI1ArhkvGxOQKo=
+  dependencies:
+    "@tarojs/utils" "2.0.0-beta.12"
+
 "@tarojs/transformer-wx@2.0.0-beta.10":
   version "2.0.0-beta.10"
   resolved "https://registry.npm.taobao.org/@tarojs/transformer-wx/download/@tarojs/transformer-wx-2.0.0-beta.10.tgz#59b698376c66ee996bcea2aee62e6137e0193557"
@@ -1151,6 +1176,11 @@
   version "2.0.0-beta.10"
   resolved "https://registry.npm.taobao.org/@tarojs/utils/download/@tarojs/utils-2.0.0-beta.10.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40tarojs%2Futils%2Fdownload%2F%40tarojs%2Futils-2.0.0-beta.10.tgz#e7e3854d73ac3aad63c14ab636a553be0357e482"
   integrity sha1-5+OFTXOsOq1jwUq2NqVTvgNX5II=
+
+"@tarojs/utils@2.0.0-beta.12":
+  version "2.0.0-beta.12"
+  resolved "http://r.cnpmjs.org/@tarojs/utils/download/@tarojs/utils-2.0.0-beta.12.tgz#90a01578451e96e63a231252251268ca0489b3ca"
+  integrity sha1-kKAVeEUeluY6IxJSJRJoygSJs8o=
 
 "@tarojs/webpack-runner@2.0.0-beta.10":
   version "2.0.0-beta.10"
@@ -3975,6 +4005,11 @@ decode-uri-component@^0.2.0:
   resolved "https://registry.npm.taobao.org/decode-uri-component/download/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
   integrity sha1-6zkTMzRYd1y4TNGh+uBiEGu4dUU=
 
+deep-diff@^0.3.5:
+  version "0.3.8"
+  resolved "http://r.cnpmjs.org/deep-diff/download/deep-diff-0.3.8.tgz#c01de63efb0eec9798801d40c7e0dae25b582c84"
+  integrity sha1-wB3mPvsO7JeYgB1Ax+Da4ltYLIQ=
+
 deep-equal@^1.0.1:
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/deep-equal/download/deep-equal-1.1.1.tgz#b5c98c942ceffaf7cb051e24e1434a25a2e6076a"
@@ -5546,6 +5581,11 @@ hmac-drbg@^1.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
+hoist-non-react-statics@^2.5.0:
+  version "2.5.5"
+  resolved "http://r.cnpmjs.org/hoist-non-react-statics/download/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
+  integrity sha1-xZA89AnA39kI84jmGdhrnBF0y0c=
+
 home-or-tmp@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/home-or-tmp/download/home-or-tmp-2.0.0.tgz#e36c3f2d2cae7d746a857e38d18d5f32a7882db8"
@@ -6761,7 +6801,7 @@ longest-streak@^2.0.1:
   resolved "https://registry.npm.taobao.org/longest-streak/download/longest-streak-2.0.3.tgz#3de7a3f47ee18e9074ded8575b5c091f5d0a4105"
   integrity sha1-Peej9H7hjpB03thXW1wJH10KQQU=
 
-loose-envify@^1.0.0, loose-envify@^1.4.0:
+loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
   resolved "https://registry.npm.taobao.org/loose-envify/download/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   integrity sha1-ce5R+nvkyuwaY4OffmgtgTLTDK8=
@@ -8782,6 +8822,21 @@ redent@^2.0.0:
     indent-string "^3.0.0"
     strip-indent "^2.0.0"
 
+redux-logger@^3.0.6:
+  version "3.0.6"
+  resolved "http://r.cnpmjs.org/redux-logger/download/redux-logger-3.0.6.tgz#f7555966f3098f3c88604c449cf0baf5778274bf"
+  integrity sha1-91VZZvMJjzyIYExEnPC69XeCdL8=
+  dependencies:
+    deep-diff "^0.3.5"
+
+redux@^4.0.5:
+  version "4.0.5"
+  resolved "http://r.cnpmjs.org/redux/download/redux-4.0.5.tgz#4db5de5816e17891de8a80c424232d06f051d93f"
+  integrity sha1-TbXeWBbheJHeioDEJCMtBvBR2T8=
+  dependencies:
+    loose-envify "^1.4.0"
+    symbol-observable "^1.2.0"
+
 regenerate-unicode-properties@^8.1.0:
   version "8.1.0"
   resolved "https://registry.npm.taobao.org/regenerate-unicode-properties/download/regenerate-unicode-properties-8.1.0.tgz#ef51e0f0ea4ad424b77bf7cb41f3e015c70a3f0e"
@@ -10060,6 +10115,11 @@ swiper@4.4.2:
   dependencies:
     dom7 "^2.1.2"
     ssr-window "^1.0.1"
+
+symbol-observable@^1.2.0:
+  version "1.2.0"
+  resolved "http://r.cnpmjs.org/symbol-observable/download/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
+  integrity sha1-wiaIrtTqs83C3+rLtWFmBWCgCAQ=
 
 table@^4.0.1:
   version "4.0.3"

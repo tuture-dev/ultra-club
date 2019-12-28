@@ -31,6 +31,8 @@
   "dependencies": {
     "@tarojs/components": "2.0.0-beta.10",
     "@tarojs/components-qa": "2.0.0-beta.10",
+    "@tarojs/redux": "^2.0.0-beta.12",
+    "@tarojs/redux-h5": "^2.0.0-beta.12",
     "@tarojs/router": "2.0.0-beta.10",
     "@tarojs/taro": "2.0.0-beta.10",
     "@tarojs/taro-alipay": "2.0.0-beta.10",
@@ -45,6 +47,8 @@
     "nerv-devtools": "^1.5.5",
     "nervjs": "^1.5.5",
     "prop-types": "^15.7.2",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
     "taro-ui": "^2.2.4"
   },
   "devDependencies": {

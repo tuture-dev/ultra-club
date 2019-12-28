@@ -1,16 +1,22 @@
 import Taro, { useRouter } from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import { PostCard } from '../../components'
+import { useSelector } from '@tarojs/redux'
 
+import { PostCard } from '../../components'
 import './post.scss'
 
 export default function Post() {
   const router = useRouter()
-  const { params } = router
+  const { postId } = router.params
+
+  const posts = useSelector(state => state.post.posts)
+  const post = posts[postId]
+
+  console.log('posts', posts, postId)
 
   return (
     <View className="post">
-      <PostCard title={params.title} content={params.content} />
+      <PostCard post={post} />
     </View>
   )
 }
