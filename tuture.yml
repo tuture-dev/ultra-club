@@ -1,7 +1,7 @@
 name: 一杯茶的时间，上手 Taro 多端小程序开发
 id: 34a473b9e9e5e3dafcc619ab152750af
 created: '2019-12-25T10:16:40.222Z'
-updated: 2019-12-27T15:25:51.329Z
+updated: 2019-12-29T07:57:14.786Z
 github: 'https://github.com/tuture-dev/ultra-club'
 topics:
   - Taro
@@ -696,6 +696,8 @@ steps:
         display: false
       - file: src/app.scss
         display: true
+      - file: src/components/LoginButton/index.js
+        display: true
       - file: src/components/AlipayLoginButton/index.js
         display: true
       - file: src/components/AlipayLoginButton/index.scss
@@ -711,8 +713,6 @@ steps:
       - file: src/components/LoggedMine/index.jsx
         display: true
       - file: src/components/LoggedMine/index.scss
-        display: true
-      - file: src/components/LoginButton/index.js
         display: true
       - file: src/components/LoginForm/index.jsx
         display: true
@@ -733,3 +733,500 @@ steps:
       - file: yarn.lock
     explain:
       pre: 与普通的 Web 应用相比，小程序能够在所在的平台实现一键登录，非常方便。这一步，我们也将实现多端登录（主要包括微信登录和支付宝登录）。
+  - name: 'Hooks + Redux, 双剑合璧'
+    commit: 173723b
+    diff:
+      - file: package.json
+        display: true
+        explain:
+          pre: >-
+            ### 安装依赖
+
+
+            首先我们先来安装使用 Redux 必要的依赖：
+
+
+            ```Bash
+
+            $ yarn add redux @tarojs/redux @tarojs/redux-h5  redux-logger
+
+            # 或者使用 npm
+
+            $ npm install --save redux @tarojs/redux @tarojs/redux-h5
+            redux-logger
+
+            ```
+          post: >-
+            可以看到，除了我们熟悉的 `redux` 依赖，以及用来打印 Action 的中间件 `redux-logger`
+            外，还有两个额外的包，这是因为在 Taro 中，Redux 原绑定库 `react-redux` 被替换成了
+            `@tarojs/redux` 和 `@tarojs/redux-h5`，前者用在小程序中，后者用在 H5 页面中，Taro 对原
+            `react-redux` 进行了封装并提供了与 react-redux API 几乎一致的包来让开发人员获得更加良好的开发体验。
+      - file: src/store/index.js
+        display: true
+        explain:
+          pre: >-
+            ### 创建 Redux Store
+
+
+            Redux 的三大核心概念为：Store，Action，Reducers：
+
+
+            - Store：保存着全局的状态，有着 ”数据的唯一真相来源之称“。
+
+            - Action：发起修改 Store 中保存状态的动作，是修改状态的唯一手段。
+
+            - Reducers：一个个的纯函数，用于响应 Action，对 Store 中的状态进行修改。
+
+
+            好的，复习了一下 Redux 的概念之后，我们马上来创建 Store，Redux 的最佳实践推荐我们在将 Store 保存在
+            `store` 文件夹中，我们在 `src` 文件夹下面创建 `store` 文件夹，并在其中创建 `index.js` 来编写我们的
+            Store：
+          post: >+
+            可以看到，我们导出了一个 `configureStore` 函数，并在其中创建并返回 Store，这里我们用到了
+            `redux-logger` 中间件，用于在发起 Action 时，在控制台打印 Action 及其前后 Store
+            中的保存的状态信息。
+
+
+            这里我们的 `createstore` 接收两个参数：`rootReducer` 和
+            `applyMiddleware(...middlewares)` 。
+
+
+            `rootReducer` 是响应 `action` 的 `reducer`，这里我们导出了一个
+            `rootReducer`，代表组合了所有的 `reducer` ，我们将在后面 "组合 User 和 Post Reducer“
+            中讲到它。
+
+
+            `createStore` 函数的第二个参数我们使用了 `redux` 为我们提供的工具函数 `applyMiddleware` 来在
+            Redux 中注入需要使用的中间件，因为它接收的参数是 `(args1, args2, args3, ..., argsn)`
+            的形式，所以这里我们用了数组展开运算符 `...` 来展开 `middlewares` 数组。
+
+
+      - file: src/reducers/user.js
+        display: true
+        explain:
+          pre: >-
+            ### 编写 User Reducer
+
+
+            创建完 Store 之后，我们接在来编写 Reducer。回到我们的页面逻辑，我们在底部有两个 Tab 栏，一个为 "首页"，一个为
+            "我的"，在 ”首页“ 里面主要是展示一列文章和允许添加文章等，在 ”我的“
+            里面主要是允许用户进行登录并展示登录信息，所以整体上我们的逻辑有两类，我们分别将其命名为 `post` 和
+            `user`，接下来我们将创建处理这两类逻辑的 reducers。
+
+
+            Reducer 的逻辑形如 `(state, action) => newState`，即接收上一步 state 以及修改 state
+            的动作 action，然后返回修改后的新的 state，它是一个纯函数，意味着我们不能突变的修改  state。
+
+
+            推荐：
+
+
+            ```JavaScript
+
+            newState = { ...state, prop: newValue }
+
+            ```
+
+
+            不推荐：
+
+
+            ```JavaScript
+
+            state.prop = newValue
+
+            ```
+
+
+            Redux 推荐的最佳实践是创建独立的 `reducers` 文件夹，在里面保存我们的一个个 reducer 文件。我们在 `src`
+            文件夹下创建 `reducers` 文件夹，在里面创建 `user.js` 文件，并加入我们的 User Reducer
+            相应的内容如下：
+          post: >
+            我们在 `user.js`  中申明了 User Reducer 的初始状态 `INITIAL_STATE`，并将它赋值给 `user`
+            函数 state 的默认值，它接收待响应的 action，在 `user` 函数内部就是一个 `switch` 语句根据
+            `action.type` 进行判断，然后执行相应的逻辑，这里我们主要有两个类型：`SET_IS_OPENED` 用于修改
+            `isOpened` 属性，`SET_LOGIN_INFO` 用于修改 `avatar` 和 `nickName` 属性，当
+            `switch` 语句中没有匹配到任何 `action.type` 值时，它返回原 state。
+
+
+
+            ::: info
+
+            **提示**
+
+
+            根据 Redux 最近实践，这里的 `SET_IS_OPENED` 和 `SET_LOGIN_INFO` 常量一般保存到
+            `constants` 文件夹中，我们将马上创建它。这里使用常量而不是直接硬编码字符串的目的是为了代码的可维护性。
+
+            :::
+      - file: src/constants/user.js
+        display: true
+        explain:
+          pre: >-
+            接下来我们来创建 `src/reducer/user.js` 中会用到的常量，我们在 `src`  文件夹下创建 `constants`
+            文件夹，并在其中创建 `user.js` 文件，在其中添加内容如下：
+      - file: src/reducers/post.js
+        display: true
+        explain:
+          pre: >-
+            ### 编写 Post Reducer
+
+
+            为了响应 `post` 逻辑的状态修改，我们创建在 `src/reducers` 下创建
+            `post.js`，并在其中编写相应的内容如下：
+          post: "可以看到，\_Post Reducer 的形式和 User Reducer 类似，我们将之前需要多组件中共享的状态 `posts` 和 `isOpened` 提取出来保存在 `post` 的状态里，这里的 `post` 函数主要响应 `SET_POSTS` 逻辑，用于添加新的 `post` 到 `posts` 状态种，以及 `SET_POST_FORM_IS_OPENED` 逻辑，用户设置 `isOpened` 状态。"
+      - file: src/constants/post.js
+        display: true
+        explain:
+          pre: >-
+            接下来我们来创建 `src/reducer/post.js` 中会用到的常量，我们在 `src/constants`  文件夹下创建
+            `user.js` 文件，在其中添加内容如下：
+          post: ''
+      - file: src/constants/index.js
+        display: true
+        explain:
+          pre: >-
+            眼尖的同学可能注意到了，我们在 `src/reducers/user.js` 和 `src/reducers/post.js`
+            中导入需要使用的常量时都是从 `../constants`  的形式，那是因为我们在 `src/constants` 文件夹下创建了一个
+            `index.js` 文件，用于统一导出所有的常量，这也是代码可维护性的一种尝试。
+      - file: src/reducers/index.js
+        display: true
+        explain:
+          pre: >-
+            ### 组合 User 和 Post Reducer
+
+
+            我们在之前将整个全局的响应逻辑分别拆分到了 `src/reducers/user.js` 和
+            `src/reducers/post.js` 中，这使得我们可以把响应逻辑拆分到很多个很小的函数单元，极大增加了代码的可读性和可维护性。
+
+
+            但最终我们还是要将这些拆分的逻辑组合成一个逻辑树，并将其作为参数传给 `createStore` 函数来使用。
+
+
+            Redux 为我们提供了 `combineReducers` 来组合这些拆分的逻辑，我们在 `src/reducers` 文件夹下创建
+            `index.js` 文件，并在其中编写如下内容：
+          post: "可以看到，我们导入了 `user.js` 和 `post.js`，并使用对象简介写法传给 `combineReducers` 函数并导出，通过 `combineReducers` 将逻辑进行组合并导出为 `rootReducer` 作为参数在我们的 `src/store/index.js` 的 `createStore` 函数中使用。\n\n这里的 `combineReducers` 函数主要完成两件事：\n\n- 组合 user Reducer 和 post Reducer 中的状态，并将其合并成一颗形如 `{ user, post }` 的状态树，其中 `user` 属性保存这 user Reducer 的状态，`post` 属性保存着 post Reducer 的状态。\n- 分发 Action，当组件中 `dispatch`  一个 Action，\_`combineReducers` 会遍历 user Reducer 和 post Reducer，当匹配到任一 Reducer 的 `switch` 语句时，就会响应这个 Action。\n\n\n::: info\n**提示**\n\n我们将马上在之后讲解如何在组件中 `dispatch` Action。\n:::\n \n\n"
+      - file: project.config.json
+        display: false
+      - file: src/app.jsx
+        display: true
+        explain:
+          pre: >-
+            ### 整合 Redux 和 React
+
+
+            当我们编写了 reducers 创建了 store 之后，下一步要考虑的就是如何将 Redux 整合进 React，我们打开
+            `src/app.js`，对其中的内容作出如下修改：
+          post: >-
+            可以看到，上面的内容主要修改了三部分：
+
+
+            - 我们导入了 `configureStore`，并调用它获取 `store`。
+
+            - 接着我们从 Redux 对应的 Taro 绑定库 `@tarojs/redux` 中导出 `Provider`，它架设起 Redux
+            和 React 交流的桥梁。
+
+            - 最后我们用 `Provider` 包裹我们之前的根组件，并将 `store` 作为其属性传入，这样后续的组件就可以通过获取到
+            `store` 里面保存的状态。
+      - file: src/components/LoginButton/index.js
+        display: true
+        explain:
+          pre: >+
+            ### Hooks 版的 Action 初尝鲜
+
+
+            准备好了 Store 和 Reducer，又整合了 Redux 和 React，是时候来体验一下 Redux
+            状态管理容器的先进性了，不过为了使用 Hooks 版本的 Action，这里我们先来讲一讲会用到的 Hooks。
+
+
+            #### useDispatch Hooks
+
+
+            这个 Hooks 返回 Redux store 的 `dispatch` 引用。你可以使用它来 dispatch actions。
+
+
+            讲完  useDispatch Hooks，我们马上来实践一波，首先搞定我们 ”普通登录“ 的 Redux 化问题，让我们打开
+            `src/components/LoginButton/index.js`，对其中内容作出相应的修改如下：
+
+          post: >-
+            可以看到，上面的内容主要有四块改动：
+
+
+            - 首先我们从 `@tarojs/redux` 中导出 `useDispatch` API。
+
+            - 接着我们从之前定义的常量文件中导出 `SET_IS_OPENED` 常量。
+
+            - 然后，我们在 `LoginButton` 函数式组件中调用 `useDispatch` Hooks 来返回我们的
+            `dispatch` 函数，我们可以用它来 dispatch action 来修改 Redux store 的状态
+
+            - 最后我们将 `AtButton` 的 `onClick` 接收的回调函数进行替换，当按钮点击时，我们发起一个 `type` 为
+            `SET_IS_OPENED` 的 action，并传递了一个 `payload` 参数，用于将 Redux store 里面对应的
+            `user` 属性中的 `isOpened` 修改为 `true`。
+      - file: src/components/WeappLoginButton/index.js
+        display: true
+        explain:
+          pre: >-
+            搞定完 ”普通登录“，我们接着来收拾一下 ”微信登录“ 的逻辑，打开
+            `src/components/WeappLoginButton/index.js` 文件，对文件的内容作出如下修改：
+          post: >-
+            可以看到，上面的改动和之前在 ”普通登录“ 里面的改动类似：
+
+
+            - 我们导出了 `useDispatch` 钩子
+
+            - 导出了 `SET_LOGIN_INFO` 常量
+
+            - 然后我们将之前调用父组件传下的 `setLoginInfo`  方法改成了 dispatch `type` 为
+            `SET_LOGIN_INFO` 的 action，因为我们的 `avatar` 和 `nickName` 状态已经在 `store`
+            中的 `user` 属性中定义了，所以我们修改也是需要通过 dispatch action 来修改，最后我们将之前定义在父组件中的
+            `Taro.setStorage` 设置缓存的方法移动到了子组件中，以保证相关信息的改动具有一致性。
+      - file: src/components/AlipayLoginButton/index.js
+        display: true
+        explain:
+          pre: >-
+            最后我们来搞定 ”支付宝登录“ 的 Redux 逻辑，打开
+            `src/components/AlipayLoginButton/index.js` 对文件内容作出对应的修改如下：
+          post: '可以看到，上面的改动和之前在 ”微信登录“ 里面的改动几乎一样，所以这里我们就不在重复讲解啦 :)'
+      - file: src/components/LoggedMine/index.jsx
+        display: true
+        explain:
+          pre: >-
+            ### useSelector Hooks 来捧场
+
+
+            一路跟下来的同学可能有点明白我们正在使用 Redux 我们之前的代码，而我们重构的思路也是先从
+            `src/pages/mine/mine.jsx` 中的 `src/components/Header/index.jsx`
+            开始，搞定完 `Header.jsx` 里面的所有登录按钮之后，接下来应该就轮到 `Header.jsx` 内的最后一个组件
+            `src/components/LoggedMine/index.jsx`  了。
+
+
+            因为在 `LoggedMine` 组件中我们要用到 useSelector Hooks，所以这里我们先来讲一下这个 Hooks。
+
+
+            #### useSelector Hooks
+
+
+            `useSelector` 允许你使用 selector 函数从一个 Redux Store 中获取数据。
+
+
+            Selector 函数大致相当于 `connect` 函数的 `mapStateToProps` 参数。Selector
+            会在组件每次渲染时调用。`useSelector` 同样会订阅 Redux store，在 Redux action 被
+            dispatch 时调用。
+
+
+            但 `useSelector` 还是和 `mapStateToProps` 有一些不同：
+
+
+            - 不像 `mapStateToProps` 只返回对象一样，Selector 可能会返回任何值。
+
+            - 当一个 action dispatch 时，`useSelector` 会把 selector
+            的前后返回值做一次浅对比，如果不同，组件会强制更新。
+
+            - Selector 函数不接受 `ownProps` 参数。但 selector 可以通过闭包访问函数式组件传递下来的 props。
+
+
+            好的，了解了 `useSelector` 的概念之后，我们马上来实操一下，打开
+            `src/components/LoggedMine/index.jsx` 文件，对其中的内容作出如下的修改：
+          post: >-
+            可以看到，我们上面的代码主要有四处改动：
+
+
+            - 首先我们从 `@tarojs/redux` 中导出了  `useSelector` Hooks。
+
+            - 接着我们使用了两次 `useSelector` 分别从 Redux Store 里面获取了 `nickName` 和
+            `avatar`，它们位于 `state.user` 属性下。
+
+            - 接着我们将之前从 `props` 里面获取到的 `nickName` 和 `avatar` 替换成我们从 Redux store
+            里面获取到状态，这里我们为了用户体验，从 `taro-ui` 中导出了一个 `AtAvatar` 组件用于展示在没有 `avatar`
+            时的默认头像。
+
+            - 最后，在点击头像进行预览的 `onImageClick` 方法里面，我们使用从 Redux store 里面获取到的
+            `avatar`。
+      - file: src/components/Header/index.js
+        display: true
+        explain:
+          pre: >-
+            是时候收割最后一波 ”韭菜“ 了，让我们彻底完成 `Header/index.js` 的 Redux 化，打开
+            `src/components/Header/index.js` ，对其中的内容做出相应的修改如下：
+          post: >-
+            可以看到，上面的代码主要有五处主要的变动：
+
+
+            - 首先我们导出了 `useSelector` Hooks。
+
+            - 接着我们使用 `useSelector` 中取到我们需要的 `nickName` 属性，用于进行双取反转换成布尔值
+            `isLogged`，表示是否登录。
+
+            - 接着我们将之前从父组件获取的 `props.isLogged` 属性替换成新的从 `isLogged` 值
+
+            - 接着，我们去掉 ”普通登录” 按钮上不再需要的 `handleClick` 属性和 “微信登录”、“支付宝登录” 上面不再需要的
+            `setLoginInfo` 属性。
+
+            - 最后，我们去掉 `LoggedMine` 组件上不再需要的 `userInfo` 属性，因为我们已经在组件内部从使用
+            `useSelector` Hooks 从组件内部获取了。
+      - file: src/components/Logout/index.js
+        display: true
+        explain:
+          pre: >-
+            ### 搞定 Footer 的 Redux 化
+
+
+            本来这个小标题我是不想起的，但是因为，是吧，大家上面在没有小标题的情况下看了这么久，可能已经废（累）了，所以我就贴心的加上一个小标题，帮助你定位接下来讲解的重心。
+
+
+            是的接下来，我们要重构 “我的" tab 页面中的下半部分组件 `src/components/Footer/index.js`
+            我们遵循自顶向下的方式来重构，首先是 `src/components/Logout/index.js`
+            文件，我们打开这个文件，对其中内容作出如下修改：
+          post: >
+            这一步可能是最能体现引入 Redux 进行状态管理带来好处的一步了 -- 我们将之前至上而下的 React
+            状态管理逻辑压平，使得底层组件可以在自身中就解决响应的状态和逻辑问题。
+
+
+            可以看到，我们上面的文件中主要有五处改动：
+
+
+            - 首先我们从 `@tarojs/taro` 里面导出 `useState` Hooks。
+
+            - 接着我们将之前在 `src/pages/mine/mine.js` 中定义的 `isLogout` 状态移动到组件 `Logout`
+            组件内部来，因为它只和此组件有关系。
+
+            - 接着我们用 `isLogout` 替换在 `AtButton` 里面用到的 `props.loading` 属性。
+
+            - 然后，我们考虑将之前按钮点击调用 `props.handleLogout` Redux 化，我们将这个点击之后的回调函数
+            `handleLogout` 在组件内部定义。
+
+            - 最后，我们从 `@tarojs/redux` 中导入 `useDispatch` Hooks，并在组件中调用成我们需要的
+            `dispatch` 函数，接着我们在 `handleLogout` 函数中去 dispatch 一个 `SET_LOGIN_INFO`
+            action 来重置 Store 中的 `nickName` 和 `avatar` 属性。
+
+
+
+            ::: info
+
+            **提示**
+
+
+            这里我们在组件内定义的 `handleLogout` 函数和我们之前在 `src/pages/mine/mine.js`
+            中定义的类似，只是使用  dispatch action 的方式替换了重置 `nickName` 和 `avatar` 的部分。
+
+            :::
+      - file: src/components/LoginForm/index.jsx
+        display: true
+        explain:
+          pre: |-
+            搞定完 `Logout` 组件，接着就是 `LoginForm` 组件的重构了，让我们快马加鞭，让它也接受 Redux 光环的洗礼吧！
+
+            打开 `src/components/LoginForm/index.jsx` ，对其中的内容作出相应的修改如下：
+          post: "这一步和上一步类似，可能也是最能体现引入 Redux 进行状态管理带来好处的一步了，我们同样将之前在顶层组件中提供的状态压平到了底层组件内部。\n\n可以看到，我们上面的文件中主要有四处改动：\n\n- 首先我们将 `formNickName` 和 `files` 等状态放置到 `LoginForm` 组件内部，并使用 `useState` Hooks 管理起来，因为它们只和此组件有关系。\n- 接着，我们将 `AtImagePicker` 里面的 `props.files` 替换成 `files`，将它的 `onChange` 回调函数内部的设置改变状态的 `props.handleFilesSelect(files)` 替换成 `setFiles(files)`。可以看到这里我们还对 `files.length = 0` 的形式做了一个判断，当没有选择图片时，要把我们选择图片的按钮显示出来。\n- 接着，我们将 `Input` 组件的 `props.formNickName` 替换成 `formNickName`，将之前 `onInput` 接收的回调函数换成了 `setFormNickName` 的形式来设置 `formNickName` 的变化。\n- 接着，我们将之前提交表单需要调用的父组件方法 `props.handleSubmit` 移动到组件内部来定义，可以看到，这个 `hanldeSubmit` 组合了之前在 `src/components/Footer/index.jsx` 和 `src/pages/mine/mine.js` 组件里的 `handleSubmit` 逻辑：\n  -  首先使用 `e.preventDefault` 禁止浏览器默认行为。\n  - 接着进行数据验证，不合要求的数据就会被驳回并显示错误（其实这里应该显示警告 `warning`，当时写代码时石乐志\U0001F605）。\n  - 接着因为 `LoginForm` 表单数据要被清除，所以我们将选中图片的按钮又设置为可显示状态。\n  - 接着提示登录成功。\n  - 清空表单状态。\n  - 将登录数据缓存在 `storage` 里面，在 Taro 里面使用 `Taro.setStorage({ key, data })` 的形式来缓存，其中 `key` 是字符串，`data` 是字符串或者对象。\n   - 最后我们导出了 `useDispatch` Hooks，使用 `useDispatch` Hooks 生成的 `dispatch` 函数的引用来发起更新 Redux store 的 action 来更新本地数据，`type` 为 `SET_LOGIN_INFO` 的 action 用来更新用户登录信息，`type` 为 `SET_IS_OPENED` 的 action 用来更新 `isOpened` 属性，它将关闭展示登录框的弹出层 `FloatLayout` 组件。\n"
+      - file: src/components/Footer/index.js
+        display: true
+        explain:
+          pre: >-
+            讲到这里，我们的 `Footer` 部分的重构大业还剩下临门一脚了。让我们打开
+            `src/components/Footer/index.js` 文件，立马来重构它：
+          post: >-
+            可以看到上面的代码主要有五处改动：
+
+
+            - 首先我们已经将 `nickName` 抽取到 Redux store 保存的状态中，所以之前从父组件获取的
+            `props.isLogged` 判断是否登录的信息，我们移动到组件内部来，使用 `useSelector` Hooks 从 Redux
+            store 从获取 `nickName` 属性，进行双取反操作成布尔值来表示是否已经登录的 `isLogged`
+            属性，并使用它来替换之前的 `props.isLogged` 属性。
+
+            - 接着，就是取代之前从父组件获取的 `props.isOpened` 属性，我们使用 `useSelector` Hooks 从
+            Redux store 中获取对应的 `isOpened` 属性，然后替换之前的
+            `props.isOpened`，用户控制登录框窗口的弹出层 `AtFloatLayout` 的打开和关闭。
+
+            - 接着，我们将之前 `AtFloatLayout` 关闭时（`onClose`）的回调函数替换成 dispatch 一个 `type`
+            为 `SET_IS_OPENED` 的 action 来设置 `isOpened` 属性将 `AtFloatLayout` 关闭。
+
+            - 接着，我们开始移除 `Logout` 和 `LoginForm`
+            组件上不再需要传递的属性，因为在对应的组件中我们已经声明了对应的属性了。
+
+            - 最后，我们删掉之前定义在 `Footer` 组件内的 `formNickName` 和 `files` 等状态，以及不再需要的
+            `handleSubmit` 函数，因为它已经在 `LoginForm` 里面定义了。
+      - file: src/pages/mine/mine.jsx
+        display: true
+        explain:
+          pre: "### 完成 “我的” 页面重构\n\n熟悉套路的同学可能都知道起这个标题的含义了吧 \U0001F60F。\n\n我们一路打怪重构到这里，相比眼尖的人已经摸清楚 Redux 的套路了，结合 Redux 来写 React 代码，就好比 “千里之堤，始于垒土” 一般，我们先把所有细小的分支组件搞定，进而一步一步向顶层组件进发，以完成所有组件的编写。\n\n而这个 `src/pages/mine/mine.jsx` 组件就是 “我的” 这一 tab 页面的顶层组件了，也是我们在 “我的” 页面需要重构的最后一个页面了，是的，我们马上就要达到第一阶段性胜利了✌️。现在就打开这个文件，对其中的内容作出如下的修改："
+          post: "可以看到，上面的代码做了一下五处改动：\n\n- 我们导入了 `useDispatch` Hooks 和 `SET_LOGIN_INFO` 常量，并把之前在 `getStorage` 方法里面设置 `nickName` 和 `avatar` 的操作替换成了 dispatch 一个 `type` 为 `SET_LOGIN_INFO` 的 action。\n- 接着我们删除不再需要的 `formNickName`、`files`、`isLogout`、`isOpened` 状态，以及 `setLoginInfo`、`handleLogout`、`handleSetIsOpened`、`handleClick` 、`handleSubmit` 方法。\n- 最后我们删除 `Header` 和 `Footer` 组件上不再不需要的属性。\n\n\n大功告成\U0001F948！这里给你颁发一个银牌，以奖励你能一直坚持阅读并跟到这里，我们这一篇教程很长很长，能跟下来的都不容易，希望你能在心里或用实际行动给自己鼓鼓掌\U0001F44F。\n\n小憩一下，恢复精力，整装待发！很多同学可能很好奇了，为什么还只能拿一个银牌呢？那是因为我们的重构进程才走了一半呀✌️，但是不要担心，我们所有新的东西都已经讲完了，接下来就只是一些收尾工作了，当你能坚持到终点的时候，会有惊喜等着你哦！加油吧骚年\U0001F4AA。"
+      - file: src/components/PostForm/index.jsx
+        display: true
+        explain:
+          pre: >-
+            ### 开始重构 “首页” 之旅
+
+
+            我们依然按照之前的套路，从最底层的组件开始重构，首先是我们的登录框弹出层 `LoginForm` 组件，让我们打开
+            `src/components/PostForm/index.jsx` 文件，对其中的内容作出相应的修改如下：
+          post: "这个文件的形式和我们之前的 `src/components/LoginForm/index.jsx` 文件类似，可以看到，我们上面的文件中主要有四处改动：\n\n- 首先我们将 `formTitle` 和 `formContent ` 等状态放置到 `PostForm` 组件内部，并使用 `useState` Hooks 管理起来，因为它们只和此组件有关系。\n- 接着，我们将 `Input ` 里面的 `props.formTitle` 替换成 `formTitle`，将它的 `onInput ` 回调函数内部的设置改变状态的 `props. handleTitleInput` 替换成 `setFormTitle(e.target.value)` 的回调函数。\n- 接着，我们将 `Textarea ` 组件的 `props. formContent ` 替换成 `formContent `，将之前 `onInput` 接收的回调函数换成了 `setFormContent ` 的形式来设置 `formContent` 的变化。\n- 最后，我们将之前提交表单需要调用的父组件方法 `props.handleSubmit` 移动到组件内部来定义，可以看到，这个 `hanldeSubmit` 和我们之前定义在 `src/pages/index/index.js` 组件里的 `handleSubmit` 逻辑类似：\n  -  首先使用 `e.preventDefault` 禁止浏览器默认行为。\n  - 接着进行数据验证，不合要求的数据就会被驳回并显示警告（这里我们又显示对了\U0001F605）。\n  - 接着 dispatch 一个 `type` 为 `SET_POSTS` 的 action，将新发表的 post 添加到 Redux store 对应的 `posts` 数组中。我们注意到这里我们使用 `useSelector` Hooks 从 Redux store 里面获取了 `nickName` 和 `avatar` 属性，并把它们组合到 `post.user` 属性里，随着 action 的 payload 一起被 dispatch，我们用这个 `user` 属性标志发帖的用户属性。\n  - 清空表单状态。\n  - 接着我们 dispatch 一个 `type` 为 `SET_POST_FORM_IS_OPENED ` 的 action 用来更新 `isOpened` 属性，它将关闭展示发表帖子的表单弹出层 `FloatLayout` 组件。\n  - 最后提示发帖成功。\n"
+      - file: src/components/PostCard/index.jsx
+        display: true
+        explain:
+          pre: >-
+            接着是我们 “首页” 页面组件另外一个底层子组件 `PostCard`，它主要用于展示一个帖子，让我们
+            `src/components/PostCard/index.jsx` 文件，对其中的内容作出对应的修改如下：
+          post: "可以看到这个组件基本不保有自己的状态，它接收来自父组件的状态，我们对它的修改主要有下面五个部分：\n\n- 将之前的直接获取 `props.title` 和 `props.content` 放到了 `props.post` 属性中，我们从 `props.post` 属性中导出我们需要展示的 `title` 和 `content`，还要一个额外的 `user` 属性，它应该是一个对象，保存着发帖人的用户属性，我们使用解构的方法获取 `user.avatar` 和 `user.nickName` 的值。\n- 接着我们看到 `return` 的组件结构发生了很大的变化，这里我们为了方便，使用了 `taro-ui` 提供给我们的 `Article` 文章样式组件，用于展示类似微信公众号文章页的一些样式，可供用户快速\b呈现文章内容，可以详情可以查看 [taro-ui 链接](https://taro-ui.jd.com/#/docs/article)，有了 `taro-ui` 加持，我们就额外的展示了发表此文章的用户头像（`avatar`）和昵称（`nickName`）。\n- 我们还可以看到，这里我们对原 `content` 做了一点修改，当 `PostCard` 组件在文章列表中被引用的时候，我们对内容长度进行截断，当超过 66 字符时，我们就截断它，并加上省略号 `...`。\n- 最后，我们改动了 `handleClick` 方法，之前是在跳转路由的页面路径里直接带上查询参数 `title` 和 `content` ，当我们要传递的内容多了，这个路径就会显得很臃肿，所以这里我们传递此文章对应的 `id`，这样可以通过此 `id` 取到完整的 `post` 数据，使路径保持简洁，这也是最佳实践的推荐做法。"
+      - file: src/components/PostCard/index.scss
+        display: true
+        explain:
+          pre: >-
+            接着我们补充一下在 `PostCard` 组件里面会用到的样式，打开 
+            `src/components/PostCard/index.scss` 文件，补充和改进对应的样式如下：
+          post: 可以看到我们更新了一些样式，然后引入了 `taro-ui` 提供给我们的 `article` 文章样式。
+      - file: src/app.scss
+        display: false
+        explain:
+          pre: ''
+      - file: src/pages/index/index.jsx
+        display: true
+        explain:
+          pre: >-
+            重构完 “首页” 页面组件的所有底层组件，我们开始完成最终的顶层组件，打开 `src/pages/index/index.jsx`
+            文件，对相应的内容修改如下：
+          post: >-
+            可以看到我们上面的内容有以下五处改动：
+
+
+            - 首先我们导出了 `useSelector` 钩子，然后从 Redux store 中获取了 `posts` 、`isOpened`
+            和 `nickName` 等属性。
+
+            - 接着，我们将之前定义在 `PostCard` 组件上的属性进行了一次换血，之前是直接传递 `title` 和 `content`
+            属性，现在我们传递整个 `post` 属性，并且额外传递了一个 `postId` 属性，用于在 `PostCard`
+            里面点击跳转路由时进行标注。
+
+            - 接着，我们去掉 `PostForm` 组件上面的所有属性，因为我们已经在组件内部定义了它们。
+
+            - 接着，我们使用 `useEffect` Hooks，在里面定义并调用了 `getStorage` 方法，获取了我们保存在
+            `storage` 里面的用户登录信息，如果用户登录了，我们 dispatch 一个 `type` 为 `SET_LOGIN_INFO`
+            的 action，将这份登录信息保存在 Redux store 里面以供后续使用。
+
+            - 最后，我们将 `AtFab` 的 `onClick` 回调函数替换成
+            `handleClickEdit`，在其中对用户点击进行判断，如果用户未登录，那么弹出警告，告知用户，如果用户已经登录，那么就
+            dispatch 一个 `type` 为 `SET_POST_FORM_IS_OPENED` 的 action 去设置
+            `isOpened` 属性，打开发帖的弹出层，允许用户进行发帖操作。
+      - file: src/pages/post/post.jsx
+        display: true
+        explain:
+          pre: "### 以重构 “文章详情” 页结束\n\n最后，让我们坚持一下，跑赢重构工作的最后一公里\U0001F4AA！完成 “文章详情” 页的重构。\n\n让我们打开 `src/pages/post/post.jsx` 文件，对其中的内容作出相应的修改如下："
+          post: "可以看到，上面的文件做了以下四处修改：\n\n- 我们从 `router.params` 中导出了 `postId`，因为之前我们在 `PostCard` 里面点击跳转的路径参数使用了 `postId`。\n- 接着我们导入并使用 `useSelector` Hooks 获取了保存在 Redux store 中的 `posts` 属性，然后使用上一步获取到的 `postId`，来获取我们最终要渲染的 `post` 属性。\n- 最后，我们将传给 `PostCard` 的属性改成上一步获取到的 `post` 。\n\n\n::: warning\n**注意**\n\n这里的 `console.log` 是调试时使用的，生产环境中建议删掉。\n:::\n\n### 小结\n\n有幸！到这里，我们 Redux 重构之旅的万里长征就跑完了！让我们来回顾一下我们在这一小节中学到了那些东西。\n\n- 首先我们讲解了使用 Redux 的初衷，接着我们安装了相关依赖，然后引出了 Redux 三大核心概念：Store、Action、Reducers，接着我们创建了应用需要的两个 Reducer：`post` 和 `user`；接着我们将将 Redux 和 React 整合起来；因为 Action 是从组件中 dispatch 出来了，所以我们接下来就开始了组件的重构之旅。\n\n- 在重构 “我的” 页面组件时，我们按照 Redux 的思想，从它的底层组件三个登录按钮重构开始，接着重构了 `LoggedMine` 组件，再往上就是 `Header` 组件；重构完 `Header` 组件之后，我们接着从 `Footer` 组件的底层组件 `Logout` 组件开始重构，然后重构了 `LoginForm` 组件，最后是 `Footer` 组件，重构完 `Header` 和 `Footer` 组件，我们开始重构其上层组件 `mine` 页面组件，自此我们就完成了 “我的” 页面的重构。\n\n- 在重构 “首页” 页面组件时，我们同样安装 Redux 的思想，从它的底层组件 `PostForm` 组件开始，接着是 `PostCard` 组件，最后再回到顶层组件 `index` 首页页面组件。\n\n在重构 “帖子详情” 页面组件时，因为其底层组件 `PostCard` 已经重构过了，所以我们就直接重构了 `post` 帖子详情页面组件。\n\n能跟着这么长的文章坚持到这里，我想给你鼓个掌，也希望你能给自己鼓个掌，我想，我可以非常肯定且自豪的颁布给你第一名的奖章了\U0001F947。\n"
+      - file: yarn.lock
+    explain:
+      pre: >-
+        写到这一步，我们发现状态已经有点多了，而且 `src/pages/mine/mine.jsx` 文件是众多状态的顶层组件，比如我们的普通登录按钮
+        `src/components/LoginButton/index.jsx` 组件和我们的
+        `src/components/Footer/index.jsx` 组件，我们通过点击普通登录按钮打开登录弹窗的状态 `isOpened`
+        需要在 `LoginButton` 里面进行操作，然后进而影响到 `Footer` 组件内的 `FloatLayout`
+        弹窗组件，像这种涉及到多个子组件进行通信，我们将状态保存到公共父组件中的方式在 React 中叫做 ”状态提升“。
+
+
+        但是随着状态增多，状态提升的状态也随着增多，导致保存这些状态的父组件会臃肿不堪，而且每次状态的改变需要影响很多中间组件，带来极大的性能开销，这种状态管理的难题我们一般交给专门的状态管理容器
+        Redux 来做，而让 React  专注于渲染用户界面。
+
+
+        Redux 不仅可以保证状态的可预测性，还能保证状态的变化只和对应的组件相关，不影响到无关的组件，关于 Redux
+        的详细剖析的实战教程可以参考图雀社区的：[Redux
+        包教包会系列文章](https://tuture.co/2019/11/28/1fe175a/)。
+
+
+        在这一节中，我们将结合 React Hooks 和 Redux 来重构我们状态管理。
