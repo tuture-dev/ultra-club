@@ -1,4 +1,4 @@
-name: 一杯茶的时间，上手 Taro 多端小程序开发
+name: Taro 多端小程序开发大型实战
 id: 34a473b9e9e5e3dafcc619ab152750af
 created: '2019-12-25T10:16:40.222Z'
 updated: 2019-12-29T07:57:14.786Z
@@ -14,18 +14,25 @@ description: >-
   Web 端、移动端、微信小程序、支付宝小程序等等多套用户界面，其维护成本可以想象。作为一个优秀的多端统一开发解决方案，Taro 的出现则改变了这一情况。正值
   Taro 2.x 进入 beta 阶段，让我们沏上一杯茶，开始我们的 Taro 多端小程序开发之旅吧。
 splits:
-  - name: 一杯茶的时间，上手 Taro 多端小程序开发（上）
+  - name: Taro 多端小程序开发大型实战（上）
     description: >-
       正当移动互联网进入白热化阶段时，以微信小程序为代表的一类“轻应用”异军突起。它们无需下载，使用方便，“用完即走”，同时功能也较为完备，一经推出即得到了各大平台和及用户的热烈追捧。但是问题也随之而来——开发者们要同时维护
       Web 端、移动端、微信小程序、支付宝小程序等等多套用户界面，其维护成本可以想象。作为一个优秀的多端统一开发解决方案，Taro
       的出现则改变了这一情况。正值 Taro 2.x 进入 beta 阶段，让我们沏上一杯茶，开始我们的 Taro 多端小程序开发之旅吧。
     cover: tuture-assets/taro-cover-1.png
     id: 34a473b9e9e5e3dafcc619ab152750af
-    start: aaead19
-    end: 7de9625
+    start: 9b929a4
+    end: 5afb0c8
+  - name: Taro 多端小程序开发大型实战（中）
+    description: >-
+      这一部分内容比较长，虽然看上去只有三步，且第一步**使用 Taro UI 来简化组件编写逻辑**的代码和文字也较短，但是因为我们在第二步里面引入了**多端登录**（我们甚至还煞有介事的给它取了个 **“群魔乱舞”** 的名字）需要适配大量的代码。同时为了保持每个代码文件都尽量短小和符合最佳实践，我们需要拆分逻辑，所以讲解这样拆分逻辑的原因也需要大量的文字，特别是在第三步中引入 **Hooks + Redux** 来重构我们第二步的登录逻辑时，文字量就成倍的增长了。所幸，虽然代码很多，文字很长，但是我们应该是认真讲清楚了，但因为讲透这样一份有点复杂的代码还是存在许多困难，所以如果文中存在问题还请读者不吝赐教，这里我们一定会认真考虑您的意见，让我们一起让这篇教程变得更好💪💪💪！
+    cover: tuture-assets/taro-cover-2.png
+    id: af6922503ad1941b09b324ffa35f33ea
+    start: e281614
+    end: 00d476c
 steps:
   - name: 起步
-    commit: aaead19
+    commit: 9b929a4
     diff:
       - file: .editorconfig
       - file: .eslintrc
@@ -157,7 +164,7 @@ steps:
 
         :::
   - name: React 代码，熟悉的味道
-    commit: 9dbcafa
+    commit: 972828d
     diff:
       - file: src/components/PostCard/index.jsx
         display: true
@@ -262,7 +269,7 @@ steps:
 
         :::
   - name: Hooks 轻装上阵
-    commit: c262228
+    commit: a91889b
     diff:
       - file: src/pages/index/index.jsx
         display: true
@@ -358,7 +365,7 @@ steps:
         类型，事实上还可以是字符串、数组、对象等等。
       post: 你尽可以打开模拟器试一下重构之后效果，看看功能是否与上一步完全一致哦！
   - name: 来一打页面
-    commit: 7de9625
+    commit: 5afb0c8
     diff:
       - file: src/app.jsx
         display: true
@@ -487,7 +494,7 @@ steps:
         至此，《Taro 一杯茶》上篇也就结束啦。我们会马上推出下篇，手把手带大家用 Taro UI 升级界面，用 Redux
         管理业务数据流，并接入小程序云，最后同时打包为微信小程序、支付宝小程序以及 H5 应用，敬请期待~
   - name: 加速开发，Taro UI 帮帮忙
-    commit: 1f31a53
+    commit: e281614
     diff:
       - file: config/index.js
         display: false
@@ -669,16 +676,16 @@ steps:
         ```
       post: 完成这一步的代码后，记得在模拟器里面看看运行起来是不是跟开头的 GIF demo 效果完全一致哦！
   - name: 多端登录，群魔乱舞
-    commit: ea264c6
+    commit: b91c53e
     diff:
       - file: config/index.js
         display: true
         explain:
           pre: >-
-            ### 配置 Babel 插件
+            #### 配置 Babel 插件
 
 
-            从这一步开始，我们将首次开始写异步代码。这个项目将采用流行的 async/await 来编写异步逻辑，因此我们配置一下相应的 Babel
+            从这一步开始，我们将首次开始写异步代码。本项目将采用流行的 async/await 来编写异步逻辑，因此我们配置一下相应的 Babel
             插件：
 
 
@@ -694,47 +701,325 @@ steps:
             然后在 `config/index.js` 中为 `config.babel.plugins` 添加相应的配置如下：
       - file: package.json
         display: false
-      - file: src/app.scss
-        display: true
       - file: src/components/LoginButton/index.js
         display: true
-      - file: src/components/AlipayLoginButton/index.js
-        display: true
-      - file: src/components/AlipayLoginButton/index.scss
-        display: true
+        explain:
+          pre: >-
+            ### 各组件的实现
+
+
+            #### 实现 LoginButton
+
+
+            首先，我们来实现普通登录按钮 `LoginButton` 组件。创建 `src/components/LoginButton`
+            目录，在其中创建 `index.js`，代码如下：
+          post: 我们使用了 Taro UI 的 `AtButton` 组件，并定义了一个 `handleClick` 事件，后面在使用时会传入。
       - file: src/components/WeappLoginButton/index.js
         display: true
+        explain:
+          pre: >-
+            #### 实现 WeappLoginButton
+
+
+            接着我们实现微信登录按钮 `WeappLoginButton`。创建 `src/components/WeappLoginButton`
+            目录，在其中分别创建 `index.js` 和 `index.scss`。`index.js` 代码如下：
+          post: >-
+            可以看到，微信登录按钮和之前的普通登录按钮多了很多东西：
+
+
+            - 添加了 `isLogin` 状态，用于表示是否在等待登录中，以及修改状态的 `setIsLogin` 函数
+
+            - 实现了 `onGetUserInfo` async
+            函数，用于处理在用户点击登录按钮、获取到信息之后的逻辑。其中，我们将获取到的用户信息传入 `props` 中的
+            `setLoginInfo`，从而修改整个应用的登录状态
+
+            - 添加了 `openType`（微信开放能力）属性，这里我们输入的是 `getUserInfo`（获取用户信息），欲查看所有支持的
+            open-type，请查看[微信开放文档对应部分](https://developers.weixin.qq.com/miniprogram/dev/component/button.html)
+
+            - 添加了 `onGetUserInfo` 这个 handler，用于编写在获取到用户信息后的处理逻辑，这里就是传入刚刚实现的
+            `onGetUserInfo`
       - file: src/components/WeappLoginButton/index.scss
         display: true
-      - file: src/components/Header/index.js
+        explain:
+          pre: '`WeappLoginButton` 的样式 `index.scss` 代码如下：'
+      - file: src/components/AlipayLoginButton/index.js
         display: true
-      - file: src/components/Header/index.scss
+        explain:
+          pre: >-
+            #### 实现 AlipayLoginButton
+
+
+            让我们来实现支付宝登录按钮组件。创建 `src/components/AlipayLoginButton` 目录，在其中分别创建
+            `index.js` 和 `index.scss`。`index.js` 代码如下：
+          post: >
+            可以看到，内容与之前的微信登录按钮基本相似，但是有以下差别：
+
+
+            - 实现 `onGetAuthorize` 回调函数。与之前微信的回调函数不同，这里我们要调用
+            `Taro.getOpenUserInfo` 手动获取用户基础信息（实际上调用的是支付宝开放平台
+            [my.getOpenUserInfo](https://docs.alipay.com/mini/api/ch8chh)）
+
+            - `Button` 组件的 `openType`（支付宝开放能力）设置成 `getAuthorize`（小程序授权）
+
+            - 在设定开放能力为 `getAuthorize` 时，需要添加 `scope` 属性为
+            `userInfo`，让用户可以授权小程序获取支付宝会员的基础信息（另一个有效值是 `phoneNumber`，用于获取手机号码）
+
+            - 传入 `onGetAuthorize` 回调函数
+
+
+            ::: info
+
+            **提示**
+
+
+            关于支付宝小程序登录按钮的细节，可以查看[官方文档](https://docs.alipay.com/mini/component/button)。
+
+            :::
+      - file: src/components/AlipayLoginButton/index.scss
         display: true
+        explain:
+          pre: 样式文件 `index.scss` 的代码如下：
       - file: src/components/LoggedMine/index.jsx
         display: true
+        explain:
+          pre: >-
+            #### 实现 LoggedMine
+
+
+            接着我们实现已经登录状态下的 `LoggedMine` 组件。创建 `src/components/LoggedMine`
+            目录，在其中分别创建 `index.jsx` 和 `index.scss`。`index.jsx` 代码如下：
+          post: >-
+            这里我们添加了点击头像可以预览的功能，可以通过 [`Taro.previewImage`
+            函数](https://nervjs.github.io/taro/docs/apis/multimedia/images/previewImage.html#docsNav)实现。
       - file: src/components/LoggedMine/index.scss
         display: true
+        explain:
+          pre: '`LoggedMine` 组件的样式文件如下：'
+      - file: src/components/Header/index.js
+        display: true
+        explain:
+          pre: >-
+            #### 实现 Header 组件
+
+
+            在所有的“小零件”全部实现后，我们就实现整个登录界面的 `Header` 部分。创建 `src/components/Header`
+            目录，在其中分别创建 `index.js` 和 `index.scss`。`index.js` 代码如下：
+          post: >
+            可以看到，我们根据 `Taro.ENV_TYPE` 查询当前所在的平台（微信、支付宝或其他），然后确定是否显示相应平台的登录按钮。
+
+
+
+            ::: info
+
+            **提示**
+
+
+            你也许发现了，`setLoginInfo` 还是要等待父组件的传入。虽然 Hooks
+            简化了状态的定义和更新方式，但是却没有简化跨组件修改状态的逻辑。在接下来的一步，我们将用 Redux 进行简化。
+
+            :::
+      - file: src/components/Header/index.scss
+        display: true
+        explain:
+          pre: '`Header` 组件的样式代码如下：'
       - file: src/components/LoginForm/index.jsx
         display: true
+        explain:
+          pre: >-
+            #### 实现 LoginForm
+
+
+            接着我们实现用于普通登录的 `LoginForm` 组件。由于本系列教程的目标是讲解
+            Taro，因此这里简化了注册/登录的流程，用户可以直接输入用户名并上传头像进行注册/登录，无需设置密码和其他验证过程。创建
+            `src/components/LoginForm` 目录，在其中分别创建 `index.jsx` 和
+            `index.scss`。`index.jsx` 代码如下：
+          post: >-
+            这里我们使用 Taro UI 的 [ImagePicker
+            图片选择器组件](https://taro-ui.jd.com/#/docs/imagepicker)，让用户能够选择图片进行上传。`AtImagePicker`
+            最重要的属性就是 `onChange` 回调函数，这里我们通过父组件传进来的 `handleFilesSelect` 函数来搞定。
       - file: src/components/LoginForm/index.scss
         display: true
+        explain:
+          pre: '`LoginForm` 组件的样式代码如下：'
       - file: src/components/Logout/index.js
         display: true
-      - file: src/components/index.jsx
-        display: true
+        explain:
+          pre: |-
+            #### 实现 Logout
+
+            在登录之后，我们还需要退出登录的按钮。创建 `src/components/Logout/index.js` 文件，代码如下：
       - file: src/components/Footer/index.js
         display: true
+        explain:
+          pre: >-
+            #### 实现 Footer
+
+
+            所有的子组件全部实现之后，我们就来实现 `Footer` 组件。创建 `src/components/Footer`
+            目录，在其中分别创建 `index.jsx` 和 `index.scss`。`index.jsx` 代码如下：
       - file: src/components/Footer/index.scss
         display: true
+        explain:
+          pre: '`Footer` 组件的样式文件代码如下：'
+      - file: src/components/index.jsx
+        display: true
+        explain:
+          pre: >-
+            所有小组件都搞定之后，我们在 `src/components` 中只需暴露出 `Header` 和 `Footer`。修改
+            `src/components/index.jsx`，代码如下：
       - file: src/pages/mine/mine.jsx
         display: true
+        explain:
+          pre: >-
+            ### 更新“我的”页面
+
+
+            是时候用上写好的 `Header` 和 `Footer` 组件了，但在此之前，我们先来讲一下我们需要用到的 `useEffect`
+            Hooks。
+
+
+            #### useEffect Hooks
+
+
+            `useEffect` Hooks 是用来替代原 React 的生命周期钩子函数的，我们可以在里面发起一些 “副作用”
+            操作，比如异步获取后端数据、设置定时器或是进行 DOM 操作等：
+
+
+            ```JavaScript
+
+            import React, { useState, useEffect } from 'react';
+
+
+            function Example() {
+              const [count, setCount] = useState(0);
+
+              // 和 componentDidMount 以及 componentDidUpdate 类似:
+              useEffect(() => {
+                // 使用浏览器 API 更新 document 的标题
+                document.title = `你点击了 ${count} 次`;
+              });
+
+              return (
+                <div>
+                  <p>你点击了 {count} 次</p>
+                  <button onClick={() => setCount(count + 1)}>
+                    点我
+                  </button>
+                </div>
+              );
+            }
+
+            ```
+
+
+            上面的对 `document` 标题的修改是具有副作用的操作，在之前的 React 应用中，我们通常会这么写：
+
+
+            ```JavaScript
+
+            class Example extends React.Component {
+              constructor(props) {
+                super(props);
+                this.state = {
+                  count: 0
+                };
+              }
+
+              componentDidMount() {
+                document.title = `你点击了 ${this.state.count} 次`;
+              }
+
+              componentDidUpdate() {
+                document.title = `你点击了 ${this.state.count} 次`;
+              }
+
+              render() {
+                return (
+                  <div>
+                    <p>你点击了 {this.state.count} 次</p>
+                    <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+                      点我
+                    </button>
+                  </div>
+                );
+              }
+            }
+
+            ```
+
+
+            如果你想了解 `useEffect` 具体的详情，可以去查看 React
+            的[官方文档](https://zh-hans.reactjs.org/docs/hooks-effect.html)。
+
+
+            做的好！了解了 `useEffect` Hooks 的概念之后，我们马上来更新“我的”页面组件
+            `src/pages/mine/mine.jsx`，代码如下：
+          post: >-
+            可以看到，我们做了这么些工作：
+
+
+            - 使用 `useState` 创建了四个状态：用户有关信息（`nickName` 和
+            `avatar`），登录弹出层是否打开（`isOpened`），是否登录成功（`isLogged`），以及相应的更新函数
+
+            - 通过 `useEffect` Hook
+            尝试从本地缓存中获取用户信息（[Taro.getStorage](https://nervjs.github.io/taro/docs/apis/storage/getStorage.html#docsNav)），并用来更新
+            `nickName` 和 `avatar` 状态
+
+            - 实现了久违的 `setLoginInfo` 函数，其中我们不仅更新了 `nickName` 和 `avatar`
+            的状态，还把用户数据存入本地缓存（[Taro.getStorage](https://nervjs.github.io/taro/docs/apis/storage/setStorage.html#docsNav)），确保下次打开时保持登录状态
+
+            - 实现了同样久违的 `handleLogout`
+            函数，其中不仅更新了相关状态，还去掉了本地缓存中的数据（[Taro.removeStorage](https://nervjs.github.io/taro/docs/apis/storage/removeStorage.html#docsNav)）
+
+            - 实现了用于处理普通登录的 `handleSubmit` 函数，内容基本上与 `setLoginInfo` 一致
+
+            - 在返回 JSX 代码时渲染 `Header` 和 `Footer` 组件，传入相应的状态和回调函数
       - file: src/pages/mine/mine.scss
         display: true
+        explain:
+          pre: 调整 `Mine` 组件的样式 `src/pages/mine/mine.scss` 代码如下：
+      - file: src/app.scss
+        display: true
+        explain:
+          pre: 最后在 `src/app.scss` 中引入相应的 Taro UI 组件的样式：
       - file: yarn.lock
     explain:
-      pre: 与普通的 Web 应用相比，小程序能够在所在的平台实现一键登录，非常方便。这一步，我们也将实现多端登录（主要包括微信登录和支付宝登录）。
+      pre: >-
+        与普通的 Web
+        应用相比，小程序能够在所在的平台实现一键登录，非常方便。这一步，我们也将实现多端登录（主要包括微信登录和支付宝登录）。之所以标题取为“群魔乱舞”，不仅受了“震惊”小编们的启发，也是因为当今各平台处理登录和鉴权的方式差异很大，很遗憾的是在
+        Taro 框架下我们依然需要踩很多“坑”才能真正实现“多端登录”。
+
+
+        ### 准备工作
+
+
+        #### 组件设计规划
+
+
+        这一节的代码很长，在正式开始之前我们先查看一下组件设计的规划，便于你对接下来我们要做的工作有清晰的了解。
+
+
+        ![](tuture-assets/components.png)
+
+
+        可以看到“我的”页面整体拆分成了 `Header` 和 `Footer`：
+
+
+        - `Header` 包括 `LoggedMine`（个人信息），如果在未登录状态下则还有
+        `LoginButton`（普通登录按钮）、`WeappLoginButton`（微信登录按钮，仅在微信小程序中出现）以及
+        `AlipayLoginButton`（支付宝登录按钮，仅在支付宝小程序中出现）
+
+        - `Footer` 则用来显示是否已登录的文字，在已登录的情况下会显示 `Logout`（退出登录按钮）
+      post: |-
+        ### 查看效果
+
+        敲了这么多代码，终于又到了神圣的验收环节。首先是普通登录：
+
+        ![](tuture-assets/taro-demo4.gif)
+
+        至于微信和支付宝登录，点击之后就会直接以登录开发者工具所用的帐号登录了。
   - name: 'Hooks + Redux, 双剑合璧'
-    commit: 173723b
+    commit: 00d476c
     diff:
       - file: package.json
         display: true
@@ -1171,7 +1456,7 @@ steps:
         display: true
         explain:
           pre: >-
-            接着我们补充一下在 `PostCard` 组件里面会用到的样式，打开 
+            接着我们补充一下在 `PostCard` 组件里面会用到的样式，打开
             `src/components/PostCard/index.scss` 文件，补充和改进对应的样式如下：
           post: 可以看到我们更新了一些样式，然后引入了 `taro-ui` 提供给我们的 `article` 文章样式。
       - file: src/app.scss
