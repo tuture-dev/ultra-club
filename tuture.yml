@@ -21,17 +21,20 @@ splits:
       的出现则改变了这一情况。正值 Taro 2.x 进入 beta 阶段，让我们沏上一杯茶，开始我们的 Taro 多端小程序开发之旅吧。
     cover: tuture-assets/taro-cover-1.jpg
     id: 34a473b9e9e5e3dafcc619ab152750af
-    start: 9b929a4
-    end: e281614
+    start: '8565035'
+    end: 63131b6
   - name: Taro 多端小程序开发大型实战（中）
-    description: "这一部分内容比较长，虽然看上去只有两步，但是因为我们在第一步中实现了多端登录（我们甚至还煞有介事的给它取了个“群魔乱舞”的名字）需要适配大量的代码。同时为了保持每个代码文件都尽量短小和符合最佳实践，我们需要拆分逻辑，所以讲解这样拆分逻辑的原因也需要大量的文字，特别是在第二步中引入 Hooks + Redux 来重构我们第二步的登录逻辑时，文字量就成倍地增长了。所幸，虽然代码很多，文字很长，但是我们应该是认真讲清楚了，但因为讲透这样一份有点复杂的代码还是存在许多困难，所以如果文中存在问题还请读者不吝赐教，这里我们一定会认真考虑您的意见，让我们一起让这篇教程变得更好！"
+    description: >-
+      这一部分内容比较长，虽然看上去只有两步，但是因为我们在第一步中实现了多端登录（我们甚至还煞有介事的给它取了个“群魔乱舞”的名字）需要适配大量的代码。同时为了保持每个代码文件都尽量短小和符合最佳实践，我们需要拆分逻辑，所以讲解这样拆分逻辑的原因也需要大量的文字，特别是在第二步中引入
+      Hooks + Redux
+      来重构我们第二步的登录逻辑时，文字量就成倍地增长了。所幸，虽然代码很多，文字很长，但是我们应该是认真讲清楚了，但因为讲透这样一份有点复杂的代码还是存在许多困难，所以如果文中存在问题还请读者不吝赐教，这里我们一定会认真考虑您的意见，让我们一起让这篇教程变得更好！
     cover: tuture-assets/taro-cover-2.jpg
     id: af6922503ad1941b09b324ffa35f33ea
-    start: b91c53e
-    end: 00d476c
+    start: 1da2fee
+    end: a3cf715
 steps:
   - name: 起步
-    commit: 9b929a4
+    commit: '8565035'
     diff:
       - file: .editorconfig
       - file: .eslintrc
@@ -163,7 +166,7 @@ steps:
 
         :::
   - name: React 代码，熟悉的味道
-    commit: 972828d
+    commit: 102299e
     diff:
       - file: src/components/PostCard/index.jsx
         display: true
@@ -268,7 +271,7 @@ steps:
 
         :::
   - name: Hooks 轻装上阵
-    commit: a91889b
+    commit: da834d1
     diff:
       - file: src/pages/index/index.jsx
         display: true
@@ -364,7 +367,7 @@ steps:
         类型，事实上还可以是字符串、数组、对象等等。
       post: 你尽可以打开模拟器试一下重构之后效果，看看功能是否与上一步完全一致哦！
   - name: 来一打页面
-    commit: 5afb0c8
+    commit: f6c79ab
     diff:
       - file: src/app.jsx
         display: true
@@ -487,7 +490,7 @@ steps:
 
         ![](tuture-assets/taro-demo2.gif)
   - name: 加速开发，Taro UI 帮帮忙
-    commit: e281614
+    commit: 63131b6
     diff:
       - file: config/index.js
         display: false
@@ -674,7 +677,7 @@ steps:
         至此，《Taro 多端小程序开发大型实战》上篇也就结束啦。欢迎继续阅读中篇，我们将手把手带大家用实现多端登录（微信 + 支付宝 +
         普通登录），并用 Hooks + Redux 彻底重构状态和数据流。
   - name: 多端登录，群魔乱舞
-    commit: b91c53e
+    commit: 1da2fee
     diff:
       - file: config/index.js
         display: true
@@ -1017,7 +1020,7 @@ steps:
 
         至于微信和支付宝登录，点击之后就会直接以登录开发者工具所用的帐号登录了。
   - name: 双剑合璧：Hooks + Redux
-    commit: 00d476c
+    commit: a3cf715
     diff:
       - file: package.json
         display: true
