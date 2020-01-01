@@ -4,14 +4,13 @@ import { AtButton } from 'taro-ui'
 import { useDispatch, useSelector } from '@tarojs/redux'
 
 import './index.scss'
-import { SET_POSTS, SET_POST_FORM_IS_OPENED } from '../../constants'
+import { CREATE_POST } from '../../constants'
 
-export default function PostForm(props) {
+export default function PostForm() {
   const [formTitle, setFormTitle] = useState('')
   const [formContent, setFormContent] = useState('')
 
-  const nickName = useSelector(state => state.user.nickName)
-  const avatar = useSelector(state => state.user.avatar)
+  const userId = useSelector(state => state.user.userId)
 
   const dispatch = useDispatch()
 
@@ -28,28 +27,18 @@ export default function PostForm(props) {
     }
 
     dispatch({
-      type: SET_POSTS,
+      type: CREATE_POST,
       payload: {
-        post: {
+        postData: {
           title: formTitle,
           content: formContent,
-          user: { nickName, avatar },
         },
+        userId,
       },
     })
 
     setFormTitle('')
     setFormContent('')
-
-    dispatch({
-      type: SET_POST_FORM_IS_OPENED,
-      payload: { isOpened: false },
-    })
-
-    Taro.atMessage({
-      message: '发表文章成功',
-      type: 'success',
-    })
   }
 
   return (

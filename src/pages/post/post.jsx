@@ -1,18 +1,30 @@
-import Taro, { useRouter } from '@tarojs/taro'
+import Taro, { useRouter, useEffect } from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import { useSelector } from '@tarojs/redux'
+import { useDispatch, useSelector } from '@tarojs/redux'
 
 import { PostCard } from '../../components'
 import './post.scss'
+import { GET_POST, SET_POST } from '../../constants'
 
 export default function Post() {
   const router = useRouter()
   const { postId } = router.params
 
-  const posts = useSelector(state => state.post.posts)
-  const post = posts[postId]
+  const dispatch = useDispatch()
+  const post = useSelector(state => state.post.post)
 
-  console.log('posts', posts, postId)
+  useEffect(() => {
+    dispatch({
+      type: GET_POST,
+      payload: {
+        postId,
+      },
+    })
+
+    return () => {
+      dispatch({ type: SET_POST, payload: { post: {} } })
+    }
+  }, [])
 
   return (
     <View className="post">

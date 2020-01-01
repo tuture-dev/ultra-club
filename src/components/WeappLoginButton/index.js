@@ -3,7 +3,7 @@ import { Button } from '@tarojs/components'
 import { useDispatch } from '@tarojs/redux'
 
 import './index.scss'
-import { SET_LOGIN_INFO } from '../../constants'
+import { LOGIN } from '../../constants'
 
 export default function WeappLoginButton(props) {
   const [isLogin, setIsLogin] = useState(false)
@@ -14,17 +14,12 @@ export default function WeappLoginButton(props) {
     setIsLogin(true)
 
     const { avatarUrl, nickName } = e.detail.userInfo
-
-    await Taro.setStorage({
-      key: 'userInfo',
-      data: { avatar: avatarUrl, nickName },
-    })
+    const userInfo = { avatar: avatarUrl, nickName }
 
     dispatch({
-      type: SET_LOGIN_INFO,
+      type: LOGIN,
       payload: {
-        avatar: avatarUrl,
-        nickName,
+        userInfo: userInfo,
       },
     })
 

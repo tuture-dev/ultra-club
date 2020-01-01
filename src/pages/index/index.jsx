@@ -5,7 +5,11 @@ import { useSelector, useDispatch } from '@tarojs/redux'
 
 import { PostCard, PostForm } from '../../components'
 import './index.scss'
-import { SET_POST_FORM_IS_OPENED, SET_LOGIN_INFO } from '../../constants'
+import {
+  SET_POST_FORM_IS_OPENED,
+  SET_LOGIN_INFO,
+  GET_POSTS,
+} from '../../constants'
 
 export default function Index() {
   const posts = useSelector(state => state.post.posts) || []
@@ -17,21 +21,47 @@ export default function Index() {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    const WeappEnv = Taro.getEnv() === Taro.ENV_TYPE.WEAPP
+
+    if (WeappEnv) {
+      Taro.cloud.init()
+    }
+
     async function getStorage() {
       try {
         const { data } = await Taro.getStorage({ key: 'userInfo' })
 
-        const { nickName, avatar } = data
+        const { nickName, avatar, _id } = data
 
         // 更新 Redux Store 数据
-        dispatch({ type: SET_LOGIN_INFO, payload: { nickName, avatar } })
+        dispatch({
+          type: SET_LOGIN_INFO,
+          payload: { nickName, avatar, userId: _id },
+        })
       } catch (err) {
         console.log('getStorage ERR: ', err)
       }
     }
 
-    getStorage()
-  })
+    if (!isLogged) {
+      getStorage()
+    }
+
+    async function getPosts() {
+      try {
+        // 更新 Redux Store 数据
+        dispatch({
+          type: GET_POSTS,
+        })
+      } catch (err) {
+        console.log('getPosts ERR: ', err)
+      }
+    }
+
+    if (!posts.length) {
+      getPosts()
+    }
+  }, [])
 
   function setIsOpened(isOpened) {
     dispatch({ type: SET_POST_FORM_IS_OPENED, payload: { isOpened } })
@@ -53,8 +83,8 @@ export default function Index() {
   return (
     <View className="index">
       <AtMessage />
-      {posts.map((post, index) => (
-        <PostCard key={index} postId={index} post={post} isList />
+      {posts.map(post => (
+        <PostCard key={post._id} postId={post._id} post={post} isList />
       ))}
       <AtFloatLayout
         isOpened={isOpened}
