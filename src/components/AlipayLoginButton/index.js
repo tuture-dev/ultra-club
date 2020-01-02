@@ -3,7 +3,7 @@ import { Button } from '@tarojs/components'
 import { useDispatch } from '@tarojs/redux'
 
 import './index.scss'
-import { SET_LOGIN_INFO } from '../../constants'
+import { LOGIN } from '../../constants'
 
 export default function AlipayLoginButton(props) {
   const [isLogin, setIsLogin] = useState(false)
@@ -17,16 +17,13 @@ export default function AlipayLoginButton(props) {
       userInfo = JSON.parse(userInfo.response).response
       const { avatar, nickName } = userInfo
 
-      await Taro.setStorage({
-        key: 'userInfo',
-        data: { avatar, nickName },
-      })
-
       dispatch({
-        type: SET_LOGIN_INFO,
+        type: LOGIN,
         payload: {
-          avatar,
-          nickName,
+          userInfo: {
+            avatar,
+            nickName,
+          },
         },
       })
     } catch (err) {
