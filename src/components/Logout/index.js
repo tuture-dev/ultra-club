@@ -19,6 +19,7 @@ export default function LoginButton(props) {
         payload: {
           avatar: '',
           nickName: '',
+          userId: '',
         },
       })
     } catch (err) {

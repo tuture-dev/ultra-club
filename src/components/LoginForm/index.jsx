@@ -3,7 +3,7 @@ import { View, Form } from '@tarojs/components'
 import { AtButton, AtImagePicker } from 'taro-ui'
 import { useDispatch } from '@tarojs/redux'
 
-import { SET_LOGIN_INFO, SET_IS_OPENED } from '../../constants'
+import { LOGIN } from '../../constants'
 import './index.scss'
 
 export default function LoginForm(props) {
@@ -58,13 +58,8 @@ export default function LoginForm(props) {
     setFiles([])
     setFormNickName('')
 
-    // 缓存在 storage 里面
-    await Taro.setStorage({ key: 'userInfo', data: userInfo })
-
-    dispatch({ type: SET_LOGIN_INFO, payload: userInfo })
-
-    // 关闭弹出层
-    dispatch({ type: SET_IS_OPENED, payload: { isOpened: false } })
+    // 向后端发起登录请求
+    dispatch({ type: LOGIN, payload: { userInfo: userInfo } })
   }
 
   return (

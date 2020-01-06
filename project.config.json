@@ -1,16 +1,18 @@
 {
-	"miniprogramRoot": "dist/",
-	"projectname": "ultra-club",
-	"description": "",
-	"appid": "touristappid",
-	"setting": {
-		"urlCheck": true,
-		"es6": false,
-		"postcss": false,
-		"minified": false
-	},
-	"compileType": "miniprogram",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"condition": {}
+  "miniprogramRoot": "dist/",
+  "projectname": "ultra-club",
+  "description": "",
+  "appid": "",
+  "cloudfunctionRoot": "functions/",
+  "setting": {
+    "urlCheck": true,
+    "es6": false,
+    "postcss": false,
+    "minified": false
+  },
+  "compileType": "miniprogram",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+  "condition": {}
 }
