@@ -1,7 +1,7 @@
 name: Taro 多端小程序开发大型实战
 id: 34a473b9e9e5e3dafcc619ab152750af
 created: '2019-12-25T10:16:40.222Z'
-updated: 2019-12-30T06:46:24.372Z
+updated: 2020-01-06T07:15:21.228Z
 github: 'https://github.com/tuture-dev/ultra-club'
 topics:
   - Taro
@@ -14,7 +14,7 @@ description: >-
   Web 端、移动端、微信小程序、支付宝小程序等等多套用户界面，其维护成本可以想象。作为一个优秀的多端统一开发解决方案，Taro 的出现则改变了这一情况。正值
   Taro 2.x 进入 beta 阶段，让我们沏上一杯茶，开始我们的 Taro 多端小程序开发之旅吧。
 splits:
-  - name: Taro 多端小程序开发大型实战（上）
+  - name: Taro 小程序开发大型实战（一）：熟悉的 React，熟悉的 Hooks
     description: >-
       正当移动互联网进入白热化阶段时，以微信小程序为代表的一类“轻应用”异军突起。它们无需下载，使用方便，“用完即走”，同时功能也较为完备，一经推出即得到了各大平台和及用户的热烈追捧。但是问题也随之而来——开发者们要同时维护
       Web 端、移动端、微信小程序、支付宝小程序等等多套用户界面，其维护成本可以想象。作为一个优秀的多端统一开发解决方案，Taro
@@ -22,15 +22,43 @@ splits:
     cover: tuture-assets/taro-cover-1.jpg
     id: 34a473b9e9e5e3dafcc619ab152750af
     start: '8565035'
-    end: 63131b6
-  - name: Taro 多端小程序开发大型实战（中）
+    end: da834d1
+  - name: Taro 小程序开发大型实战（二）：多页面跳转和 Taro UI 组件库
     description: >-
-      这一部分内容比较长，虽然看上去只有两步，但是因为我们在第一步中实现了多端登录（我们甚至还煞有介事的给它取了个“群魔乱舞”的名字）需要适配大量的代码。同时为了保持每个代码文件都尽量短小和符合最佳实践，我们需要拆分逻辑，所以讲解这样拆分逻辑的原因也需要大量的文字，特别是在第二步中引入
-      Hooks + Redux
-      来重构我们第二步的登录逻辑时，文字量就成倍地增长了。所幸，虽然代码很多，文字很长，但是我们应该是认真讲清楚了，但因为讲透这样一份有点复杂的代码还是存在许多困难，所以如果文中存在问题还请读者不吝赐教，这里我们一定会认真考虑您的意见，让我们一起让这篇教程变得更好！
+      在上一篇教程中，我们用熟悉的 React 和 Hooks 搞定了“奥特曼俱乐部”的雏形。在这一篇文章中，我们将用 Taro
+      自带的路由功能实现多页面跳转，并用 Taro UI 组件库升级之前略显简陋的界面。
     cover: tuture-assets/taro-cover-2.jpg
+    topics:
+      - Taro
+      - Taro UI
     id: af6922503ad1941b09b324ffa35f33ea
+    start: f6c79ab
+    end: 63131b6
+  - name: Taro 小程序开发大型实战（三）：实现微信和支付宝多端登录
+    description: >-
+      能够借助所在平台实现“一键登录”是小程序的一大优势，大大降低了用户的使用门槛，但是各平台处理登录和鉴权的方式又存在较大的差异。在这一篇文章中，我们将带你踩过“多端登录”的“坑”，让用户能够在不同的平台轻松登录我们的应用。
+    cover: tuture-assets/taro-cover-3.jpg
+    id: 5e10118be51d454165777203
+    categories:
+      - 小程序
+      - Taro
+      - 进阶
     start: 1da2fee
+    end: 1da2fee
+  - name: Taro 小程序开发大型实战（四）：Hooks + Redux 双剑合璧
+    description: >-
+      随着状态增多，状态提升的操作也随着增多，导致保存这些状态的父组件会臃肿不堪，而且每次状态的改变需要影响很多中间组件，带来极大的性能开销。在这篇长文中，我们将用
+      Hooks 版的 Redux 来解决状态管理的难题，而让 Taro 专注于渲染用户界面。
+    cover: tuture-assets/taro-cover-4.jpg
+    id: 5e100f78e51d4541493621cd
+    topics:
+      - Taro
+      - Redux
+    categories:
+      - 小程序
+      - Taro
+      - 进阶
+    start: a3cf715
     end: a3cf715
 steps:
   - name: 起步
@@ -106,7 +134,7 @@ steps:
         display: false
       - file: yarn.lock
     explain:
-      pre: "对于国内 React 开发者来说，[Taro](https://taro.jd.com/) 的出现无疑是福音——它能够让我们用熟悉的 React 代码去搭建各类小程序，并且一份代码可以编译成多个平台的应用（目前包括微信小程序、支付宝小程序、React Native、H5 等等）。随着 Taro 的不断进化，它对 React 代码的支持程度越来越好，所支持的目标平台也越来越多，学习的价值自然不必多言。正值 Taro 进入 2.0.0 版本的 beta 阶段，我们在这一篇教程将手把手带你实现一个能够部署到多端的小程序，让你感受 Taro 的强大与魅力！\n\n《Taro 多端小程序开发大型实战》共分为三篇：\n\n- 上篇（也就是这篇）\n  - 用脚手架初始化项目\n  - 用熟悉的 React 代码编写用户界面\n  - 使用 React Hooks 重构状态管理\n  - 用自带路由功能搭建多页面应用\n  - 用 Taro UI 组件库升级应用界面\n- [中篇](https://juejin.im/post/5e046c4fe51d45584221e508)（已完成）\n  - 实现多端登录（微信 + 支付宝 + 普通登录）\n  - Hooks + Redux 彻底重构状态和数据流\n- 下篇（✍️写作中）\n  - 利用小程序云（云函数 + RESTful API）进行后台开发\n  - 在小程序中发起请求，获取后台数据\n  - 多平台编译和发布（微信 + 支付宝）\n\n我们还提供了项目仓库的 [GitHub 地址](https://github.com/tuture-dev/ultra-club)。*项目目前还在开发阶段，您可以跳转到任意一次 commit 查看当前步骤的所有代码哦。*\n\n### 我们将构建什么？\n\n 我们将构建一个具有多页面的多端小程序应用——奥特曼俱乐部（Ultraman Club）。在完成上篇后，项目的 GIF 动图展示如下：\n\n![](tuture-assets/taro-demo-first.gif)\n\n具体有三个页面：\n\n1. **主页**：展示了所有帖子，以及添加新帖子的按钮。\n2. **帖子详情**：展示单个帖子的全部内容。\n3. **个人主页**：展示用户的个人信息。\n\n### 前提条件\n\n在阅读这篇教程之前，我们希望你已经具备以下知识：\n\n- 了解 HTML、CSS、JavaScript 的基础知识，如果了解 Sass 就更好了\n- 了解 React 框架的基础知识，可以参考[这篇教程](https://tuture.co/2019/11/18/07acf61/)进行学习；如果接触过 React Native 以及 Hooks 则更好了\n- 了解并已经安装好 Node 与 npm，可以参考[这篇教程](https://tuture.co/2019/12/03/892fa12/)进行学习\n\n*除此之外，你还需要下载并安装微信开发者工具，这里是[下载地址](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)。*\n\n### 用 Taro 脚手架初始化项目\n\n首先安装 Taro CLI：\n\n```bash\nnpm install -g @tarojs/cli\n```\n\n然后创建我们的项目：\n\n```bash\ntaro init ultra-club\n```\n\n之后会出现一系列选项，按照下图所示进行选择即可（CSS 预处理器选择 [Sass](https://www.sass.hk/)，模板选择“默认模板”，老司机可自行选择使用 TS）：\n\n![](tuture-assets/taro-init.png)\n\n\n::: info\n**提示**\n\n本项目使用 [Sass](https://www.sass.hk/) 主要是为了兼容 taro-ui 的样式，并没有使用到 Sass 的高级特性，如果你不熟悉的话也不用担心哦，就当成是常规的 CSS 代码。\n:::\n\n\n进入到我们的项目目录 ultra-club 之后，可以看到项目模板包括以下文件：\n\n```text\n.\n├── config                    # 项目配置\n│\_\_ ├── dev.js                # 开发环境配置文件\n│\_\_ ├── index.js              # 主配置文件\n│\_\_ └── prod.js               # 生产环境配置文件\n├── package.json\n├── project.config.json       # 微信小程序项目配置\n└── src                       # 项目源码目录\n    ├── app.scss               # 根组件样式\n    ├── app.jsx               # 根组件 app\n    ├── index.html            # 等待被嵌入代码的 HTML 文档\n    └── pages                 # 页面目录\n        └── index             # index 页面模块\n            ├── index.scss     # index 页面样式\n            └── index.jsx     # index 页面组件\n```\n\n我们主要看一下两个代码文件：`src/app.jsx` 以及 `src/pages/index/index.jsx`。"
+      pre: "对于国内 React 开发者来说，[Taro](https://taro.jd.com/) 的出现无疑是福音——它能够让我们用熟悉的 React 代码去搭建各类小程序，并且一份代码可以编译成多个平台的应用（目前包括微信小程序、支付宝小程序、React Native、H5 等等）。随着 Taro 的不断进化，它对 React 代码的支持程度越来越好，所支持的目标平台也越来越多，学习的价值自然不必多言。正值 Taro 进入 2.0.0 版本的 beta 阶段，我们在这一篇教程将手把手带你实现一个能够部署到多端的小程序，让你感受 Taro 的强大与魅力！\n\n在这一系列教程中，我们将构建一个多端小程序应用——奥特曼俱乐部（Ultraman Club，简称 UltraClub），一个支持多端登录（微信和支付宝）的类似贴吧的小程序。我们还提供了项目仓库的 [GitHub 地址](https://github.com/tuture-dev/ultra-club)。*项目目前还在开发阶段，您可以跳转到任意一次 commit 查看当前步骤的所有代码哦。*\n\n### 我们将构建什么？\n\n在完成这篇教程后，项目的 GIF 动图展示如下：\n\n![](tuture-assets/taro-demo1.gif)\n\n具体有三个页面：\n\n1. **主页**：展示了所有帖子，以及添加新帖子的按钮。\n2. **帖子详情**：展示单个帖子的全部内容。\n3. **个人主页**：展示用户的个人信息。\n\n### 前提条件\n\n在阅读这篇教程之前，我们希望你已经具备以下知识：\n\n- 了解 HTML、CSS、JavaScript 的基础知识，如果了解 Sass 就更好了\n- 了解 React 框架的基础知识，可以参考[这篇教程](https://tuture.co/2019/11/18/07acf61/)进行学习；如果接触过 React Native 以及 Hooks 则更好了\n- 了解并已经安装好 Node 与 npm，可以参考[这篇教程](https://tuture.co/2019/12/03/892fa12/)进行学习\n\n*除此之外，你还需要下载并安装微信开发者工具，这里是[下载地址](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)。*\n\n### 用 Taro 脚手架初始化项目\n\n首先安装 Taro CLI：\n\n```bash\nnpm install -g @tarojs/cli\n```\n\n然后创建我们的项目：\n\n```bash\ntaro init ultra-club\n```\n\n之后会出现一系列选项，按照下图所示进行选择即可（CSS 预处理器选择 [Sass](https://www.sass.hk/)，模板选择“默认模板”，老司机可自行选择使用 TS）：\n\n![](tuture-assets/taro-init.png)\n\n\n::: info\n**提示**\n\n本项目使用 [Sass](https://www.sass.hk/) 主要是为了兼容 taro-ui 的样式，并没有使用到 Sass 的高级特性，如果你不熟悉的话也不用担心哦，就当成是常规的 CSS 代码。\n:::\n\n\n进入到我们的项目目录 ultra-club 之后，可以看到项目模板包括以下文件：\n\n```text\n.\n├── config                    # 项目配置\n│\_\_ ├── dev.js                # 开发环境配置文件\n│\_\_ ├── index.js              # 主配置文件\n│\_\_ └── prod.js               # 生产环境配置文件\n├── package.json\n├── project.config.json       # 微信小程序项目配置\n└── src                       # 项目源码目录\n    ├── app.scss              # 根组件样式\n    ├── app.jsx               # 根组件 app\n    ├── index.html            # 等待被嵌入代码的 HTML 文档\n    └── pages                 # 页面目录\n        └── index             # index 页面模块\n            ├── index.scss    # index 页面样式\n            └── index.jsx     # index 页面组件\n```\n\n我们主要看一下两个代码文件：`src/app.jsx` 以及 `src/pages/index/index.jsx`。"
       post: >-
         ### 运行小程序
 
@@ -365,7 +393,9 @@ steps:
 
         还注意到 `useState` 接受一个参数，即**状态的初始值**。这里我们取了一个 `Number`
         类型，事实上还可以是字符串、数组、对象等等。
-      post: 你尽可以打开模拟器试一下重构之后效果，看看功能是否与上一步完全一致哦！
+      post: >-
+        你尽可以打开模拟器试一下重构之后效果，看看功能是否与上一步完全一致哦！在接下来的[第二篇](https://tuture.co/2019/12/25/af69225/)中，我们将进一步实现多页面跳转，并用
+        Taro UI 组件库升级我们的界面。
   - name: 来一打页面
     commit: f6c79ab
     diff:
@@ -446,7 +476,27 @@ steps:
       - file: src/images/mineSelected.png
     explain:
       pre: >-
-        在这一步中，我们将开始实现项目的其他页面，包括：
+        在[上一篇教程](https://tuture.co/2019/12/25/34a473b/)中，我们用熟悉的 React 和 Hooks
+        搞定了“奥特曼俱乐部”的雏形。在这一篇文章中，我们将用 Taro 自带的路由功能实现多页面跳转，并用 Taro UI
+        组件库升级之前略显简陋的界面。这一篇完成后的 DEMO 如下：
+
+
+        ![](tuture-assets/taro-demo2.gif)
+
+
+        如果你想直接从这一篇开始动手实践，那么请运行以下命令快速开始：
+
+
+        ```bash
+
+        git clone -b second-part https://github.com/tuture-dev/ultra-club.git
+
+        cd ultra-club
+
+        ```
+
+
+        现在让我们开始实现项目的其他页面吧，包括：
 
 
         - 帖子详情 `post`：进入单篇帖子的详情页面
@@ -674,8 +724,9 @@ steps:
         完成这一步的代码后，记得在模拟器里面看看运行起来是不是跟开头的 GIF demo 效果完全一致哦！
 
 
-        至此，《Taro 多端小程序开发大型实战》上篇也就结束啦。欢迎继续阅读中篇，我们将手把手带大家用实现多端登录（微信 + 支付宝 +
-        普通登录），并用 Hooks + Redux 彻底重构状态和数据流。
+        至此，《Taro
+        多端小程序开发大型实战》第二篇也就结束啦。欢迎继续阅读[第三篇](https://tuture.co/2019/12/25/af69225/5e10118/)，我们将手把手带大家用实现如何在
+        Taro 框架下实现多端登录（微信小程序 + 支付宝小程序 + 普通登录）。
   - name: 多端登录，群魔乱舞
     commit: 1da2fee
     diff:
@@ -986,12 +1037,50 @@ steps:
       - file: yarn.lock
     explain:
       pre: >-
+        欢迎继续阅读《Taro 小程序开发大型实战》系列，前情回顾：
+
+
+        - [熟悉的 React，熟悉的 Hooks](https://tuture.co/2019/12/25/34a473b/)：我们用 React
+        和 Hooks 实现了一个非常简单的添加帖子的原型
+
+        - [多页面跳转和 Taro UI 组件库](https://tuture.co/2019/12/25/af69225/)：我们用 Taro
+        自带的路由功能实现了多页面跳转，并用 Taro UI 组件库升级了应用界面
+
+
+        而在这一篇中，我们将实现微信和支付宝多端登录。如果你希望直接从这一篇开始，请运行以下命令：
+
+
+        ```bash
+
+        git clone -b third-part https://github.com/tuture-dev/ultra-club.git
+
+        cd ultra-club
+
+        ```
+
+
         与普通的 Web
         应用相比，小程序能够在所在的平台实现一键登录，非常方便。这一步，我们也将实现多端登录（主要包括微信登录和支付宝登录）。之所以标题取为“群魔乱舞”，不仅受了“震惊”小编们的启发，也是因为当今各平台处理登录和鉴权的方式差异很大，很遗憾的是在
         Taro 框架下我们依然需要踩很多“坑”才能真正实现“多端登录”。
 
 
         ### 准备工作
+
+
+        #### 前提条件
+
+
+        在正式开始之前，我们希望你已经具备以下知识：
+
+
+        - 基本的 React 框架知识，可参考[这篇文章](https://tuture.co/2019/11/18/07acf61/)进行学习
+
+        - 对常用的 React Hooks （`useState`、`useEffect`）有所了解，后面图雀社区将推出 “一杯茶的时间，上手
+        React Hooks”，敬请期待！
+
+
+        *除此之外，你还需要下载并安装[支付宝开发者工具](https://docs.alipay.com/mini/ide/download)，登录后创建自己的小程序
+        ID。*
 
 
         #### 组件设计规划
@@ -1011,14 +1100,28 @@ steps:
         `AlipayLoginButton`（支付宝登录按钮，仅在支付宝小程序中出现）
 
         - `Footer` 则用来显示是否已登录的文字，在已登录的情况下会显示 `Logout`（退出登录按钮）
-      post: |-
+      post: >-
         ### 查看效果
+
 
         敲了这么多代码，终于又到了神圣的验收环节。首先是普通登录：
 
+
         ![](tuture-assets/taro-demo4.gif)
 
-        至于微信和支付宝登录，点击之后就会直接以登录开发者工具所用的帐号登录了。
+
+        而微信和支付宝登录，点击之后就会直接以登录开发者工具所用的帐号登录了。下面贴出我微信和支付宝登录后的界面展示：
+
+
+        ![](tuture-assets/logged-squashed.jpg)
+
+
+        登录后点击下方的“退出登录”按钮，就会将当前登录帐户注销哦。
+
+
+        至此，《Taro
+        多端小程序开发大型实战》第三篇也就结束啦。在接下来的[第四篇](https://tuture.co/2019/11/28/5e100f7/)中，我们将逐步用
+        Redux 来重构业务数据流，让我们现在略显臃肿的状态管理变得清晰可控。
   - name: 双剑合璧：Hooks + Redux
     commit: a3cf715
     diff:
@@ -1495,10 +1598,60 @@ steps:
         display: true
         explain:
           pre: "### 以重构 “文章详情” 页结束\n\n最后，让我们坚持一下，跑赢重构工作的最后一公里\U0001F4AA！完成 “文章详情” 页的重构。\n\n让我们打开 `src/pages/post/post.jsx` 文件，对其中的内容作出相应的修改如下："
-          post: "可以看到，上面的文件做了以下四处修改：\n\n- 我们从 `router.params` 中导出了 `postId`，因为之前我们在 `PostCard` 里面点击跳转的路径参数使用了 `postId`。\n- 接着我们导入并使用 `useSelector` Hooks 获取了保存在 Redux store 中的 `posts` 属性，然后使用上一步获取到的 `postId`，来获取我们最终要渲染的 `post` 属性。\n- 最后，我们将传给 `PostCard` 的属性改成上一步获取到的 `post` 。\n\n\n::: warning\n**注意**\n\n这里的 `console.log` 是调试时使用的，生产环境中建议删掉。\n:::\n\n### 查看效果\n\n可以看到，在未登录状态下，会提示请登录：\n\n![](tuture-assets/taro-demo-notlogin.gif)\n\n在已登录的情况下，发帖子会显示当前登录用户的头像和昵称：\n\n![](tuture-assets/taro-demo5.gif)\n\n### 小结\n\n有幸！到这里，我们 Redux 重构之旅的万里长征就跑完了！让我们来回顾一下我们在这一小节中学到了那些东西。\n\n- 首先我们讲解了使用 Redux 的初衷，接着我们安装了相关依赖，然后引出了 Redux 三大核心概念：Store、Action、Reducers，接着我们创建了应用需要的两个 Reducer：`post` 和 `user`；接着我们将将 Redux 和 React 整合起来；因为 Action 是从组件中 dispatch 出来了，所以我们接下来就开始了组件的重构之旅。\n\n- 在重构 “我的” 页面组件时，我们按照 Redux 的思想，从它的底层组件三个登录按钮重构开始，接着重构了 `LoggedMine` 组件，再往上就是 `Header` 组件；重构完 `Header` 组件之后，我们接着从 `Footer` 组件的底层组件 `Logout` 组件开始重构，然后重构了 `LoginForm` 组件，最后是 `Footer` 组件，重构完 `Header` 和 `Footer` 组件，我们开始重构其上层组件 `mine` 页面组件，自此我们就完成了 “我的” 页面的重构。\n\n- 在重构 “首页” 页面组件时，我们同样按照 Redux 的思想，从它的底层组件 `PostForm` 组件开始，接着是 `PostCard` 组件，最后再回到顶层组件 `index` 首页页面组件。\n\n在重构 “帖子详情” 页面组件时，因为其底层组件 `PostCard` 已经重构过了，所以我们就直接重构了 `post` 帖子详情页面组件。\n\n能跟着这么长的文章坚持到这里，我想给你鼓个掌，也希望你能给自己鼓个掌，我想，我可以非常肯定且自豪的颁布给你第一名的奖章了\U0001F947。\n\n到这里，《Taro 多端小程序开发大型实战》中篇也就结束了，在下篇中，我们将接触小程序云后台开发，并在前端接入后台数据，并实现多端编译和发布。\n"
+          post: "可以看到，上面的文件做了以下四处修改：\n\n- 我们从 `router.params` 中导出了 `postId`，因为之前我们在 `PostCard` 里面点击跳转的路径参数使用了 `postId`。\n- 接着我们导入并使用 `useSelector` Hooks 获取了保存在 Redux store 中的 `posts` 属性，然后使用上一步获取到的 `postId`，来获取我们最终要渲染的 `post` 属性。\n- 最后，我们将传给 `PostCard` 的属性改成上一步获取到的 `post` 。\n\n\n::: warning\n**注意**\n\n这里的 `console.log` 是调试时使用的，生产环境中建议删掉。\n:::\n\n### 查看效果\n\n可以看到，在未登录状态下，会提示请登录：\n\n![](tuture-assets/taro-demo-notlogin.gif)\n\n在已登录的情况下，发帖子会显示当前登录用户的头像和昵称：\n\n![](tuture-assets/taro-demo5.gif)\n\n### 小结\n\n有幸！到这里，我们 Redux 重构之旅的万里长征就跑完了！让我们来回顾一下我们在这一小节中学到了那些东西。\n\n- 首先我们讲解了使用 Redux 的初衷，接着我们安装了相关依赖，然后引出了 Redux 三大核心概念：Store、Action、Reducers，接着我们创建了应用需要的两个 Reducer：`post` 和 `user`；接着我们将将 Redux 和 React 整合起来；因为 Action 是从组件中 dispatch 出来了，所以我们接下来就开始了组件的重构之旅。\n\n- 在重构 “我的” 页面组件时，我们按照 Redux 的思想，从它的底层组件三个登录按钮重构开始，接着重构了 `LoggedMine` 组件，再往上就是 `Header` 组件；重构完 `Header` 组件之后，我们接着从 `Footer` 组件的底层组件 `Logout` 组件开始重构，然后重构了 `LoginForm` 组件，最后是 `Footer` 组件，重构完 `Header` 和 `Footer` 组件，我们开始重构其上层组件 `mine` 页面组件，自此我们就完成了 “我的” 页面的重构。\n\n- 在重构 “首页” 页面组件时，我们同样按照 Redux 的思想，从它的底层组件 `PostForm` 组件开始，接着是 `PostCard` 组件，最后再回到顶层组件 `index` 首页页面组件。\n\n在重构 “帖子详情” 页面组件时，因为其底层组件 `PostCard` 已经重构过了，所以我们就直接重构了 `post` 帖子详情页面组件。\n\n能跟着这么长的文章坚持到这里，我想给你鼓个掌，也希望你能给自己鼓个掌，我想，我可以非常肯定且自豪的颁布给你第一名的奖章了\U0001F947。\n"
       - file: yarn.lock
     explain:
       pre: >-
+        欢迎继续阅读《Taro 小程序开发大型实战》系列，前情回顾：
+
+
+        - [熟悉的 React，熟悉的 Hooks](https://tuture.co/2019/12/25/34a473b/)：我们用 React
+        和 Hooks 实现了一个非常简单的添加帖子的原型
+
+        - [多页面跳转和 Taro UI 组件库](https://tuture.co/2019/12/25/af69225/)：我们用 Taro
+        自带的路由功能实现了多页面跳转，并用 Taro UI 组件库升级了应用界面
+
+        -
+        [实现微信和支付宝多端登录](https://tuture.co/2019/12/25/af69225/5e10118/)：实现了微信、支付宝以及普通登录和退出登录
+
+
+        如果你跟着敲到了这里，你一定会发现现在的状态管理和数据流越来越臃肿，组件状态的更新非常复杂。在这一篇中，我们将开始用 Redux 重构。
+
+
+        如果你不熟悉 Redux，推荐阅读我们的《Redux 包教包会》系列教程：
+
+
+        - [Redux 包教包会（一）：解救 React 状态危机](https://tuture.co/2019/11/28/1fe175a/)
+
+        - [Redux 包教包会（二）：趁热打铁，完全重构](https://tuture.co/2019/11/28/d129c56/)
+
+        - [Redux 包教包会（三）：各司其职，重拾初心](https://tuture.co/2019/11/28/a3b94eb/)
+
+
+        如果你希望直接从这一步开始，请运行以下命令：
+
+
+        ```bash
+
+        git clone -b redux-start https://github.com/tuture-dev/ultra-club.git
+
+        cd ultra-club
+
+        ```
+
+
+
+        ::: info
+
+        **提示**
+
+
+        这一篇的内容很长，要敲的代码很多，建议先收藏，在有空的时候抽出一大块时间去实践哦。相信经过这一篇的洗礼，不仅能对 Redux
+        的理解更上一层楼，Taro 的开发功力也能大增！
+
+        :::
+
+
         写到这一步，我们发现状态已经有点多了，而且 `src/pages/mine/mine.jsx` 文件是众多状态的顶层组件，比如我们的普通登录按钮
         `src/components/LoginButton/index.jsx` 组件和我们的
         `src/components/Footer/index.jsx` 组件，我们通过点击普通登录按钮打开登录弹窗的状态 `isOpened`
@@ -1516,3 +1669,4 @@ steps:
 
 
         在这一节中，我们将结合 React Hooks 和 Redux 来重构我们状态管理。
+      post: 终于，这漫长的第四篇结束了。在接下里，我们将接触小程序云后台开发，并在前端接入后台数据。
