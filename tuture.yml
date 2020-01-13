@@ -1,7 +1,7 @@
 name: Taro 多端小程序开发大型实战
 id: 34a473b9e9e5e3dafcc619ab152750af
 created: '2019-12-25T10:16:40.222Z'
-updated: 2020-01-06T08:02:52.259Z
+updated: 2020-01-13T11:39:40.708Z
 github: 'https://github.com/tuture-dev/ultra-club'
 topics:
   - Taro
@@ -1669,3 +1669,686 @@ steps:
 
         在这一节中，我们将结合 React Hooks 和 Redux 来重构我们状态管理。
       post: 终于，这漫长的第四篇结束了。在接下来的文章中，我们将接触小程序云后台开发，并在前端接入后台数据。
+  - name: '小程序云,虽有遗憾'
+    commit: b32362b
+    diff:
+      - file: package.json
+        display: true
+        explain:
+          pre: >-
+            ### Redux 异步工作流解析
+
+
+            我们来看一下 Redux 的数据流动图：
+
+
+            ![](tuture-assets/编组-7f50d1d73e8425b0.png)
+
+
+            上图中灰色的那条路径是我们之前一直在使用的 Redux 的数据流动图，它是 Redux 同步数据流动图：
+
+
+            - `view` 中 `dispatch(syncAction)` 一个同步 action 来更新 `store` 中的数据
+
+            - `reducer` 响应 action，更新 `store` 状态
+
+            - `connect` 将更新后的状态传给 `view`
+
+            - `view` 接收新的数据重新渲染
+
+
+
+            ::: info
+
+            **注意**
+
+
+            对 Redux 还不了解的同学可以学习一下图雀社区的 [Redux
+            包教包会系列教程](https://tuture.co/2019/11/28/1fe175a/)哦。
+
+            :::
+
+
+            现在我们要去向小程序云发起请求，这个请求是一个异步的请求，它不会立刻得到响应，所以我们需要一个中间状态（这里我们使用
+            `Saga`）来回处理这个异步请求并得到数据，然后再执行和之前同步请求类似的路径，即为我们上图中绿色的部分+剩下灰色的部分，所以异步工作流程就变成了这样：
+
+
+            - `view` 中 `dispatch(asyncAction)` 一个异步 action 来获取后端（这里是小程序云）的数据
+
+            - `saga` 处理这个异步 action，并等待数据响应
+
+            - `saga` 得到响应的数据，`dispatch(syncAction)` 一个同步的 action 来更新 store 的状态
+
+            - `reducer` 响应 action，更新 `store` 状态
+
+            - `connect` 将更新后的状态传给 `view`
+
+            - `view` 接收新的数据重新渲染
+
+
+            ::: info
+
+            **注意**
+
+
+            图雀社区日后会出一篇教程专门讲解 Redux
+            异步工作流，这里不会细究整个异步流程的原理，只会讲解如何整合这个异步工作流。敬请期待哦✌️~
+
+            :::
+
+
+            ### 实战 Redux 异步工作流
+
+
+            #### 安装
+
+
+            我们使用 `redux-saga` 这个中间件来接管 Redux 异步工作流的处理异步请求部分，首先在项目根目录下安装
+            `redux-saga` 包：
+
+
+            ```Bash
+
+            $ npm install redux-saga
+
+            ```
+      - file: src/store/index.js
+        display: true
+        explain:
+          pre: >-
+            #### 配置 `redux-saga` 中间件
+
+
+            安装完之后，我们接着要先配置 `redux-saga` 才能使用它，打开 `src/store/index.js`
+            文件，对其中的内容作出对应的修改如下：
+          post: >-
+            可以看到，我们上面的文件作出以下四处改动：
+
+
+            - 首先我们导出了 `createSagaMiddleware`
+
+            - 接着我们从 `src/store/sagas` 文件夹下导出了一个 `rootSaga`，它组合了所有的 `saga`
+            文件，这类似组合 `reducer` 的 `combineReducers`，我们将在后续的步骤中编写这些 `sagas`。
+
+            - 接着我们调用 `createSagaMiddleware` 生成 `sagaMiddleware` 中间件，并将其放置在
+            `middleware` 数组中，这样 Redux 就会注册这个中间件，在响应异步 action 时，`sagaMiddleware`
+            会介入，并将其转交给我们定义的 `saga` 函数来处理。
+
+            - 最后在 `createStore` 函数里面，当创建 `store` 之后，我们调用
+            `sagaMiddleware.run(rootSaga)` 来将所有的 `sagas` 跑起来开始监听并响应异步 action。
+      - file: src/components/LoginForm/index.jsx
+        display: true
+        explain:
+          pre: >-
+            #### View 中发起异步请求
+
+
+            配置使用 `redux-saga` 中间件，并将 `sagas` 跑起来之后，我们可以开始在 React 中 dispatch 异步的
+            action 了。
+
+
+            让我们遵照之前的重构顺序，先来搞定登录的异步数据流处理，打开 `src/components/LoginForm/index.jsx`
+            文件，对其中的内容作出对应的修改如下：
+          post: >-
+            可以看到，我们对上面的代码做出了以下三处改动：
+
+
+            - 我们将之前设置用户登录信息的 `SET_LOGIN_INFO` 和设置登录框弹出层的 `SET_IS_OPENED` 换成了
+            `LOGIN`
+            常量，代表我们要先向小程序云发起登录请求，然后获取到登录的数据再设置登录信息和关闭登录框弹出层（其实这里也可以直接关闭弹出层，有点失策(⊙o⊙)…）。
+
+            - 接着我们将之前的设置登录信息和关闭登录框弹出层的操作删除掉。
+
+            - 最后我们将 `dispatch` 一个 `action.type` 为 `LOGIN` 的
+            action，带上我们的需要进行登录的信息 `userInfo`。
+
+
+            #### 增加 Action 常量
+
+
+            我们在上一步中使用到了 `LOGIN` 常量，打开 `src/constants/user.js`，在其中增加 `LOGIN` 常量：
+
+
+            ```JavaScript
+
+            export const SET_IS_OPENED = 'MODIFY_IS_OPENED'
+
+            export const SET_LOGIN_INFO = 'SET_LOGIN_INFO'
+             
+            export const LOGIN = 'LOGIN'
+
+            ```
+      - file: src/sagas/user.js
+        display: true
+        explain:
+          pre: >-
+            #### Saga 处理异步请求
+
+
+            Saga 在处理异步请求时有很多种方式，因项目不同，可以采用不同的方式，这里我们选用了官方推荐的最佳实践：
+
+
+            - watcherSaga 监听异步的 action
+
+            - handlerSaga 处理异步的 action
+              - `dispatch` 同步的 action，更新异步 action 开始的状态
+              - `dispatch` 同步的 action，更新异步 action 成功/失败的状态
+
+            运用最近实践之后，之前的 Redux 数据流动图就变成了下面这样子：
+
+
+            ![](tuture-assets/image-78c52df00369534c.png)
+
+
+            好了，讲解了 `redux-saga` 处理异步 Action 的最佳实践之后，我们马上来运用最佳实践来编写处理异步 Action 的
+            Saga 文件。
+
+
+            在我们的应用中可能涉及到多个异步请求，所以 `redux-saga` 推荐的最佳实践是单独创建一个 `sagas`
+            文件夹，来存放所有处理异步请求的 `sagas` 文件，以及可能用到的辅助文件。
+
+
+            在上一步中，我们从 view 中发出了 `LOGIN` 异步登录请求，接下来我们要编写对应处理这个 `LOGIN` 请求的 `saga`
+            文件，在 `src` 文件夹下创建 `sagas` 文件夹，并在其中创建 `user.js`，在其中编写如下内容：
+          post: "可以看到，上面的改动主要是创建 `watcherSaga` 和 `handlerSaga` 。\n\n**创建 `watcherSaga`**\n\n- 我们创建了登录的 `watcherSaga`： `watchLogin`，它用来监听 `action.type` 为 `LOGIN` 的 action，并且当监听到 `LOGIN` action 之后，从这个 action 中获取必要的 `userInfo` 数组，然后激活 `handlerSaga`：`login` 去处理对应的登录逻辑。\n- 这里的 `watcherSaga`：`watchLogin` 是一个 `Generator Function`，它内部是一个 `while` 无限循环，表示在内部持续监听 `LOGIN` action。\n- 在循环内部，我们使用了 `redux-saga` 提供的 `effects helper` 函数：`take`，它用于监听 `LOGIN` action，获取 action 中携带的数据。\n- 接着我们使用了另外一个 `effects helper` 函数：`fork`，它表示非阻塞的执行 `handlerSaga`：`login`，并将 `payload.userInfo` 作为参数传给 `login`。\n\n**创建 `handlerSaga`**\n\n- 我们创建了登录的 `hanlderSaga`：`login`，它用来处理登录逻辑。\n- `login` 也是一个 Generator Function，在它内部是一个 `try/catch` 语句，用于处理登录请求可能存在的错误情况。\n- 在 `try` 语句中，首先是使用了 `redux-saga` 提供给我们的 `effects helper` 函数：`call` 来调用登录的 API：`userApi.login`，并把 `userInfo` 作为参数传给这个 API。\n  - 接着如果登录成功，我们将登录成功的 `user` 缓存到 `storage` 里面。\n  - 接着，我们使用 `redux-saga` 提供的 `effects helpers` 函数：`put`，`put` 类似之前在 `view` 中的 `dispatch` 操作，，来 `dispatch` 了三个 action：`LOGIN_SUCCESS`，`SET_IS_OPENED`，`SET_LOGIN_INFO`，代表更新登录成功的状态，关闭登录框，设置登录信息到 Redux Store 中。\n  - 最后我们使用了 Taro UI 提供给我们的消息框，来显示一个 `success` 消息。\n- 如果登录失败，我们则使用 `put` 发起一个 `LOGIN_ERROR` 的 action 来更新登录失败的信息到 Redux Store，接着使用了 Taro UI 提供给我们的消息框，来显示一个 `error` 消息。\n\n::: info\n**注意**\n\n对 Generator Function 不了解的同学可以看一下这篇文档：[迭代器和生成器](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Iterators_and_generators)。\n:::\n\n**一些额外的工作**\n\n为了创建 `watcherSaga` 和 `handlerSaga`，我们还导入了 `userApi`，我们将在后面来创建这个 API。\n\n除此之外我们还导入了需要使用的 action 常量：\n\n- `SET_LOGIN_INFO`：设置登录信息\n- `LOGIN_SUCCESS`：更新登录成功信息\n- `LOGIN`：监听登录动作\n- `LOGIN_ERROR`：更新登录失败信息\n- `SET_IS_OPENED`：设置登录框开启/关闭的信息\n\n我们还从 `redux-saga/effects` 包中导入了必要的函数：\n\n- `call`：在 `saga` 函数中调用其他异步/同步函数，获取结果\n- \_`put`：类似 `dispatch`，用于在 `saga` 函数中发起 action\n- `take`：在 `saga` 函数中监听 action，并获取对应 action 所携带的数据\n- `fork`：在 `saga` 函数中无阻塞的调用 `handlerSaga`，即调用之后，不会阻塞后续的执行逻辑。\n\n最后，我们导出了 `watchLogin`，它类似 `reducers` 里面的单个 `reducer` 函数，最终会有类似 `combineReducers` 组合 `reducer` 一样来组合所以的 `watcherSaga`。\n"
+      - file: src/constants/user.js
+        display: true
+        explain:
+          pre: >-
+            #### 添加 action 常量
+
+
+            因为在上一步的 `user` saga 文件中，我们使用到了一些还未定义的常量，所以接下来我们马上来定义它们，打开
+            `src/constants/user.js`，在其中添加对应的常量如下：
+          post: >-
+            可以看到，上面除了我们在  "saga 处理异步请求" 中使用到的常量之外，还多了一个 `LOGIN_NORMAL`
+            常量，它主要是用于设置登录状态的默认状态的常量。
+      - file: src/api/user.js
+        display: true
+        explain:
+          pre: >-
+            #### 实现请求 login API
+
+
+            在之前的 `user` saga 文件里面，我们使用到了
+            `userApi`，它里面封装了用于向后端，这里我们是小程序云，发起请求的逻辑，让我们马上来实现它吧。
+
+
+            我们统一将所有的 API 文件放到 `api` 文件夹里面，这便于我们日后的代码维护工作，在 `src` 文件夹下创建 `api`
+            文件夹，在其中添加 `user.js` 文件，并在文件中编写内容如下：
+          post: >-
+            在上面的代码中，我们定义了 `login` 函数，它是一个 `async` 函数，用来处理异步逻辑，在 `login`
+            函数中，我们对当前的环境进行了判断，且只在微信小程序，即 `isWeapp` 的条件下执行登录的操作，对于支付宝小程序和
+            H5，我们则放在下一节使用 LeanCloud 的 Serverless 来解决。
+
+
+            登录逻辑是一个 `try/catch` 语句，用于捕捉可能存在的请求错误，在 `try` 代码块中，我们使用了 `Taro`
+            为我们提供的微信小程序云的云函数 API `Taro.cloud.callFunction`
+            来便捷的向小程序云发起云函数调用请求，它的调用体是一个类似下面结构的对象：
+
+
+            ```JavaScript
+
+            {
+              name: '', // 需要调用的云函数名
+              data: {} // 需要传递给云函数的数据
+            }
+
+            ```
+
+
+            这里我们调用了一个 `login` 云函数，并将 `userInfo`
+            作为参数传给云函数，用于在云函数中使用用户信息来注册用户并保存到数据库，我们将在下一节中实现这个云函数。
+
+
+
+            ::: info
+
+            **提示**
+
+
+            想了解更多关于微信小程序云函数的内容，可以查阅微信小程序云函数文档：[文档地址](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/capabilities.html#%E4%BA%91%E5%87%BD%E6%95%B0)
+
+            :::
+
+
+
+            如果调用成功，我们可以接收返回值，用于从后端返回数据，这里我们使用解构的方法，从返回体里面拿到了 `result` 对象，然后取出其中的
+            `user` 对象并作为 `login` API 函数的返回值。
+
+
+            如果调用失败，则打印错误。
+
+
+            最后我们定义了一个 `userApi` 对象，用于存放所有和用户逻辑有个的函数，并添加 `login` API 属性然后将其导出，这样在
+            `user` saga 函数里面就可以导入 `userApi` 然后通过 `userApi.login` 的方式来调用 `login`
+            API 处理登录逻辑了。
+      - file: project.config.json
+        display: true
+        explain:
+          pre: >-
+            #### 配置云函数开发环境
+
+
+            我们在上一小节中使用 Taro 为我们提供的云函数 API 调用了一个 `login` 云函数，现在我们马上来实现这个云函数。
+
+
+            微信小程序文档中要求我们在项目根目录下面建立一个一个存储云函数的文件夹，然后在 `project.config.json` 的
+            `cloudfunctionRoot`
+            字段的值指定为这个目录，这样小程序开发者工具就可以识别此目录为存放云函数的目录，并做特殊的标志处理。
+
+
+            我们在项目根目录下创建了一个 `functions` 文件夹，它与 `src` 文件夹是同级的：
+
+
+            ```bash
+
+            .
+
+            ├── LICENSE
+
+            ├── README.md
+
+            ├── config
+
+            ├── dist
+
+            ├── functions
+
+            ├── node_modules
+
+            ├── package.json
+
+            ├── project.config.json
+
+            ├── src
+
+            ├── tuture-assets
+
+            ├── tuture-build
+
+            ├── tuture.yml
+
+            └── yarn.lock
+
+            ```
+
+
+            接着我们在根目录的 `project.config.json` 文件中添加 `cloudfunctionRoot` 字段，并将其设置为
+            `'functions/'` 如下：
+          post: >+
+            可以看到，当我们创建了上面的文件夹并设置了 `project.config.json` 之后，我们的小程序开发者工具会变成下面这个样子：
+
+
+            ![](tuture-assets/image-b9ffa2fa953840b8.png)
+
+
+            我们创建的那个 `functions` 文件夹多了一个额外的云图标，并且文件夹的命名从 `functions` 变成了
+            `functions | ultra-club`，竖杠右边的是我们当前的小程序环境。
+
+
+            并且当我们在小程序开发者工具里面右键点击这个 `functions` 文件夹时，会出现菜单弹框，允许我们进行云函数相关的操作：
+
+
+            ![](tuture-assets/image-dd2e30ba279bcf87.png)
+
+
+            我们可以看到有很多操作，这里我们主要会用到如下几个操作：
+
+
+            - 新建 Node.js 云函数
+
+            - 开启云函数本地调试
+
+
+
+            ::: info
+
+            **注意**
+
+
+            其它的操作等你走完整个小程序云开发的流程之后，当需要编写更加复杂的业务逻辑时都会遇到，具体可以参考小程序云的文档：[文档地址](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/guide/functions.html)。
+
+            :::
+
+
+
+            ::: info
+
+            **注意**
+
+
+            必须先开通小程序云开发环境才能使用云函数。具体步骤可以参考我们在 “开通小程序云” 这一节中的讲解。
+
+            :::
+
+
+      - file: functions/login/package.json
+        display: true
+        explain:
+          pre: >-
+            #### 创建 login 云函数
+
+
+            讲解了微信小程序云函数的配置，终于到了创建云函数的阶段了，我们在小程序开发者工具中右键点击 `functions` 文件夹，然后选择新建
+            Node.js 云函数，输入 `login`，然后回车创建，会看到小程序开发者工具自动帮我们创建了如下的代码文件：
+
+
+            ![](tuture-assets/image-a55c174ef431b4ea.png)
+
+
+            可以看到，一个云函数是一个独立的 Node.js 模块，它处理一类逻辑。
+
+
+            我们先来看一下 `package.json` 文件如下：
+          post: >-
+            可以看到，在添加云函数时，小程序开发者工具默认为我们添加了一项 `wx-server-sdk` 依赖，我们在云函数中需要用到它内置的相关
+            API 来操作小程序云。
+
+
+            为了使这个 Node.js 云函数/项目跑起来，我们需要安装依赖，进入 `functions/login` 目录，在目录下运行 `npm
+            install` 命令来安装依赖。
+      - file: functions/login/index.js
+        display: true
+        explain:
+          pre: >-
+            #### 了解默认生成的云函数
+
+
+            当创建了云函数，并安装了依赖之后，我们马上来揭开云函数的神秘面纱，打开
+            `functions/login/index.js`，可以看到如下代码：
+
+
+            ```JavaScript
+
+            // 云函数入口文件
+
+            const cloud = require('wx-server-sdk')
+
+
+            cloud.init()
+
+
+            // 云函数入口函数
+
+            exports.main = async (event, context) => {
+              const wxContext = cloud.getWXContext()
+
+              return {
+                event,
+                openid: wxContext.OPENID,
+                appid: wxContext.APPID,
+                unionid: wxContext.UNIONID,
+              }
+            }
+
+            ```
+
+
+            可以看到，默认生成的代码主要做了下面几项工作：
+
+
+            - 导入 `wx-server-sdk` 包，并命名为 `cloud`，所有我们需要操作小程序云的方法都绑定在 `cloud` 对象上。
+
+            - 接着调用 `cloud.init()` 来初始化云函数的云开发环境，我们将在后续实现 `login` 逻辑时设置环境。
+
+            - 最后是云函数的入口函数，它默认以 `main` 函数作为导出函数，是一个 `async`
+            函数，我们可以在函数内部以同步的方式处理异步逻辑，可以看到，这个函数接收两个参数：`event` 和 `context`，`event`
+            指的是触发云函数的事件，当小程序端调用云函数时，event 就是小程序端调用云函数时传入的参数，外加后端自动注入的小程序用户的
+            `openid` 和小程序的 `appid`。`context`
+            对象包含了此处调用的调用信息和运行状态，可以用它来了解服务运行的情况。默认生成的函数内部代码主要是获取了此时微信上下文信息，然后与
+            `event` 对象一同返回，这样当我们在小程序端以 `Taro.cloud.callFunction`
+            调用这个函数获得的返回值就是包含微信上下文信息和 `event` 的对象。
+
+
+            #### 编写 login 云函数
+
+
+            了解了云函数的具体逻辑，我们马上在云函数中来实现我们具体的登录逻辑，打开
+            `functions/login/index.js`，对其中的代码做出对应的修改如下：
+          post: >
+            可以看到上面的代码改动主要有以下四处：
+
+
+            - 首先我们给 `cloud.init()` 传入了环境参数，我们使用了内置的
+            `cloud.DYNAMIC_CURRENT_ENV`，表示自动设置为当前的云环境，即在右键点击小程序开发者工具里
+            `functions` 文件夹时选择的环境。
+
+            - 接着，我们通过 `cloud.database()` 生成了数据实例 `db`，用于之后在函数体中便捷的操作云数据库。
+
+            - 接着就是 `main` 函数体，我们首先从 `event` 对象中取到了在小程序的调用
+            `Taro.cloud.callFunction` 传过来的 `userInfo` 数据。
+
+            - 然后，跟着取数据的是一个 `try/catch` 语句块，用于捕获错误，在 `try` 语句块中，我们使用 `db`
+            的查询操作，首先查询此用户是否在数据库中已经存在了，如果存在就直接返回，如果不存在，就添加此用户，然后返回添加后的用户。
+
+
+
+            ::: info
+
+            **注意**
+
+
+            这里关于云数据库的相关操作，可以查阅微信小程序云文档，在文档里提供了详尽的实例：云数据库
+
+            :::
+      - file: src/reducers/user.js
+        display: true
+      - file: src/components/WeappLoginButton/index.js
+        display: true
+      - file: src/pages/mine/mine.jsx
+        display: true
+      - file: src/components/Logout/index.js
+        display: true
+      - file: src/components/PostForm/index.jsx
+        display: true
+      - file: src/constants/post.js
+        display: true
+      - file: src/sagas/post.js
+        display: true
+      - file: src/api/post.js
+        display: true
+      - file: functions/createPost/index.js
+        display: true
+      - file: functions/createPost/package.json
+        display: true
+      - file: src/reducers/post.js
+        display: true
+      - file: src/pages/index/index.jsx
+        display: true
+      - file: functions/getPosts/index.js
+        display: true
+      - file: functions/getPosts/package.json
+        display: true
+      - file: functions/createPost/yarn.lock
+        display: false
+      - file: src/pages/post/post.jsx
+        display: true
+      - file: functions/getPost/index.js
+        display: true
+      - file: functions/getPost/package.json
+        display: true
+      - file: functions/getPost/yarn.lock
+        display: false
+      - file: functions/getPosts/yarn.lock
+        display: false
+      - file: functions/login/yarn.lock
+        display: false
+      - file: src/api/index.js
+        display: true
+      - file: src/sagas/index.js
+        display: true
+      - file: yarn.lock
+    explain:
+      pre: >-
+        在前面的代码中，我们通过将数据保存在 Storage
+        里面来完成数据的持久化，这样可以解决小规模数据的存储和查询问题，一旦数据量变大了，那么查询和存储就需要依靠专门的数据库来解决了，一般我们可以通过自建后端和数据库的方式来解决，但当小程序正越来越火的同时，一种被称为
+        Serverless 的模式被提出并也逐渐火爆起来，通俗意义上来概括就是
+        “无后端”，即把后端交给云服务厂商（阿里云、腾讯云、京东云等），开发者只需要专注于前端逻辑，快速交付功能。
+
+
+        一般的小程序 Serverless 服务都包含三大功能：
+
+
+        - 数据库：一般是以 JSON 数据格式进行存储，可以将数据存储在云端数据库中。
+
+        - 存储：支持文本、图片等用户生成内容的存储，可以获取资源的链接进行使用。
+
+        - 云函数：可以用 Node.js 进行开发，自己编写对应的后端逻辑，并把写好的代码传到云端，然后在小程序前端使用 API 进行调用。
+
+
+
+        ::: info
+
+        关于小程序 Serverless
+        的详细描述，这里推荐一篇文章，有兴趣的同学可以详细了解一下：[什么是小程序Serverless？](https://help.aliyun.com/document_detail/122371.html)
+
+        :::
+
+
+        在这一节中，我们使用微信小程序云作为我们的
+        “后端”，微信小程序云和小程序账号绑定在一起，一个小程序账号可以开通一个小程序云空间，接下来我们来详细讲解如何开通小程序云。
+
+
+        ### 开通小程序云
+
+
+        1. 首先确保你注册了小程序的微信公众平台账号：[注册地址](https://mp.weixin.qq.com/)。
+
+        2. 登录之后，在菜单栏开发 > 开发设置里面找到 `AppID`，他应该是一个18位字符串。
+
+        3.使用[微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/stable.html)打开我们的
+        `ultra-club` 项目文件夹，然后在微信开发者工具中打开设置 > 项目设置，打开设置栏：
+
+
+        ![](tuture-assets/image-fa70e73d16bbc8f1.png)
+
+
+        4.找到设置栏的基本信息，AppID 栏将其修改为上面的 AppID 如下：
+
+
+        ![](tuture-assets/image-7e3ccdb97c801ffd.png)
+
+
+        5.当设置了 AppID 之后，我们的开发者工具里面的 “云开发” 按钮应该就会变成可点击状态，找到左上角的 “云开发”
+        的按钮并点击，类似下面这张图：
+
+
+        ![](tuture-assets/image.png)
+
+
+        4.点击 ”云开发“ 按钮之后会弹出确认框，点击同意就会进到小程序云开发控制台：
+
+
+        ![](tuture-assets/image-0625634a4725dd28.png)
+
+
+        进来之后我们首先看到的是云开发控制台的 ”运营分析“
+        界面，这是用来可视化云开发各类资源的使用情况的界面，在这篇教程中我们不会讲解这方面内容。我们主要来讲一下图中标红的部分：
+
+
+        - 其中序号为 1 的就是我们的云数据库，它是一个 JSON 数据库，里面存储着我们在开发时需要的数据。
+
+        - 序号为2的是存储，即我们可以上传一些文本、图片、音/视频，然后返回给我们访问这些资源的链接。
+
+        - 序号3是云函数，即我们可以在这里面管理一些我们编写的一些后端 Node.js 逻辑，它运行在云中，我们可以在小程序端通过 API
+        来调用它们。
+
+        - 序号4是代表我们此次的云环境的标识符，可以用于在小程序端以 API 调用云开发资源时标志此时的调用的云环境。
+
+
+        在本篇教程中，我们会用到上面提到的数据库和云函数两项功能。
+
+
+        ### 创建数据库表
+
+
+        介绍完小程序云的界面，我们马上来动手实践，来创建我们需要的数据库表，因为我们前端逻辑主要分为 `user` 和 `post`
+        两类逻辑，所以我们在数据库中创建两张表：
+
+
+        ![](tuture-assets/image-be3225865fcac308.png)
+
+
+        这里我们具体来解释一下这个数据库操作界面的含义：
+
+
+        - 可以看到，点击云开发控制台左上角的第二个按钮，然后点击图中标红序号为1的 “+” 按钮，创建两个集合 `user` 和
+        `post`，这样我们就创建好了我们的数据库表。
+
+        - 序号为2表示我们可以选中某个集合，点击右键进行删除操作。
+
+        - 序号为3表示我们可以给某个集合添加记录，因为是 JSON 数据库，集合中每条记录都可以不一样。
+
+        - 序号4表示我们可以选中某条记录，点击右键进行删除操作
+
+        - 序号5表示我们可以给单挑记录添加字段
+
+        - 序号6表示我们可以选中单挑记录进行删/改操作
+
+        - 序号7表示我们可以查询这个集合中某条记录
+
+
+        #### 创建 `post` 记录
+
+
+        这里我们添加了一条默认的 `post` 记录，表示之前我们之前小程序端的那条默认数据，这条数据记录了 `post` 的相关信息：
+
+
+        - `_id`： 此条数据的唯一标识符
+
+        - `title`： 文章标题
+
+        - `content`： 文章内容
+
+        - `user`： 发表此文章的用户，这里我们为了方便起见，直接保存了用户的完整信息，一般的最佳实践建议是保存此用户的 `_id`
+        属性，然后在查询 `post` 时，取出此用户的 `_id` 属性，然后去查 `user` 得到用户的完整信息。
+
+        - `updatedAt`：此条记录的上次更新时间
+
+        - `createdAt`：此条记录的创建时间
+
+
+        #### 创建 `user` 记录
+
+
+        上面我们提到了我们在这条文章记录里面保存了发帖作者信息，那么当然我们的 `user` 集合中就要新建一条此作者的信息如下：
+
+
+        ![](tuture-assets/image-b14ab2785526e0cb.png)
+
+
+        可以看到，我们添加了一条用户记录，它的字段如下：
+
+
+        - `_id`：此用户在 `user` 集合中的唯一标识符
+
+        - `avatar`：此用户的头像地址
+
+        - `nickName`：此用户的昵称，我们将用它来进行登录
+
+        - `createdAt`：创建此记录的时间
+
+        - `updatedAt`：上次更新此记录的时间
+
+
+        ### 小结
+
+
+        到现在为止，我们讲解了如何开通小程序云，然后讲解了小程序云控制台界面，同时，我们讲解了将会用到的数据库功能界面，在其中创建了我们应用需要的两张表（集合）：`post`
+        和 `user`，并且各自初始化了一条记录。
+
+
+        好了，准备好了小程序云，我们开始准备在应用中接入它了，但在此之前，因为我们要接入小程序云，那么势必要发起异步的请求，这就需要了解一下 Redux
+        的异步处理流程，在下一节中，我们将使用 `redux-saga` 中间件来简化 Redux 处理异步的流程。
+  - name: 'LeanCloud,一统江湖'
+    commit: abfd872
+    diff:
+      - file: src/api/post.js
+        display: true
+      - file: src/api/user.js
+        display: true
+      - file: src/api/utils.js
+        display: true
+      - file: src/components/AlipayLoginButton/index.js
+        display: true
