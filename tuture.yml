@@ -1,7 +1,7 @@
 name: Taro 多端小程序开发大型实战
 id: 34a473b9e9e5e3dafcc619ab152750af
 created: '2019-12-25T10:16:40.222Z'
-updated: 2020-01-14T14:09:03.954Z
+updated: 2020-01-14T15:16:24.298Z
 github: 'https://github.com/tuture-dev/ultra-club'
 topics:
   - Taro
@@ -62,7 +62,9 @@ splits:
     end: a3cf715
   - name: Taro 小程序开发大型实战（五）：小程序云初尝鲜（上篇）
     description: >-
-      为了将数据持久化存储和高效的查询，我们需要把数据存储到数据库中，为了实现⼩程序端便捷的开发体验，⼀大批⼩程序 Serverless 服务兴起，⽽而微信小程序云正是为了微信小程序的快速开发⽽生的。在这篇文章中，我们将使用微信小程序云作为我们的后端，并讲解如何引⼊和实现 Redux 异步⼯作流来 实现⼩程序端访问小程序云的状态管理。
+      为了将数据持久化存储和高效的查询，我们需要把数据存储到数据库中，为了实现⼩程序端便捷的开发体验，⼀大批⼩程序 Serverless
+      服务兴起，⽽而微信小程序云正是为了微信小程序的快速开发⽽生的。在这篇文章中，我们将使用微信小程序云作为我们的后端，并讲解如何引⼊和实现 Redux
+      异步⼯作流来 实现⼩程序端访问小程序云的状态管理。
     cover: tuture-assets/taro-cover-5.jpg
     id: b32362b
     start: b32362b
@@ -2331,6 +2333,46 @@ steps:
       - file: yarn.lock
     explain:
       pre: >-
+        欢迎继续阅读《Taro 小程序开发大型实战》系列，前情回顾：
+
+
+        - [熟悉的 React，熟悉的 Hooks](https://tuture.co/2019/12/25/34a473b/)：我们用 React
+        和 Hooks 实现了一个非常简单的添加帖子的原型
+
+        - [多页面跳转和 Taro UI 组件库](https://tuture.co/2019/12/25/af69225/)：我们用 Taro
+        自带的路由功能实现了多页面跳转，并用 Taro UI 组件库升级了应用界面
+
+        -
+        [实现微信和支付宝多端登录](https://tuture.co/2019/12/25/5e10118/)：实现了微信、支付宝以及普通登录和退出登录
+
+        - [Hooks + Redux 双剑合璧](https://tuture.co/2019/12/25/5e100f7/)：使用了 Hooks
+        版的 Redux 来进行状态管理
+
+
+        在这一篇中，我们将开始引入和实践 Redux 异步工作流，如果你不熟悉 Redux，推荐阅读我们的《Redux 包教包会》系列教程：
+
+
+        - [Redux 包教包会（一）：解救 React 状态危机](https://tuture.co/2019/11/28/1fe175a/)
+
+        - [Redux 包教包会（二）：趁热打铁，完全重构](https://tuture.co/2019/11/28/d129c56/)
+
+        - [Redux 包教包会（三）：各司其职，重拾初心](https://tuture.co/2019/11/28/a3b94eb/)
+
+
+        如果你希望直接从这一步开始，请运行以下命令：
+
+
+        ```bash
+
+        git clone -b miniprogram-start
+        https://github.com/tuture-dev/ultra-club.git
+
+        cd ultra-club
+
+        ```
+
+
+
         在前面的代码中，我们通过将数据保存在 Storage
         里面来完成数据的持久化，这样可以解决小规模数据的存储和查询问题，一旦数据量变大了，那么查询和存储就需要依靠专门的数据库来解决了，一般我们可以通过自建后端和数据库的方式来解决，但当小程序正越来越火的同时，一种被称为
         Serverless 的模式被提出并也逐渐火爆起来，通俗意义上来概括就是
