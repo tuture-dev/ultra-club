@@ -1,7 +1,7 @@
 name: Taro 多端小程序开发大型实战
 id: 34a473b9e9e5e3dafcc619ab152750af
 created: '2019-12-25T10:16:40.222Z'
-updated: 2020-01-14T14:06:12.258Z
+updated: 2020-01-14T14:09:03.954Z
 github: 'https://github.com/tuture-dev/ultra-club'
 topics:
   - Taro
@@ -1678,7 +1678,7 @@ steps:
 
         在这一节中，我们将结合 React Hooks 和 Redux 来重构我们状态管理。
       post: 终于，这漫长的第四篇结束了。在接下来的文章中，我们将接触小程序云后台开发，并在前端接入后台数据。
-  - name: '小程序云,虽有遗憾'
+  - name: 微信小程序云初尝鲜
     commit: b32362b
     diff:
       - file: package.json
