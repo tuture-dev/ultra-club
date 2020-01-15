@@ -45,7 +45,7 @@ splits:
       - 进阶
     start: 1da2fee
     end: 1da2fee
-  - name: Taro 小程序开发大型实战（四）：Hooks + Redux 双剑合璧
+  - name: Taro 小程序开发大型实战（四）：使用 Hooks 版的 Redux 实现应用状态管理
     description: >-
       随着状态增多，状态提升的操作也随着增多，导致保存这些状态的父组件会臃肿不堪，而且每次状态的改变需要影响很多中间组件，带来极大的性能开销。在这篇长文中，我们将用
       Hooks 版的 Redux 来解决状态管理的难题，而让 Taro 专注于渲染用户界面。
