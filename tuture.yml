@@ -1,7 +1,7 @@
 name: Taro 多端小程序开发大型实战
 id: 34a473b9e9e5e3dafcc619ab152750af
 created: '2019-12-25T10:16:40.222Z'
-updated: 2020-01-14T15:16:24.298Z
+updated: 2020-01-15T01:50:34.894Z
 github: 'https://github.com/tuture-dev/ultra-club'
 topics:
   - Taro
@@ -60,7 +60,7 @@ splits:
       - 进阶
     start: a3cf715
     end: a3cf715
-  - name: Taro 小程序开发大型实战（五）：小程序云初尝鲜（上篇）
+  - name: Taro 小程序开发大型实战（五）：尝鲜微信小程序云（上篇）
     description: >-
       为了将数据持久化存储和高效的查询，我们需要把数据存储到数据库中，为了实现⼩程序端便捷的开发体验，⼀大批⼩程序 Serverless
       服务兴起，⽽而微信小程序云正是为了微信小程序的快速开发⽽生的。在这篇文章中，我们将使用微信小程序云作为我们的后端，并讲解如何引⼊和实现 Redux
@@ -1691,7 +1691,7 @@ steps:
             我们来看一下 Redux 的数据流动图：
 
 
-            ![](tuture-assets/编组-7f50d1d73e8425b0.png)
+            ![](tuture-assets/redux-saga-1.jpg)
 
 
             上图中灰色的那条路径是我们之前一直在使用的 Redux 的数据流动图，它是 Redux 同步数据流动图：
@@ -1860,7 +1860,7 @@ steps:
             运用最近实践之后，之前的 Redux 数据流动图就变成了下面这样子：
 
 
-            ![](tuture-assets/image-78c52df00369534c.png)
+            ![](tuture-assets/redux-saga-2.jpg)
 
 
             好了，讲解了 `redux-saga` 处理异步 Action 的最佳实践之后，我们马上来运用最佳实践来编写处理异步 Action 的
@@ -2293,33 +2293,33 @@ steps:
 
             在这篇教程中，我们实现了 User 逻辑的异步流程，在下一篇教程中，我们将实现 Post 逻辑的异步流程，敬请期待！
       - file: src/components/PostForm/index.jsx
-        display: true
+        display: false
       - file: src/constants/post.js
-        display: true
+        display: false
       - file: src/sagas/post.js
-        display: true
+        display: false
       - file: src/api/post.js
-        display: true
+        display: false
       - file: functions/createPost/index.js
-        display: true
+        display: false
       - file: functions/createPost/package.json
-        display: true
+        display: false
       - file: src/reducers/post.js
-        display: true
+        display: false
       - file: src/pages/index/index.jsx
-        display: true
+        display: false
       - file: functions/getPosts/index.js
-        display: true
+        display: false
       - file: functions/getPosts/package.json
-        display: true
+        display: false
       - file: functions/createPost/yarn.lock
         display: false
       - file: src/pages/post/post.jsx
-        display: true
+        display: false
       - file: functions/getPost/index.js
-        display: true
+        display: false
       - file: functions/getPost/package.json
-        display: true
+        display: false
       - file: functions/getPost/yarn.lock
         display: false
       - file: functions/getPosts/yarn.lock
@@ -2327,9 +2327,9 @@ steps:
       - file: functions/login/yarn.lock
         display: false
       - file: src/api/index.js
-        display: true
+        display: false
       - file: src/sagas/index.js
-        display: true
+        display: false
       - file: yarn.lock
     explain:
       pre: >-
@@ -2347,6 +2347,13 @@ steps:
 
         - [Hooks + Redux 双剑合璧](https://tuture.co/2019/12/25/5e100f7/)：使用了 Hooks
         版的 Redux 来进行状态管理
+
+
+        如果你敲到这里，会发现我们之后的内容都是纯前端（小程序端）的逻辑，一个完整的可上线小程序应用应该还要有后端，在这篇文章中，我们将使用微信小程序云作为我们的后台，接着我们会引进
+        `redux-saga` 来帮助 Redux 优雅的处理异步流程，本文最终的实现效果如下：
+
+
+        ![](tuture-assets/result-11ec1de85de0d7bc.gif)
 
 
         在这一篇中，我们将开始引入和实践 Redux 异步工作流，如果你不熟悉 Redux，推荐阅读我们的《Redux 包教包会》系列教程：
