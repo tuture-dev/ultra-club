@@ -1,7 +1,7 @@
 name: Taro 多端小程序开发大型实战
 id: 34a473b9e9e5e3dafcc619ab152750af
 created: '2019-12-25T10:16:40.222Z'
-updated: 2020-02-17T14:15:29.127Z
+updated: 2020-02-18T04:47:29.093Z
 github: 'https://github.com/tuture-dev/ultra-club'
 topics:
   - Taro
@@ -2295,7 +2295,7 @@ steps:
       - file: src/components/PostForm/index.jsx
         display: true
         explain:
-          pre: "## “六脉神剑” 搞定 createPost 异步逻辑\n\n在上一篇文章中，我们将我们两大逻辑之一 User 部分接入了 Redux 异步处理流程，接着接入了微信小程序云，使得 User 逻辑可以在云端永久保存，好不自主 ：），两兄弟一个得了好处，另外一个不能干瞪眼对吧？在这一篇教程中，我们想办法把 User 另外一个兄弟 Post 捞上来，也把 Redux 异步流程和微信小程序给它整上，这样就齐活了\U0001F606\n\n不知道看到这里的读者有没有发现上篇文章其实打造了一套讲解模式，即按照如下的 “六步流程” 来讲解，我们也称为 “六脉神剑” 讲解法：\n\n- 将组件中的同步逻辑重构到异步逻辑\n- 声明和补充对应需要的异步 `sagas` 文件\n- 定义 `sagas` 需要的常量文件\n- 定义 `sags` 涉及到的前端 API 文件\n- 创建对于的微信小程序云函数，并编写对应的 Node.js 处理逻辑\n- 定义对应的 `reducers` 文件\n- 如此往复\n\n可以看到我们上面的讲解顺序实际上是按照前端数据流的流动来进行的，我们对标上面的讲解逻辑来看一下前端数据流是如何流动的：\n\n- 从组件中通过对应的常量发起异步请求\n- `sagas` 监听到对应的异步请求，开始处理流程\n- 在 `sagas` 调用对应的前端 API 文件向微信小程序云发起请求\n- 微信小程序云函数处理对应的 API 请求，返回数据\n- `sagas` 中获取到对应的数据，`dispatch` action 到对应的 `reducers` 处理逻辑\n- `reducers` 接收数据，开始更新本地 Redux Store 中的 `state`\n- 组件中重新渲染\n\n好的，了解了讲解逻辑和对应前端数据流动逻辑之后，我们马上来实践这套逻辑，把 User 逻辑的好兄弟 Post 逻辑搞定。\n\n### 第一剑：`PostForm` 组件中发起异步请求\n\n首先从创建帖子逻辑动刀子，我们将创建帖子接入异步逻辑并接通小程序云，让文章上云。打开 `src/components/PostForm/index.jsx` ，对其中的内容作出对应的修改如下：\n\n"
+          pre: "## “六脉神剑” 搞定 createPost 异步逻辑\n\n在上一篇文章中，我们将我们两大逻辑之一 User 部分接入了 Redux 异步处理流程，接着接入了微信小程序云，使得 User 逻辑可以在云端永久保存，好不自在：），两兄弟一个得了好处，另外一个不能干瞪眼对吧？在这一篇教程中，我们想办法把 User 另外一个兄弟 Post 捞上来，也把 Redux 异步流程和微信小程序给它整上，这样就齐活了\U0001F606\n\n我们首先来看一看最终的完成效果：\n\n![](tuture-assets/result7.gif)\n\n不知道看到这里的读者有没有发现上篇文章其实打造了一套讲解模式，即按照如下的 “六步流程” 来讲解，我们也称为 “六脉神剑” 讲解法：\n\n- 将组件中的同步逻辑重构到异步逻辑\n- 声明和补充对应需要的异步 `sagas` 文件\n- 定义 `sagas` 需要的常量文件\n- 定义 `sagas` 涉及到的前端 API 文件\n- 创建对于的微信小程序云函数，并编写对应的 Node.js 处理逻辑\n- 定义对应的 `reducers` 文件\n- 如此往复\n\n可以看到我们上面的讲解顺序实际上是按照前端数据流的流动来进行的，我们对标上面的讲解逻辑来看一下前端数据流是如何流动的：\n\n- 从组件中通过对应的常量发起异步请求\n- `sagas` 监听到对应的异步请求，开始处理流程\n- 在 `sagas` 调用对应的前端 API 文件向微信小程序云发起请求\n- 微信小程序云函数处理对应的 API 请求，返回数据\n- `sagas` 中获取到对应的数据，`dispatch` action 到对应的 `reducers` 处理逻辑\n- `reducers` 接收数据，开始更新本地 Redux Store 中的 `state`\n- 组件中重新渲染\n\n好的，了解了讲解逻辑和对应前端数据流动逻辑之后，我们马上来实践这套逻辑，把 User 逻辑的好兄弟 Post 逻辑搞定。\n\n### 第一剑：`PostForm` 组件中发起异步请求\n\n首先从创建帖子逻辑动刀子，我们将创建帖子接入异步逻辑并接通小程序云，让文章上云。打开 `src/components/PostForm/index.jsx` ，对其中的内容作出对应的修改如下：\n\n"
           post: >-
             可以看到，上面的内容做了如下四处修改：
 
@@ -2613,6 +2613,9 @@ steps:
 
 
             按照和之前创建 `login` 云函数类似，我们创建 `createPost` 云函数。
+
+
+            ![](tuture-assets/image-5f006311d35d7ac6.png)
 
 
             创建成功之后，我们可以得到两个文件，一个是 `functions/createPost/package.json`
@@ -2960,6 +2963,8 @@ steps:
 
             按照和之前创建 `createPost` 云函数类似，我们创建 `getPosts ` 云函数。
 
+            ![](tuture-assets/image-560ef4e2593d9e2d.png)
+
             创建成功之后，我们可以得到两个文件，一个是 `functions/getPosts/package.json` 文件，它和之前的类似。
       - file: functions/getPosts/index.js
         display: true
@@ -3003,7 +3008,7 @@ steps:
         display: true
         explain:
           pre: "## “六脉神剑” 搞定 getPost 异步逻辑\n\n在上面两 “大” 节中，我们连续用了两次 “六脉神剑”，相信跟到这里的同学应该对我们接下来要做的事情已经轻车熟路了吧\U0001F601。\n\n接下来，我们将收尾 Post 逻辑的最后一公里，即帖子详情的异步逻辑 “getPost” 接入，话不多说就是干！\n\n### 第一剑：`post` 组件中发起异步请求\n\n打开 `src/pages/post/post.jsx` 文件，对其中的内容作出对应的修改如下："
-          post: >-
+          post: >
             可以看到，上面的内容做了如下四处修改：
 
 
@@ -3019,26 +3024,272 @@ steps:
 
             - 最后我们删除了不必要的获取 `posts` 数据的 `useSelector` Hooks，以及删掉了不必要的调试
             `console.log` 语句。
+
+
+            ### 第二剑： 声明和补充对应需要的异步 `sagas` 文件
+
+
+            在 “第一剑” 中，我们从组件中 dispatch 了 action.type 为 `GET_POST` 的异步
+            Action，接下来我们要做的就是在对应的 `sagas` 文件中补齐响应这个异步 action 的 sagas。
+
+
+            打开 `src/sagas/post.js` 文件，在其中定义 `getPosts` sagas 逻辑如下：
+
+
+            ```JavaScript
+              // ... 和之前的逻辑一样
+            import {
+              // ... 和之前的逻辑一样
+              SET_POST,
+            } from '../constants';
+
+              // ... 和之前的逻辑一样
+
+            function* getPost(postId) {
+              try {
+                const post = yield call(postApi.getPost, postId)
+             
+                // 其实以下三步可以合成一步，但是这里为了讲解清晰，将它们拆分成独立的单元
+             
+                // 发起获取帖子成功的 action
+                yield put({ type: POST_SUCCESS })
+             
+                // 更新 Redux store 数据
+                yield put({
+                  type: SET_POST,
+                  payload: {
+                    post,
+                  },
+                })
+              } catch (err) {
+                console.log('getPost ERR: ', err)
+             
+                // 获取帖子失败，发起失败的 action
+                yield put({ type: POST_ERROR })
+              }
+            }
+             
+            function* watchGetPost() {
+              while (true) {
+                const { payload } = yield take(GET_POST)
+             
+                yield fork(getPost, payload.postId)
+              }
+            }
+
+
+            export { watchGetPost }
+
+            ```
+
+
+            可以看到，上面的改动主要是创建 `watcherSaga` 和 `handlerSaga` 。
+
+
+            **创建 `watcherSaga`**
+
+
+            - 我们创建了登录的 `watcherSaga`： `watchGetPost `，它用来监听 `action.type` 为
+            `GET_POST ` 的 action，并且当监听到 `GET_POST ` action 之后，然后激活
+            `handlerSaga`：`getPost ` 去处理对应的获取单个帖子的逻辑。
+
+            - 这里的 `watcherSaga`：`watchGetPost ` 是一个生成器函数，它内部是一个 `while`
+            无限循环，表示在内部持续监听 `GET_POST ` action。
+
+            - 在循环内部，我们使用了 `redux-saga` 提供的 `effects helper` 函数：`take`，它用于监听
+            `GET_POST ` action，获取 action 中携带的数据，这里我们拿到了传过来的 `payload` 数据。
+
+            - 接着我们使用了另外一个 `effects helper` 函数：`fork`，它表示非阻塞的执行
+            `handlerSaga`：`getPost `，并传入了获取到 `payload.postId` 参数。
+
+
+            **创建 `handlerSaga`**
+
+
+            - 我们创建了获取单个帖子的 `handlerSaga`：`getPost `，它用来处理获取帖子逻辑。
+
+            - `getPost ` 也是一个生成器函数，在它内部是一个 `try/catch` 语句，用于处理获取单个帖子请求可能存在的错误情况。
+
+            - 在 `try` 语句中，首先是使用了 `redux-saga` 提供给我们的 `effects helper` 函数：`call`
+            来调用登录的 API：`postApi. getPost `。
+              - 如果获取单个帖子成功，我们使用 `redux-saga` 提供的 `effects helpers` 函数：`put`，`put` 类似之前在 `view` 中的 `dispatch` 操作，，来 `dispatch` 了两个 action：`POST_SUCCESS `，`SET_POSTS `，代表更新获取单个帖子成功的状态，设置最新获取的帖子到 Redux Store 中。
+            - 如果获取单个帖子失败，我们则使用 `put` 发起一个 `POST_ERROR ` 的 action 来更新获取单个帖子失败的信息到
+            Redux Store
+
+
+            #### 一些额外的工作
+
+
+            为了创建 `watcherSaga` 和 `handlerSaga`，我们还导入了 `postApi.getPost
+            `，我们将在后面来创建这个 API。
+
+
+            除此之外我们还导入了需要使用的 action 常量：
+
+
+            - `SET_POST `：响应获取帖子列表的 ACTION 常量，我们将在 “第三剑” 中创建它
+      - file: src/sagas/index.js
+        display: true
+        explain:
+          pre: >-
+            #### 加入 saga 中心调度文件
+
+
+            我们像之前将 `watchGetPosts` 等加入到 `sagas` 中心调度文件一样，将我们创建好的 `watchGetPost `
+            也加入进去：
+
+
+            打开 `src/sagas/index.js` 文件，对其中的内容作出如下的修改：
+          post: >-
+            ### 第三剑：定义 `sagas` 需要的常量文件
+
+
+            打开 `src/constants/post.js` 文件，定义我们之前创建的常量文件 `GET_POST`：
+
+
+            ```JavaScript
+
+
+            export const SET_POST = 'SET_POST'
+
+            ```
+
+
+            ### 第四剑：定义 `sagas` 涉及到的前端 API 文件
+
+
+            在之前的 `post` saga 文件里面，我们使用到了
+            `postApi.getPost`，它里面封装了用于向后端（这里我们是小程序云）发起和获取单个帖子有关请求的逻辑，让我们马上来实现它吧。
+
+
+            打开 `src/api/post.js` 文件，并在其中编写内容如下：
+
+
+            ```JavaScript
+
+            // ... 其他内容和之前一致
+
+            async function getPost(postId) {
+              const isWeapp = Taro.getEnv() === Taro.ENV_TYPE.WEAPP
+              const isAlipay = Taro.getEnv() === Taro.ENV_TYPE.ALIPAY
+             
+              // 针对微信小程序使用小程序云函数，其他使用小程序 RESTful API
+              try {
+                if (isWeapp) {
+                  const { result } = await Taro.cloud.callFunction({
+                    name: 'getPost',
+                    data: {
+                      postId,
+                    },
+                  })
+             
+                  return result.post
+                }
+              } catch (err) {
+                console.error('getPost ERR: ', err)
+              }
+            }
+
+
+            const postApi = {
+              getPost,
+            }
+             
+            export default postApi
+
+            ```
+
+
+            可以看到上面的代码有如下六处改动：
+
+
+            - 在上面的代码中，我们定义了 `getPost ` 函数，它是一个 `async` 函数，用来处理异步逻辑，在 `getPost`
+            函数中，我们对当前的环境进行了判断，且只在微信小程序，即 `isWeapp` 的条件下执行获取单个帖子的操作，对于支付宝小程序和
+            H5，我们则放在下一节使用 LeanCloud 的 Serverless 来解决。
+
+
+            - 创建帖子逻辑是一个 `try/catch` 语句，用于捕捉可能存在的请求错误，在 `try` 代码块中，我们使用了 `Taro`
+            为我们提供的微信小程序云的云函数 API `Taro.cloud.callFunction` 来便捷的向小程序云发起云函数调用请求。
+
+
+            - 这里我们调用了一个 `getPost ` 云函数，并给它传递了对应要获取的帖子的 `postId` 我们将在下一节中实现这个云函数。
+
+
+            - 如果调用成功，我们可以接收返回值，用于从后端返回数据，这里我们返回了 `result.post` 数据，即从小程序云返回的单个帖子。
+
+
+            - 如果调用失败，则打印错误。
+
+
+            - 最后我们在已经定义好的 `postApi ` 对象里，添加 `getPost ` API 属性然后将其导出，这样在 `post`
+            saga 函数里面就可以导入 `postApi` 然后通过 `postApi. getPost ` 的方式来调用 `getPost `
+            API 处理获取单个帖子的逻辑了。
+      - file: src/constants/post.js
+        display: false
+        explain:
+          pre: ''
       - file: src/sagas/post.js
         display: false
         explain:
           pre: ''
-      - file: src/sagas/index.js
-        display: true
-      - file: src/constants/post.js
-        display: true
-        explain:
-          pre: ''
       - file: src/api/post.js
-        display: true
+        display: false
         explain:
           pre: ''
       - file: src/api/index.js
-        display: true
+        display: false
       - file: functions/getPost/package.json
         display: true
+        explain:
+          pre: |-
+            ### 第五剑：创建对应的微信小程序云函数
+
+            #### 创建 getPost 云函数
+
+            按照和之前创建 `getPosts` 云函数类似，我们创建 `getPost ` 云函数。
+
+            ![](tuture-assets/image-7d9f70c8a90700da.png)
+
+            创建成功之后，我们可以得到两个文件，一个是 `functions/getPost/package.json` 文件，它和之前的类似。
       - file: functions/getPost/index.js
         display: true
+        explain:
+          pre: >+
+            第二个文件就是我们需要编写创建帖子逻辑的 `functions/getPost/index.js`
+            文件，微信小程序开发者工具会默认为我们生成一段样板代码。
+
+
+            我们在 `function/getPost ` 文件夹下同样运行 `npm install` 安装对应的云函数依赖，这样我们才能运行它。
+
+
+            #### 编写 getPost 云函数
+
+
+            打开 `functions/getPost/index.js` 文件，对其中的内容作出对应的修改如下：
+
+          post: >-
+            可以看到上面的代码改动主要有以下处：
+
+
+            - 首先我们给 `cloud.init()` 传入了环境参数，我们使用了内置的
+            `cloud.DYNAMIC_CURRENT_ENV`，表示自动设置为当前的云环境，即在右键点击小程序开发者工具里
+            `functions` 文件夹时选择的环境。
+
+            - 接着，我们通过 `cloud.database()` 生成了数据实例 `db`，用于之后在函数体中便捷的操作云数据库。
+
+            - 接着就是 `main` 函数体，里面是一个 `try/catch` 语句块，用于捕获错误，在 `try` 语句块中，我们首先从
+            `event`  对象里面获取到了 `postId`，接着我们使用 `db`
+            的查询操作：`db.collection('post').doc(postId).get()`，表示查询所有的对应 `_id` 为
+            `postId` 的单个帖子数据
+
+            - 最后我们返回查询到的  `post` 数据。
+
+
+            ### 第六剑： 定义对应的 `reducers` 文件
+
+
+            因为这里 `SET_POST` 的 Action 我们在上上 “大” 节中创建帖子时已经定义了，所有在 “这一剑”
+            中我们无需添加额外的代码，复用之前的逻辑就好。
       - file: functions/createPost/yarn.lock
         display: false
       - file: functions/getPost/yarn.lock
@@ -3299,14 +3550,52 @@ steps:
 
         好了，准备好了小程序云，我们开始准备在应用中接入它了，但在此之前，因为我们要接入小程序云，那么势必要发起异步的请求，这就需要了解一下 Redux
         的异步处理流程，在下一节中，我们将使用 `redux-saga` 中间件来简化 Redux 处理异步的流程。
+      post: >-
+        ### 小结
+
+
+        在这篇教程中，我们连续使用了三次 “六脉神剑” 讲完了我们的 Post 逻辑的异步流程，让我们再来复习一下我们开头提到的 “六脉神剑”：
+
+
+        - 将组件中的同步逻辑重构到异步逻辑
+
+        - 声明和补充对应需要的异步 `sagas` 文件
+
+        - 定义 `sagas` 需要的常量文件
+
+        - 定义 `sagas` 涉及到的前端 API 文件
+
+        - 创建对于的微信小程序云函数，并编写对应的 Node.js 处理逻辑
+
+        - 定义对应的 `reducers` 文件
+
+
+        这是一套讲解模式，也是一套写代码的最佳实践方式之一，希望你能受用。
+
+
+        #### 一点遗憾
+
+
+        这两篇讲解微信小程序云的文章有一个小小的遗憾，我们也在之前的文章中提到过了，就是微信小程序云仅限于微信小程序内的使用，如果我们想做多端应用，比如支付宝小程序云，H5
+        网站，那么单单使用微信小程序就显得无能为力了，我们将在下一篇文章中引入 LeanCloud Serverless
+        服务，并使用它来补齐我们跨端小程序开发的短板，敬请期待！✌️
   - name: 'LeanCloud,一统江湖'
     commit: abfd872
     diff:
-      - file: src/api/post.js
+      - file: src/api/utils.js
+        display: true
+        explain:
+          pre: >-
+            ### 开始实际的接入
+
+
+            对于接入 LeanCloud，我们需要在应用中做一系列初始化环境的准备，在 `src/api/` 文件夹下创建 `utils.js`
+            文件，并在其中编写内容如下：
+      - file: src/components/AlipayLoginButton/index.js
         display: true
       - file: src/api/user.js
         display: true
-      - file: src/api/utils.js
+      - file: src/api/post.js
         display: true
-      - file: src/components/AlipayLoginButton/index.js
-        display: true
+    explain:
+      pre: "在上两篇文章中，我们讲解了使用微信小程序云作为我们的小程序后台，然后我们跑通了我们的注册登录、创建帖子、获取帖子列表、获取帖子详情的全栈流程，如果只想了解微信小程序的全栈开发流程的话，之前的文章已经足够了，如果还想了解跨端开发全栈开发流程的话（当然用 Taro 的同学估计也比较期待跨端的全栈开发流程，手动滑稽）接下来这篇文章就是你的菜了\U0001F606\n\n在这一篇文章中，我们将接入 LeanCloud Serverless 服务，它类似微信小程序云，只不过它没有平台属性，所有的端都可以便捷访问，相信你已经迫不及待了，让我们马上开始吧\U0001F4AA！\n\n### 小程序接入外网的流程\n\n因为小程序是封装在一些巨型 App 应用里的沙盒环境之内，所以对于接入外站的服务需要一些特殊的流程，我们在这里总结一下：\n\n- 注册外站服务的账号\n- 找到对应的小程序开发接入指南\n- 获取对应的接入地址，将接入地址填入小程序后台的白名单列表\n- 在小程序实际接入，并进行测试\n\n在这篇文章中，我们的外站特指 LeanCloud Serverless 云服务，小程序特指微信小程序和支付宝小程序。\n\n好的，了解了流程之后，我们现在来走一遍流程来将我们的 LeanCloud 接入到微信/支付宝小程序。\n\n#### 注册外站服务的账号\n\n访问 LeanCloud 网址：[点我访问](https://www.leancloud.cn/)，完成注册登录流程。\n\n#### 找到对应的小程序开发接入指南\n\n这里我们找到 LeanCloud 微信/QQ 小程序接入指南：[点我访问](https://leancloud.cn/docs/weapp.html)\n\n:::info\n**注意**\n\nLeanCloud 没有提供支付宝的接入指南，但是小程序接入指南都基本类似，我们会一一讲解这一流程。\n:::\n\n#### 获取对应的接入地址\n\nLeanCloud 已经有详细的链接提示如何接入：\n\n![](tuture-assets/image-f017da933d02a499.png)\n\n对于支付宝小程序的白名单配置地址如下：[点我访问](https://mini.open.alipay.com/channel/miniIndex.htm)。\n\n#### 在小程序实际接入，并进行测试\n\n最后我们需要进行小程序的实际接入，因为 LeanCloud 并没有提供支付宝小程序的 SDK 包，这里对于支付宝小程序我们使用 LeanCloud 提供的 REST 接口进行访问"
