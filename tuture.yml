@@ -1,7 +1,7 @@
 name: Taro 多端小程序开发大型实战
 id: 34a473b9e9e5e3dafcc619ab152750af
 created: '2019-12-25T10:16:40.222Z'
-updated: 2020-02-18T04:47:29.093Z
+updated: 2020-02-18T11:55:49.817Z
 github: 'https://github.com/tuture-dev/ultra-club'
 topics:
   - Taro
@@ -3586,16 +3586,400 @@ steps:
         display: true
         explain:
           pre: >-
-            ### 开始实际的接入
+            ### 定义 LeanCloud 相关的辅助函数
 
 
             对于接入 LeanCloud，我们需要在应用中做一系列初始化环境的准备，在 `src/api/` 文件夹下创建 `utils.js`
             文件，并在其中编写内容如下：
+          post: >-
+            可以看到，上面的代码主要分为四个部分：
+
+
+            - 定义云函数的 REST URL，LeanCloud 的云函数 REST URL
+            的格式类似这样：`https://API_BASE_URL/1.1/functions/functionName`，其中
+            `API_BASE_URL`
+            可以通过文档获取：[点我访问](https://leancloud.cn/docs/leanengine-rest-api.html#hash-1722650509)；而
+            `functionName` 即为我们需要调用的云函数名字。这里我们定义了 `API_BASE_URL`
+            ，我们给了空字符串，读者可以根据 LeanCloud 给与的 `Base URL`
+            替代空字符串；同样我们定义了四个云函数，分别代表登录、创帖、查询帖子列表、查询单个帖子，具体的云端云函数我们将在后面定义。
+
+            - 第二个部分即为向 LeanCloud 服务器发送 REST
+            请求时需要携带的请求头部，这个也可以在文档里给出：[点我访问](https://leancloud.cn/docs/leanengine-rest-api.html#hash20005220)；这里也需要用户用自己的内容来替换上面的空字符串。
+
+            - 第三个部分则为两个辅助转换格式的函数，主要用于将 LeanCloud 数据库格式的数据与现有的微信小程序数据库格式的数据兼容。
+
+            - 第四个部分为导出这些定义的内容，供其它模块使用。
+
+
+            ::: info
+
+            **提示**
+
+
+            上面的 `API_BASE_URL` 和 `HEADER` 都需要用户在登录的情况下访问给出的地址才能获取到。
+
+            :::
+
+
+            ### 在 LeanCloud 上面创建数据库表
+
+
+            登录 LeanCloud 控制台，在左边栏的 **存储 > 结构化数据** 可以看到创建 Class 的按钮，我们可以通过创建一个
+            Class 来创建一张数据库表：
+
+
+            ![](tuture-assets/image-4cb13f15ee12ad44.png)
+
+
+            可以看到我们创建了两张表：`Post` 和 `MyUser`，一个存放和帖子相关的数据，一个存放和用户相关的数据。其中 `MyUser`
+            类似之前我们在微信小程序数据库表时的 `user` 表。
+
+
+            #### 定义 MyUser 字段
+
+
+            如图之前在微信小程序数据库表创建时一样，我们同样为 `MyUser` 定义如下的字段：
+
+
+            - avatar
+
+            - nickName
+
+
+            至于读者看到的其它字段都是 LeanCloud 默认创建且自动更新的字段，用户不可以操作。
+
+
+            #### 定义 Post 字段
+
+
+            同样和之前在微信小程序里面创建 `post` 一样，我们给 Post 定义如下字段:
+
+
+            - content
+
+            - title
+
+            - user
+
+
+            眼尖的同学可能注意到了，这里的 `user` 字段是一个 `Pointer` 类型，它是 LeanCloud
+            数据表独有的引用类型，类似关系数据库里面的外键，即存一个指针，之后获取数据的时候可以便捷的获取对应的 `user` 数据。
+
+
+            #### 关于默认 Class 的解释
+
+
+            这里有些读者可能有疑问，为什么还有一些多余的表了？这些以下划线开头的 Class 其实是 LeanCloud
+            默认创建的，不允许删除，用于 LeanCloud SDK 封装一系列常用且复杂的应用功能，供用户快速搭建
+            App/网站/小程序原型，比如类似微信的朋友圈功能，LeanCloud 提供开箱即用的逻辑，你可以直接调用。
+
+
+            并且，类似 `_User` 和 `User` Class 其实是引用自同一个 Class，所以不能创建和 LeanCloud
+            默认的类具有同名且不带前缀下划线的类，比如 `User` ，`File` 类就不能创建，所以这里我们创建了 `MyUser`
+            类，这样不用去考虑 `_User` 类本身存在的一些细节限制。
       - file: src/components/AlipayLoginButton/index.js
         display: true
+        explain:
+          pre: >-
+            ### 在 LeanCloud 上创建云函数
+
+
+            在上一步里面，我们在小程序代码里创建了和 LeanCloud
+            有关的逻辑代码，其中我们创建了四个云函数，现在我们要创建对应这四个云函数的实际云函数。
+
+
+            注册并登陆 LeanCloud 之后，点击左边栏的 **云引擎 > 部署** 可以看到类似下面的界面：
+
+
+            ![](tuture-assets/image-d3a09bf272416f22.png)
+
+
+            LeanCloud
+            提供给我们在线创建和编写云函数的方便界面，使得我们不用自己创建本地服务器代码和配置部署和运维过程，大大加速了程序的开发过程。
+
+
+            接下来，我们将遵循以下三步走的方式来进行 LeanCloud 云函数的开发：
+
+
+            - 创建云函数
+
+            - 部署
+
+            - 在小程序端进行调试
+
+
+            ### 创建 User 逻辑 云函数
+
+
+            点击界面里面的创建按钮，会看到如下的界面：
+
+
+            ![](tuture-assets/image-7c77e8f7fbccf648.png)
+
+
+            可以看到上图分为如下几个部分：
+
+
+            - 选择我们要创建的函数类型，主要有三类，这里我们选择 `Function`
+            ，这也是默认选择的类型，其余两类读者有兴趣可以自行探索，这里我们不展开讲。
+
+            - 接着就是定义你的函数名，这里我们填入 `login`。
+
+            - 接着就是编写函数体，它是一个 Node.js 函数，我们只需要编写对应的 Node.js 处理逻辑就可以了。
+
+            - 最后我们可以对这个函数写一点注释，方便日后回顾，这里我们选择不填入。
+
+
+            好的，了解了创建函数的弹出层之后，我们填入我们需要创建的 `login` 函数体如下：
+
+
+            ```JavaScript
+
+            const { userInfo } = request.params
+
+
+            const query = new AV.Query('MyUser')
+
+            query.equalTo('nickName', userInfo.nickName)
+
+            const users = await query.find()
+
+
+            if (users.length > 0) {
+                return users[0]
+            } else {
+                const MyUser = AV.Object.extend('MyUser')
+                const myUser = new MyUser()
+                
+                const { nickName, avatar } = userInfo
+                myUser.set('nickName', nickName)
+                myUser.set('avatar', avatar)   
+                
+                const user = await myUser.save()
+                return user
+            }
+
+            ```
+
+
+            可以看到我们上面的内容主要改动有四处：
+
+
+            - 从 `request.params` 取到对应的请求体数据 `userInfo`，这决定了我们之后在小程序端调用 LeanCloud
+            云函数时，要使用 `POST` 的方式。
+
+            - 接着我们使用了 LeanCloud 的查询 SDK 操作
+              - 首先通过 `new AV.Query` 新建一个对 `MyUser` Class 的查询请求。注意到这里的 `AV` 接口是 LeanCloud 暴露给我们的默认接口，可以通过这个接口操作 LeanCloud 的各种资源。
+              - 接着通过 `equalTo` 进行条件过滤，这里我们查询 `nickName` 为 `userInfo.nickName` 的用户。
+              -  通过 `query.find()` 来提交查询操作，注意到这里我们使用了 `await` 关键字，那是因为默认包裹云函数提的是一个 `async` 函数，允许我们方便的执行异步流程。
+            - 接着我们对查询到的数据进行判断，如果 `users.length > 0 `
+            表示存在用户，那么我们返回查询到的第一个用户；如果不存在，我们执行创建用户操作，再返回创建的用户。
+
+            - 创建用户的操作主要是如下几个步骤：
+              - `AV.Object.extend` 对应的 Class 来获取对应的类
+              - 实例化这个类获取一个对象
+              - 设置这个对象的属性，这里通过 `set(key, value)` 的方式设置
+              - 通过对象的 `save` 方法进行保存，保存到 LeanCloud 数据库
+
+            ::: info
+
+            **注意**
+
+
+            这里我们只用到了 LeanCloud
+            的一些简单操作，具体的详情可以查看官方文档，官方文档撰写了非常完备的操作指南：[点我查看](https://leancloud.cn/docs/leanstorage_guide-js.html)。
+
+            :::
+
+
+            #### 部署
+
+
+            按照上面的步骤编写完 `login`
+            云函数之后，点击保存，此时我们的云函数就编写好了，但是我们目前在小程序端还无法调用它，因为我们还需要一个部署的操作。
+
+
+            在 LeanCloud 上面进行云函数的部署也同样简单，只需要点击一个按钮：
+
+
+            ![](tuture-assets/image-7969c02e1badc548.png)
+
+
+            点我之后，等待部署提示，过一会应该就会提示部署成功，这个时候我们就可以在小程序端通过 REST API 访问了。
+
+
+            #### 在小程序端进行调试 
+
+
+            我们这里使用 LeanCloud 主要是让支付宝小程序也可以成为全栈应用，对应我们之前提到的 H5，因为 Taro 目前对 H5
+            的支持还不完善，我们决定放弃对 H5 的讲解, 但是这并不代表 Taro
+            存在缺陷，只能说它是一个很有潜力的框架，成长还需要实践，并且跨端小程序是它诞生的重点，将精力放在主要的路径上是值得提倡的，Taro
+            在近期发布了 Taro Next，支持使用 Vue/React/Nerve
+            开发跨端小程序，笔者这里推荐读者可以尝试一波：[点我跳转](https://taro.jd.com/)。
+
+
+            因为我们首先创建了 `login` 的云函数，所以我们需要改进一下我们的支付宝登录的按钮逻辑，打开
+            `src/components/AlipayLoginButton/index.js` 对其中的内容作出如下的修改:
+          post: >-
+            可以看到，上面的内容改动主要有三处：
+
+
+            - 我们删掉了使用支付宝获取登录信息之后存缓存的逻辑
+
+            - 接着，我们 dispatch 了一个 `action.type` 为 LOGIN 的异步 ACTION，并传递了
+            `userInfo` 数据
+
+            - 最后我们导入了需要的 `LOGIN` 常量。
       - file: src/api/user.js
         display: true
+        explain:
+          pre: |-
+            除了支付宝登录按钮的逻辑改进之外，我们还要改进我们的 api 逻辑，加上对支付宝环境的判断和调用对应的 LeanCloud 云函数。
+
+            打开 `src/api/user.js` 文件，对其中的内容作出对应的修改如下：
+          post: >-
+            可以看到上面主要做了四处修改：
+
+
+            - 首先我们导入了之前定义的和 LeanCloud 有个的 `utils` 函数。
+
+            - 接着我们加入了对 H5 环境的判断。
+
+            - 最后我们增加了一个 `else if` 流程，用于判断在支付宝小程序或者 H5 环境下需要执行发起 REST
+            请求的逻辑，这里我们使用了 `Taro.request` 进行网络请求，并传入了对应的 `url`
+            、`header`、`data`，以及将请求的类型设置为 `POST`，之前我们提到过，对 LeanCloud 云函数发起请求都需要使用
+            `POST` 方法。
+
+            - 最后我们将从 LeanCloud 拿到的请求结果使用 `convertUserFormat `
+            做了一次格式的转换，以适应现有的微信小程序数据类型。
+
+
+            好了，通过以上三步流程，我们就跑通了小程序类请求 LeanCloud 的流程，保存修改的代码，让我们马上打开支付宝小程序试一下吧！
+
+
+            ![](tuture-assets/leancloud-1-4bf697a564eb0f1a.gif)
       - file: src/api/post.js
         display: true
+        explain:
+          pre: >-
+            ### 创建 Post 逻辑云函数
+
+
+            在上一节中，我们创建了 User 逻辑的 `login` 云函数，在这一节中，我们来收尾 Post 逻辑的三个云函数：
+
+
+            - `createPost`
+
+            - `getPosts`
+
+            - `getPost`
+
+
+            因为创建的逻辑和方式和之前的 `login` 云函数类似，我们这里不再赘述，会简单的贴一下代码，但我们同样按照之前的三步流程来讲解。
+
+
+            #### 创建云函数
+
+
+            首先创建我们的 `createPost` 云函数，其代码如下：
+
+
+            ```JavaScript
+
+            const { postData, userId } = request.params
+
+
+
+            const Post = AV.Object.extend('Post')
+
+            const post = new Post();
+
+
+            const myUser = AV.Object.createWithoutData('MyUser', userId)    
+
+            const newPost = await post.save({
+                ...postData,
+                user: myUser
+            });
+
+
+            const query = new AV.Query('Post')
+
+            const postWithUser = await query.equalTo('objectId',
+            newPost.get('objectId')).include('user').first()
+
+
+            return postWithUser
+
+            ```
+
+
+            接着来创建我们的获取帖子列表的云函数 `getPosts`，其代码如下：
+
+
+            ```JavaScript
+
+            const query = new AV.Query('Post')
+
+            const posts = await query.include('user').find()
+
+
+            return posts
+
+            ```
+
+
+            最后是我们的获取帖子详情的云函数 `getPost`：
+
+
+            ```JavaScript
+
+            const { postId } = request.params
+
+
+            const query = new AV.Query('Post')
+
+            const post = await query.equalTo('objectId',
+            postId).include('user').first()
+
+
+            return post
+
+            ```
+
+
+            #### 部署
+
+
+            好的，三个和 Post 逻辑有关的云函数创建好了，我们马上点击部署按钮来将它们部署上线。
+
+
+            #### 在小程序端测试
+
+
+            当创建好云函数，并部署好之后，我们就可以在小程序端编写对应的代码进行测试了，打开 `src/api/post.js`
+            文件，对其中的代码做出对应的修改如下：
+          post: >-
+            可以看到上面主要做了四处修改：
+
+
+            - 首先我们导入了之前定义的和 LeanCloud 有关的 `utils` 函数。
+
+            - 接着我们加入了对 H5 环境的判断。
+
+            - 最后我们增加了一个 `else if` 流程，用于判断在支付宝小程序或者 H5 环境下需要执行发起 REST
+            请求的逻辑，这里我们使用了 `Taro.request` 进行网络请求，并传入了对应三个和 Post 逻辑有关的 `url`
+            、以及对应的 `header`、`data`，以及将请求的类型设置为 `POST`，之前我们提到过，对 LeanCloud
+            云函数发起请求都需要使用 `POST` 方法。
+
+            - 最后我们将从 LeanCloud 拿到的请求结果使用 `convertPostFormat `
+            做了一次格式的转换，以适应现有的微信小程序数据类型。
+
+
+            好了，通过以上三步流程，我们就跑通了小程序类请求 LeanCloud 的流程，保存修改的代码，让我们马上打开支付宝小程序试一下吧！
+
+
+            ![](tuture-assets/leancloud-2-f1ddd47a26e4d9ae.gif)
     explain:
-      pre: "在上两篇文章中，我们讲解了使用微信小程序云作为我们的小程序后台，然后我们跑通了我们的注册登录、创建帖子、获取帖子列表、获取帖子详情的全栈流程，如果只想了解微信小程序的全栈开发流程的话，之前的文章已经足够了，如果还想了解跨端开发全栈开发流程的话（当然用 Taro 的同学估计也比较期待跨端的全栈开发流程，手动滑稽）接下来这篇文章就是你的菜了\U0001F606\n\n在这一篇文章中，我们将接入 LeanCloud Serverless 服务，它类似微信小程序云，只不过它没有平台属性，所有的端都可以便捷访问，相信你已经迫不及待了，让我们马上开始吧\U0001F4AA！\n\n### 小程序接入外网的流程\n\n因为小程序是封装在一些巨型 App 应用里的沙盒环境之内，所以对于接入外站的服务需要一些特殊的流程，我们在这里总结一下：\n\n- 注册外站服务的账号\n- 找到对应的小程序开发接入指南\n- 获取对应的接入地址，将接入地址填入小程序后台的白名单列表\n- 在小程序实际接入，并进行测试\n\n在这篇文章中，我们的外站特指 LeanCloud Serverless 云服务，小程序特指微信小程序和支付宝小程序。\n\n好的，了解了流程之后，我们现在来走一遍流程来将我们的 LeanCloud 接入到微信/支付宝小程序。\n\n#### 注册外站服务的账号\n\n访问 LeanCloud 网址：[点我访问](https://www.leancloud.cn/)，完成注册登录流程。\n\n#### 找到对应的小程序开发接入指南\n\n这里我们找到 LeanCloud 微信/QQ 小程序接入指南：[点我访问](https://leancloud.cn/docs/weapp.html)\n\n:::info\n**注意**\n\nLeanCloud 没有提供支付宝的接入指南，但是小程序接入指南都基本类似，我们会一一讲解这一流程。\n:::\n\n#### 获取对应的接入地址\n\nLeanCloud 已经有详细的链接提示如何接入：\n\n![](tuture-assets/image-f017da933d02a499.png)\n\n对于支付宝小程序的白名单配置地址如下：[点我访问](https://mini.open.alipay.com/channel/miniIndex.htm)。\n\n#### 在小程序实际接入，并进行测试\n\n最后我们需要进行小程序的实际接入，因为 LeanCloud 并没有提供支付宝小程序的 SDK 包，这里对于支付宝小程序我们使用 LeanCloud 提供的 REST 接口进行访问"
+      pre: "在上两篇文章中，我们讲解了使用微信小程序云作为我们的小程序后台，然后我们跑通了我们的注册登录、创建帖子、获取帖子列表、获取帖子详情的全栈流程，如果只想了解微信小程序的全栈开发流程的话，之前的文章已经足够了，如果还想了解跨端开发全栈开发流程的话（当然用 Taro 的同学估计也比较期待跨端的全栈开发流程，手动滑稽）接下来这篇文章就是你的菜了\U0001F606\n\n首先我们先来看一下最终的运行效果：\n\n![](tuture-assets/leancloud-3.gif)\n\n在这一篇文章中，我们将接入 LeanCloud Serverless 服务，它类似微信小程序云，只不过它没有平台属性，所有的端都可以便捷访问，相信你已经迫不及待了，让我们马上开始吧\U0001F4AA！\n\n### 小程序接入外网的流程\n\n因为小程序是封装在一些巨型 App 应用里的沙盒环境之内，所以对于接入外站的服务需要一些特殊的流程，我们在这里总结一下：\n\n- 注册外站服务的账号\n- 找到对应的小程序开发接入指南\n- 获取对应的接入地址，将接入地址填入小程序后台的白名单列表\n- 在小程序实际接入，并进行测试\n\n在这篇文章中，我们的外站特指 LeanCloud Serverless 云服务，小程序特指微信小程序和支付宝小程序。\n\n好的，了解了流程之后，我们现在来走一遍流程来将我们的 LeanCloud 接入到微信/支付宝小程序。\n\n#### 注册外站服务的账号\n\n访问 LeanCloud 网址：[点我访问](https://www.leancloud.cn/)，完成注册登录流程。\n\n#### 找到对应的小程序开发接入指南\n\n这里我们找到 LeanCloud 微信/QQ 小程序接入指南：[点我访问](https://leancloud.cn/docs/weapp.html)\n\n:::info\n**注意**\n\nLeanCloud 没有提供支付宝的接入指南，但是小程序接入指南都基本类似，我们会一一讲解这一流程。\n:::\n\n#### 获取对应的接入地址\n\nLeanCloud 已经有详细的链接提示如何接入：\n\n![](tuture-assets/image-f017da933d02a499.png)\n\n对于支付宝小程序的白名单配置地址如下：[点我访问](https://mini.open.alipay.com/channel/miniIndex.htm)。\n\n#### 在小程序实际接入，并进行测试\n\n最后我们需要进行小程序的实际接入，因为 LeanCloud 并没有提供支付宝小程序的 SDK 包，这里对于支付宝小程序我们使用 LeanCloud 提供的 REST 接口进行访问，具体地址如下：[点我访问](https://leancloud.cn/docs/leanengine-rest-api.html#hash20005220)。"
+      post: "### 小结\n\n在这篇文章中，我们讲解了支付宝小程序接入 LeanCloud Serverless 云服务的过程，我们再来复习一下整个流程：\n\n- 首先我们讲解了微信小程序云的不足，然后引出了 LeanCloud 来实现跨端小程序开发\n- 接着我们介绍了 LeanCloud 服务的配置过程，具体包含 1）注册登录 LeanCloud 2）配置对应的小程序后台的白名单。且因为 LeanCloud 没有支付宝小程序的 SDK，所以我们采用 REST 请求的方式来获取和修改对应的数据\n- 接着我们讲解了如何在 LeanCloud 上面创建数据表。\n- 接着，我们介绍了如何在 LeanCloud 创建云函数。\n- 最后我们通过三步走流程：1）创建云函数 2）部署 3）在小程序端测试，创建了我们需要的四个云函数。\n\n我们再来看一下整体的接入效果：\n\n![](tuture-assets/leancloud-3-5f5cf4af09a34c4e.gif)\n\n到这里我们的 **Taro 多端小程序开发大型实战** 就基本告一段落了，整个教程内容想当长，涵盖的内容也相当多，这也是图雀社区最长的一个系列教程。最后希望 Taro 社区越来越好，也希望能帮到您！\n\n### One More Thing\n\n我们在之前的教程中花了8篇文章的篇幅讲解了小程序从0到开发完成的过程，但是我们还没将如何将小程序上线，这里我们再额外花一点笔墨讲一下如何上线你的小程序，因为小程序的上线很容易，所以内容不会很长，有兴趣的读者可以继续读下去ღ( ´･ᴗ･` )比心。\n\n#### 微信小程序上线\n\n首先点击小程序开发者工具的右上角的上传按钮：\n\n![](tuture-assets/image-2ae3cfd8008c3e92.png)\n\n接着去微信小程序网站后台：[点我前往](https://mp.weixin.qq.com/wxamp/home/guide?lang=zh_CN&token=160873486)。\n\n进行登录之后，在进来的第一个页面的第二步可以看见版本发布的信息，安装微信官方的流程进行即可。\n\n![](tuture-assets/image-7c6c55dde66e13a6.png)\n\n#### 支付宝小程序上线\n\n首先点击支付宝小程序开发者工具的右上角上传按钮：\n\n![](tuture-assets/image-c5fe559acd96a5dd.png)\n\n接着去支付宝小程序后台：[点我前往](https://mini.open.alipay.com/channel/miniIndex.htm)。\n\n进行登录之后，点击顶部的 开发中心，选择小程序应用，选择你的小程序应用，然后同样可以看到类似发布上线的栏目，安装支付宝官方的流程进行发布就可以了。\n\n![](tuture-assets/image-3e0e96370de6d1ac.png)\n\n::: info\n**提示**\n\n微信/支付宝小程序对于有社交、社区性质的小程序是需要企业认证的，所以有类似需求的需要做一下准备。\n:::\n\n好了，到这里我们的要说再见了 \U0001F44B！希望你们学得开心！\n"
