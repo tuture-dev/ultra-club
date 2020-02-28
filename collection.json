@@ -3,81 +3,55 @@
   "description": "正当移动互联网进入白热化阶段时，以微信小程序为代表的一类“轻应用”异军突起。它们无需下载，使用方便，“用完即走”，同时功能也较为完备，一经推出即得到了各大平台和及用户的热烈追捧。但是问题也随之而来——开发者们要同时维护 Web 端、移动端、微信小程序、支付宝小程序等等多套用户界面，其维护成本可以想象。作为一个优秀的多端统一开发解决方案，Taro 的出现则改变了这一情况。正值 Taro 2.x 进入 beta 阶段，让我们沏上一杯茶，开始我们的 Taro 多端小程序开发之旅吧。",
   "id": "34a473b9e9e5e3dafcc619ab152750af",
   "created": "2019-12-25T10:16:40.222Z",
-  "topics": [
-    "Taro"
-  ],
-  "categories": [
-    "小程序",
-    "Taro",
-    "入门"
-  ],
-  "cover": ".tuture/assets/taro-cover-6.jpg",
+  "topics": ["Taro"],
+  "categories": ["小程序", "Taro", "入门"],
+  "cover": ".tuture/assets/taro-cover-1.jpg",
   "articles": [
     {
       "name": "Taro 小程序开发大型实战（一）：熟悉的 React，熟悉的 Hooks",
       "description": "正当移动互联网进入白热化阶段时，以微信小程序为代表的一类“轻应用”异军突起。它们无需下载，使用方便，“用完即走”，同时功能也较为完备，一经推出即得到了各大平台和及用户的热烈追捧。但是问题也随之而来——开发者们要同时维护 Web 端、移动端、微信小程序、支付宝小程序等等多套用户界面，其维护成本可以想象。作为一个优秀的多端统一开发解决方案，Taro 的出现则改变了这一情况。正值 Taro 2.x 进入 beta 阶段，让我们沏上一杯茶，开始我们的 Taro 多端小程序开发之旅吧。",
       "cover": ".tuture/assets/taro-cover-1.jpg",
       "id": "34a473b9e9e5e3dafcc619ab152750af",
-      "created": "2019-12-26T10:16:40.222Z",
-      "updated": "2020-12-26T13:57:56.494Z"
+      "created": "2019-12-26T10:16:40.222Z"
     },
     {
       "name": "Taro 小程序开发大型实战（二）：多页面跳转和 Taro UI 组件库",
       "description": "在上一篇教程中，我们用熟悉的 React 和 Hooks 搞定了“奥特曼俱乐部”的雏形。在这一篇文章中，我们将用 Taro 自带的路由功能实现多页面跳转，并用 Taro UI 组件库升级之前略显简陋的界面。",
       "cover": ".tuture/assets/taro-cover-2.jpg",
-      "topics": [
-        "Taro",
-        "Taro UI"
-      ],
+      "topics": ["Taro", "Taro UI"],
       "id": "af6922503ad1941b09b324ffa35f33ea",
-      "created": "2019-12-29T10:16:40.222Z",
-      "updated": "2020-12-29T13:57:56.494Z"
+      "created": "2019-12-29T10:16:40.222Z"
     },
     {
       "name": "Taro 小程序开发大型实战（三）：实现微信和支付宝多端登录",
       "description": "能够借助所在平台实现“一键登录”是小程序的一大优势，大大降低了用户的使用门槛，但是各平台处理登录和鉴权的方式又存在较大的差异。在这一篇文章中，我们将带你踩过“多端登录”的“坑”，让用户能够在不同的平台轻松登录我们的应用。",
       "cover": ".tuture/assets/taro-cover-3.jpg",
       "id": "5e10118be51d454165777203",
-      "categories": [
-        "小程序",
-        "Taro",
-        "进阶"
-      ],
-      "created": "2020-01-06T10:16:40.222Z",
-      "updated": "2020-01-06T13:57:56.494Z"
+      "categories": ["小程序", "Taro", "进阶"],
+      "created": "2020-01-06T10:16:40.222Z"
     },
     {
       "name": "Taro 小程序开发大型实战（四）：使用 Hooks 版的 Redux 实现应用状态管理",
       "description": "随着状态增多，状态提升的操作也随着增多，导致保存这些状态的父组件会臃肿不堪，而且每次状态的改变需要影响很多中间组件，带来极大的性能开销。在这篇长文中，我们将用 Hooks 版的 Redux 来解决状态管理的难题，而让 Taro 专注于渲染用户界面。",
       "cover": ".tuture/assets/taro-cover-4.jpg",
       "id": "5e100f78e51d4541493621cd",
-      "topics": [
-        "Taro",
-        "Redux"
-      ],
-      "categories": [
-        "小程序",
-        "Taro",
-        "进阶"
-      ],
-      "created": "2020-01-15T10:16:40.222Z",
-      "updated": "2020-01-15T13:57:56.494Z"
+      "topics": ["Taro", "Redux"],
+      "categories": ["小程序", "Taro", "进阶"],
+      "created": "2020-01-15T10:16:40.222Z"
     },
     {
       "name": "Taro 小程序开发大型实战（五）：尝鲜微信小程序云（上篇）",
       "description": "为了将数据持久化存储和高效的查询，我们需要把数据存储到数据库中，为了实现⼩程序端便捷的开发体验，⼀大批⼩程序 Serverless 服务兴起，⽽而微信小程序云正是为了微信小程序的快速开发⽽生的。在这篇文章中，我们将使用微信小程序云作为我们的后端，并讲解如何引⼊和实现 Redux 异步⼯作流来 实现⼩程序端访问小程序云的状态管理。",
       "cover": ".tuture/assets/taro-cover-5.jpg",
       "id": "b32362b",
-      "created": "2019-01-17T10:16:40.222Z",
-      "updated": "2020-01-17T13:57:56.494Z"
+      "created": "2020-01-17T10:16:40.222Z"
     },
     {
       "name": "Taro 小程序开发大型实战（六）：LeanCloud，一统江湖",
       "description": "在上两篇文章中，我们讲解了使用微信小程序云作为我们的小程序后台，然后我们跑通了我们的注册登录、创建帖子、获取帖子列表、获取帖子详情的全栈流程，如果只想了解微信小程序的全栈开发流程的话，之前的文章已经足够了，如果还想了解跨端开发全栈开发流程的话（当然用 Taro 的同学估计也比较期待跨端的全栈开发流程，手动滑稽）接下来这篇文章就是你的菜了😆",
       "cover": ".tuture/assets/taro-cover-6.jpg",
       "id": "abfd872",
-      "created": "2020-02-19T10:16:40.222Z",
-      "updated": "2020-02-19T13:57:56.494Z"
+      "created": "2020-02-19T10:16:40.222Z"
     }
   ],
   "steps": [
@@ -2318,9 +2292,7 @@
               "type": "diff-block",
               "file": "src/pages/index/index.jsx",
               "commit": "102299e",
-              "hiddenLines": [
-                64
-              ],
+              "hiddenLines": [64],
               "children": [
                 {
                   "type": "paragraph",
@@ -3471,13 +3443,7 @@
               "type": "diff-block",
               "file": "src/components/PostCard/index.jsx",
               "commit": "f6c79ab",
-              "hiddenLines": [
-                0,
-                1,
-                2,
-                22,
-                23
-              ],
+              "hiddenLines": [0, 1, 2, 22, 23],
               "children": [
                 {
                   "type": "paragraph",
@@ -4512,16 +4478,7 @@
               "type": "diff-block",
               "file": "config/index.js",
               "commit": "63131b6",
-              "hiddenLines": [
-                0,
-                1,
-                2,
-                3,
-                67,
-                68,
-                103,
-                104
-              ],
+              "hiddenLines": [0, 1, 2, 3, 67, 68, 103, 104],
               "children": [
                 {
                   "type": "paragraph",
@@ -4826,11 +4783,7 @@
               "type": "diff-block",
               "file": "src/components/PostForm/index.scss",
               "commit": "63131b6",
-              "hiddenLines": [
-                7,
-                24,
-                25
-              ],
+              "hiddenLines": [7, 24, 25],
               "children": [
                 {
                   "type": "paragraph",
@@ -5303,17 +5256,7 @@
               "type": "diff-block",
               "file": "src/components/PostCard/index.jsx",
               "commit": "63131b6",
-              "hiddenLines": [
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14
-              ],
+              "hiddenLines": [6, 7, 8, 9, 10, 11, 12, 13, 14],
               "children": [
                 {
                   "type": "paragraph",
@@ -5372,17 +5315,7 @@
               "type": "diff-block",
               "file": "src/components/PostCard/index.scss",
               "commit": "63131b6",
-              "hiddenLines": [
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-                16,
-                17
-              ],
+              "hiddenLines": [9, 10, 11, 12, 13, 14, 15, 16, 17],
               "children": [
                 {
                   "type": "paragraph",
@@ -19422,12 +19355,7 @@
               "type": "diff-block",
               "file": "src/pages/mine/mine.jsx",
               "commit": "1da2fee",
-              "hiddenLines": [
-                108,
-                109,
-                110,
-                111
-              ],
+              "hiddenLines": [108, 109, 110, 111],
               "children": [
                 {
                   "type": "paragraph",
@@ -19753,14 +19681,7 @@
               "type": "diff-block",
               "file": "src/app.scss",
               "commit": "1da2fee",
-              "hiddenLines": [
-                0,
-                1,
-                2,
-                3,
-                4,
-                5
-              ],
+              "hiddenLines": [0, 1, 2, 3, 4, 5],
               "children": [
                 {
                   "type": "paragraph",
@@ -33050,9 +32971,7 @@
               "type": "diff-block",
               "file": "src/components/LoginButton/index.js",
               "commit": "a3cf715",
-              "hiddenLines": [
-                20
-              ],
+              "hiddenLines": [20],
               "children": [
                 {
                   "type": "paragraph",
@@ -33923,13 +33842,7 @@
               "type": "diff-block",
               "file": "src/components/Header/index.js",
               "commit": "a3cf715",
-              "hiddenLines": [
-                7,
-                8,
-                9,
-                38,
-                39
-              ],
+              "hiddenLines": [7, 8, 9, 38, 39],
               "children": [
                 {
                   "type": "paragraph",
@@ -34144,9 +34057,7 @@
               "type": "diff-block",
               "file": "src/components/Logout/index.js",
               "commit": "a3cf715",
-              "hiddenLines": [
-                42
-              ],
+              "hiddenLines": [42],
               "children": [
                 {
                   "type": "paragraph",
@@ -34451,19 +34362,7 @@
               "type": "diff-block",
               "file": "src/components/LoginForm/index.jsx",
               "commit": "a3cf715",
-              "hiddenLines": [
-                28,
-                29,
-                85,
-                86,
-                87,
-                98,
-                99,
-                100,
-                101,
-                102,
-                103
-              ],
+              "hiddenLines": [28, 29, 85, 86, 87, 98, 99, 100, 101, 102, 103],
               "children": [
                 {
                   "type": "paragraph",
@@ -34901,9 +34800,7 @@
               "type": "diff-block",
               "file": "src/components/Footer/index.js",
               "commit": "a3cf715",
-              "hiddenLines": [
-                80
-              ],
+              "hiddenLines": [80],
               "children": [
                 {
                   "type": "paragraph",
@@ -35210,15 +35107,7 @@
               "type": "diff-block",
               "file": "src/pages/mine/mine.jsx",
               "commit": "a3cf715",
-              "hiddenLines": [
-                21,
-                33,
-                34,
-                108,
-                109,
-                110,
-                111
-              ],
+              "hiddenLines": [21, 33, 34, 108, 109, 110, 111],
               "children": [
                 {
                   "type": "paragraph",
@@ -35470,14 +35359,7 @@
               "type": "diff-block",
               "file": "src/components/PostForm/index.jsx",
               "commit": "a3cf715",
-              "hiddenLines": [
-                82,
-                83,
-                84,
-                85,
-                86,
-                87
-              ],
+              "hiddenLines": [82, 83, 84, 85, 86, 87],
               "children": [
                 {
                   "type": "paragraph",
@@ -36222,16 +36104,7 @@
               "type": "diff-block",
               "file": "src/app.scss",
               "commit": "a3cf715",
-              "hiddenLines": [
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7
-              ],
+              "hiddenLines": [0, 1, 2, 3, 4, 5, 6, 7],
               "children": [
                 {
                   "type": "paragraph",
@@ -36290,15 +36163,7 @@
               "type": "diff-block",
               "file": "src/pages/index/index.jsx",
               "commit": "a3cf715",
-              "hiddenLines": [
-                106,
-                107,
-                108,
-                109,
-                110,
-                111,
-                112
-              ],
+              "hiddenLines": [106, 107, 108, 109, 110, 111, 112],
               "children": [
                 {
                   "type": "paragraph",
@@ -36583,12 +36448,7 @@
               "type": "diff-block",
               "file": "src/pages/post/post.jsx",
               "commit": "a3cf715",
-              "hiddenLines": [
-                25,
-                26,
-                27,
-                28
-              ],
+              "hiddenLines": [25, 26, 27, 28],
               "children": [
                 {
                   "type": "paragraph",
@@ -53463,16 +53323,7 @@
               "type": "diff-block",
               "file": "src/reducers/user.js",
               "commit": "b32362b",
-              "hiddenLines": [
-                20,
-                21,
-                22,
-                23,
-                24,
-                48,
-                49,
-                50
-              ],
+              "hiddenLines": [20, 21, 22, 23, 24, 48, 49, 50],
               "children": [
                 {
                   "type": "paragraph",
@@ -53883,19 +53734,7 @@
               "type": "diff-block",
               "file": "src/pages/mine/mine.jsx",
               "commit": "b32362b",
-              "hiddenLines": [
-                7,
-                41,
-                42,
-                43,
-                44,
-                45,
-                46,
-                47,
-                48,
-                49,
-                50
-              ],
+              "hiddenLines": [7, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50],
               "children": [
                 {
                   "type": "paragraph",
@@ -57379,11 +57218,7 @@
               "type": "diff-block",
               "file": "src/reducers/post.js",
               "commit": "b32362b",
-              "hiddenLines": [
-                46,
-                47,
-                66
-              ],
+              "hiddenLines": [46, 47, 66],
               "children": [
                 {
                   "type": "paragraph",
@@ -59610,16 +59445,7 @@
               "type": "diff-block",
               "file": "src/pages/post/post.jsx",
               "commit": "b32362b",
-              "hiddenLines": [
-                35,
-                36,
-                37,
-                38,
-                39,
-                40,
-                41,
-                42
-              ],
+              "hiddenLines": [35, 36, 37, 38, 39, 40, 41, 42],
               "children": [
                 {
                   "type": "paragraph",
