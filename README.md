@@ -6,11 +6,11 @@
 
 微信小程序云效果，微信小程序全流程：登录、发帖、展示帖子列表、查看帖子详情：
 
-![1705b4e9b0b79869.2020-03-10 11_01_12](https://tva1.sinaimg.cn/large/00831rSTgy1gconiqiosug30m80iiqt0.gif)
+![1705b4e9b0b79869.2020-03-10 11_01_12](https://imgkr.cn-bj.ufileos.com/3faf1ee5-dbef-4593-9a33-d56453c69485.gif)
 
 LeanCloud 效果，支付宝小程序全流程：登录、发帖、展示帖子列表、查看帖子详情：
 
-![1705b4e9b0b79869.2020-03-10 11_01_12](https://tva1.sinaimg.cn/large/00831rSTgy1gcong90tu6g30m80iiqt0.gif)
+![1705b4e9b0b79869.2020-03-10 11_01_12](https://imgkr.cn-bj.ufileos.com/5e84e7f3-c08e-456b-a354-a8fa1c52337e.gif)
 
 ### 项目界面说明（以微信小程序为例）
 
@@ -18,7 +18,7 @@ LeanCloud 效果，支付宝小程序全流程：登录、发帖、展示帖子�
 
 主要是展示帖子列表，每个帖子包含：1）标题 2）描述 3）发帖人用户头像 4）发帖人用户名
 
-![00831rSTgy1gcony1tdh3j30ho0vojt4](https://tva1.sinaimg.cn/large/00831rSTgy1gcoo9lqquxj30900fjmxu.jpg)
+![00831rSTgy1gcony1tdh3j30ho0vojt4](https://imgkr.cn-bj.ufileos.com/629e6b4a-57b2-43e7-b217-b05ade7dc1f1.png)
 
 
 
@@ -26,7 +26,7 @@ LeanCloud 效果，支付宝小程序全流程：登录、发帖、展示帖子�
 
 主要展示帖子详情，是另外一个页面，因为对于帖子列表展示的信息有限，详情页可以展示更多的帖子正文信息
 
-![00831rSTgy1gconz8dq34j30hu0vkta0](https://tva1.sinaimg.cn/large/00831rSTgy1gcoo9s33uvj30930c0aag.jpg)
+![00831rSTgy1gconz8dq34j30hu0vkta0](https://imgkr.cn-bj.ufileos.com/55df083d-4116-4a21-94c2-45a938df8391.png)
 
 
 
@@ -34,21 +34,21 @@ LeanCloud 效果，支付宝小程序全流程：登录、发帖、展示帖子�
 
 主题用于给登录用户发帖，包含标题和正文，发的帖子会自动带上登录用户的身份信息
 
-![00831rSTgy1gcoo0t75bbj30hq0vwgnk](https://tva1.sinaimg.cn/large/00831rSTgy1gcoo9vwcddj30910dy3z7.jpg)
+![00831rSTgy1gcoo0t75bbj30hq0vwgnk](https://imgkr.cn-bj.ufileos.com/06cc32c1-484f-4148-9f43-0122f83e2cd9.png)
 
 #### 我的页面
 
 已登录：展示用户头像和用户名
 
-![00831rSTgy1gcoo2hl2q3j30hs0vutaw](https://tva1.sinaimg.cn/large/00831rSTgy1gcooaj2he4j30920fm754.jpg)
+![00831rSTgy1gcoo2hl2q3j30hs0vutaw](https://imgkr.cn-bj.ufileos.com/7942c63e-ff72-4ed1-b713-6b5ea08c9c2a.png)
 
 未登录：展示普通登录按钮和微信登录
 
-![00831rSTgy1gcoo2tiuqkj30hm0vwq48](https://tva1.sinaimg.cn/large/00831rSTgy1gcooa57pwuj308z0fn3z3.jpg)
+![00831rSTgy1gcoo2tiuqkj30hm0vwq48](https://imgkr.cn-bj.ufileos.com/2de5d050-0e13-439a-bc91-802e342587e3.png)
 
 未登录，进行登录界面：上传头像和输入昵称，昵称会自动作为用户主键标志
 
-![位图](https://tva1.sinaimg.cn/large/00831rSTgy1gcoodydm8nj30950fmjrw.jpg)
+![位图](https://imgkr.cn-bj.ufileos.com/9f1c1d72-b59d-4a10-bb07-d125ae5baaf0.png)
 
 ## 体验项目
 
@@ -115,6 +115,9 @@ npm run dev:alipay
 - [掘金](https://juejin.im/user/5b33414351882574b9694d28)
 - [知乎专栏](https://zhuanlan.zhihu.com/tuture)
 - 知乎圈子：搜索 图雀社区
+- 也可以直接扫码下方的二维码关注微信公众号哦：
+
+![](https://imgkr.cn-bj.ufileos.com/24d1bc26-9cb8-4c50-bf4b-bfee05633e95.png)
 
 ## 许可证
 
