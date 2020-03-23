@@ -61,7 +61,7 @@
       "created": "2020-01-15T10:16:40.222Z"
     },
     {
-      "name": "Taro 小程序开发大型实战（五）：尝鲜微信小程序云（上篇）",
+      "name": "Taro 小程序开发大型实战（五）：尝鲜微信小程序云",
       "description": "为了将数据持久化存储和高效的查询，我们需要把数据存储到数据库中，为了实现⼩程序端便捷的开发体验，⼀大批⼩程序 Serverless 服务兴起，⽽而微信小程序云正是为了微信小程序的快速开发⽽生的。在这篇文章中，我们将使用微信小程序云作为我们的后端，并讲解如何引⼊和实现 Redux 异步⼯作流来 实现⼩程序端访问小程序云的状态管理。",
       "cover": ".tuture/assets/taro-cover-5.jpg",
       "id": "b32362b",
@@ -48151,10 +48151,10 @@
       ]
     },
     {
-      "type": "step",
       "commit": "b32362b",
       "id": "n7VsQGQs6k",
       "articleId": "b32362b",
+      "type": "step",
       "children": [
         {
           "type": "heading-two",
@@ -49339,13 +49339,14 @@
                 }
               ]
             }
-          ]
+          ],
+          "flag": "step_start"
         },
         {
-          "type": "file",
           "file": "package.json",
           "display": true,
-          "id": "71Na7bK7jC",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -49695,7 +49696,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -49822,15 +49824,16 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
         {
-          "type": "file",
           "file": "src/store/index.js",
           "display": true,
-          "id": "h4_1VxB4hE",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -49874,7 +49877,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -50058,15 +50062,16 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
         {
-          "type": "file",
           "file": "src/components/LoginForm/index.jsx",
           "display": true,
-          "id": "BgyBU1qY3a",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -50118,7 +50123,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -50380,15 +50386,16 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
         {
-          "type": "file",
           "file": "src/sagas/user.js",
           "display": true,
-          "id": "J7CsQ0Z3Wi",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -50566,7 +50573,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -51676,15 +51684,16 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
         {
-          "type": "file",
           "file": "src/constants/user.js",
           "display": true,
-          "id": "txKf4V6APh",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -51721,7 +51730,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -51758,15 +51768,16 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
         {
-          "type": "file",
           "file": "src/api/user.js",
           "display": true,
-          "id": "z8RNA_5bL9",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -51839,7 +51850,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -52188,15 +52200,16 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
         {
-          "type": "file",
           "file": "project.config.json",
           "display": true,
-          "id": "dZE-J-VXPq",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -52417,7 +52430,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -52595,15 +52609,16 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
         {
-          "type": "file",
           "file": "functions/login/package.json",
           "display": true,
-          "id": "LwmOoj3uJg",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -52677,7 +52692,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -52736,15 +52752,16 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
         {
-          "type": "file",
           "file": "functions/login/index.js",
           "display": true,
-          "id": "3MjxC8IeEl",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -53087,7 +53104,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -53386,15 +53404,16 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
         {
-          "type": "file",
           "file": "src/reducers/user.js",
           "display": true,
-          "id": "cqCdnjcHW1",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -53452,7 +53471,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -53601,15 +53621,16 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
         {
-          "type": "file",
           "file": "src/components/WeappLoginButton/index.js",
           "display": true,
-          "id": "YBhsJrLR3D",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -53648,7 +53669,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -53813,15 +53835,16 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
         {
-          "type": "file",
           "file": "src/pages/mine/mine.jsx",
           "display": true,
-          "id": "SC2kVOtP_-",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -53872,7 +53895,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -54019,15 +54043,16 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
         {
-          "type": "file",
           "file": "src/components/Logout/index.js",
           "display": true,
-          "id": "6QTmxY5K06",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -54085,7 +54110,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -54287,15 +54313,16 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
         {
-          "type": "file",
           "file": "src/components/PostForm/index.jsx",
           "display": true,
-          "id": "-0Uz-GCSdp",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -54610,7 +54637,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -56707,15 +56735,16 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
         {
-          "type": "file",
           "file": "functions/createPost/package.json",
           "display": true,
-          "id": "-Q4cUnLACH",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -56790,7 +56819,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -56820,15 +56850,16 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
         {
-          "type": "file",
           "file": "functions/createPost/index.js",
           "display": true,
-          "id": "tV5ZwYj1vM",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -56895,7 +56926,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -57295,15 +57327,16 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
         {
-          "type": "file",
           "file": "src/reducers/post.js",
           "display": true,
-          "id": "SlcFjG-q8R",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -57368,7 +57401,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -57489,15 +57523,16 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
         {
-          "type": "file",
           "file": "src/pages/index/index.jsx",
           "display": true,
-          "id": "063CDgRo9m",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -57558,7 +57593,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -59151,15 +59187,16 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
         {
-          "type": "file",
           "file": "functions/getPosts/package.json",
           "display": true,
-          "id": "-9xla0nspG",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -59234,7 +59271,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -59264,15 +59302,16 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
         {
-          "type": "file",
           "file": "functions/getPosts/index.js",
           "display": true,
-          "id": "j3mQh_3NAo",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -59339,7 +59378,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -59529,15 +59569,16 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
         {
-          "type": "file",
           "file": "src/pages/post/post.jsx",
           "display": true,
-          "id": "LT6d4mKfoC",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -59599,7 +59640,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -60577,15 +60619,16 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
         {
-          "type": "file",
           "file": "src/sagas/index.js",
           "display": true,
-          "id": "koX6ZdpWm8",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -60644,7 +60687,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -61177,7 +61221,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
@@ -61390,10 +61435,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "functions/getPost/package.json",
           "display": true,
-          "id": "k_yrO1Yew0",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -61468,7 +61513,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -61498,15 +61544,16 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
         {
-          "type": "file",
           "file": "functions/getPost/index.js",
           "display": true,
-          "id": "Qunwjco6zu",
+          "commit": "b32362b",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -61573,7 +61620,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_start"
             },
             {
               "type": "diff-block",
@@ -61784,7 +61832,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "flag": "file_end"
             }
           ]
         },
@@ -73382,7 +73431,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "flag": "step_end"
         }
       ]
     },
