@@ -1,40 +1,40 @@
-import Taro, { useState } from '@tarojs/taro'
+import Taro, { useState, useRef, useEffect } from '@tarojs/taro'
 import { View, Form } from '@tarojs/components'
 import { AtButton, AtImagePicker } from 'taro-ui'
 import { useDispatch } from '@tarojs/redux'
 
-import { LOGIN } from '../../constants'
+import { SET_IS_OPENED, SET_LOGIN_INFO } from '../../constants'
+import CountDownButton from '../CountDownButton'
 import './index.scss'
 
 export default function LoginForm(props) {
   // Login Form 登录数据
-  const [formNickName, setFormNickName] = useState('')
-  const [files, setFiles] = useState([])
-  const [showAddBtn, setShowAddBtn] = useState(true)
+  const [phone, setPhone] = useState('')
+  const [phoneCode, setPhoneCode] = useState('')
+  const countDownButtonRef = useRef(null)
 
   const dispatch = useDispatch()
 
-  function onChange(files) {
-    if (files.length > 0) {
-      setShowAddBtn(false)
-    } else {
-      setShowAddBtn(true)
+  async function countDownButtonPressed() {
+    if (!phone) {
+      Taro.atMessage({
+        type: 'error',
+        message: '您还没有填写手机!',
+      })
+
+      return
     }
 
-    setFiles(files)
-  }
+    countDownButtonRef.current.startCountDown()
 
-  function onImageClick() {
-    Taro.previewImage({
-      urls: [props.files[0].url],
-    })
+    // 处理发送验证码事件
   }
 
   async function handleSubmit(e) {
     e.preventDefault()
 
     // 鉴权数据
-    if (!formNickName || !files.length) {
+    if (!phone || !phoneCode) {
       Taro.atMessage({
         type: 'error',
         message: '您还有内容没有填写！',
@@ -43,50 +43,39 @@ export default function LoginForm(props) {
       return
     }
 
-    setShowAddBtn(true)
-
-    // 提示登录成功
-    Taro.atMessage({
-      type: 'success',
-      message: '恭喜您，登录成功！',
-    })
-
-    // 缓存在 storage 里面
-    const userInfo = { avatar: files[0].url, nickName: formNickName }
-
-    // 清空表单状态
-    setFiles([])
-    setFormNickName('')
-
-    // 向后端发起登录请求
-    dispatch({ type: LOGIN, payload: { userInfo: userInfo } })
+    // 处理登录和注册
   }
 
   return (
     <View className="post-form">
       <Form onSubmit={handleSubmit}>
         <View className="login-box">
-          <View className="avatar-selector">
-            <AtImagePicker
-              length={1}
-              mode="scaleToFill"
-              count={1}
-              files={files}
-              showAddBtn={showAddBtn}
-              onImageClick={onImageClick}
-              onChange={onChange}
+          <Input
+            className="input-phone input-item"
+            type="text"
+            placeholder="输入手机号"
+            value={phone}
+            onInput={e => setPhone(e.target.value)}
+          />
+          <View className="verify-code-box">
+            <Input
+              className="input-nickName input-item"
+              type="text"
+              placeholder="四位验证码"
+              value={phoneCode}
+              onInput={e => setPhoneCode(e.target.value)}
+            />
+            <CountDownButton
+              onClick={countDownButtonPressed}
+              ref={countDownButtonRef}
             />
           </View>
-          <Input
-            className="input-nickName"
-            type="text"
-            placeholder="点击输入昵称"
-            value={formNickName}
-            onInput={e => setFormNickName(e.target.value)}
-          />
           <AtButton formType="submit" type="primary">
             登录
           </AtButton>
+          <View className="at-article__info">
+            通过手机和验证码来登录，如果没有账号，我们将自动创建
+          </View>
         </View>
       </Form>
     </View>

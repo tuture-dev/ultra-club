@@ -1,0 +1,40 @@
+/* 按钮默认展现样式 */
+
+.buttonCommonStyle {
+  margin: 0;
+  width: 160px;
+  height: calc(1.4rem + 20px);
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+}
+/* 禁用时候的TouchableOpacity样式 */
+
+.disableButtonStyle {
+  background-color: #f6f6f6 !important;
+}
+/* 可以点击时候的TouchableOpacity样式 */
+
+.activeButtonStyle {
+  background-color: #02b875;
+}
+/* 文本默认样式 */
+
+.txtCommonStyle {
+  font-size: 20px;
+}
+/* 禁用时Text样式 */
+
+.disableTxtStyle {
+  color: #999;
+}
+/* 可以点击时候的Text样式 */
+
+.activeTxtStyle {
+  color: #fff;
+}
