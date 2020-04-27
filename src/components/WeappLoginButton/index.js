@@ -14,7 +14,7 @@ export default function WeappLoginButton(props) {
   async function onGetUserInfo(e) {
     setIsLogin(true)
 
-    const userPoolId = '5ea4ffa72b3a80b6eff60b65'
+    const userPoolId = ''
     const authing = new Authing({
       userPoolId,
     })
@@ -53,14 +53,6 @@ export default function WeappLoginButton(props) {
           key: 'token',
           data: userInfo.token,
         })
-
-        // 当 code 用于登录之后，会失效，所以这里重新获取 code
-        Taro.login({
-          success(res) {
-            const code = res.code
-            Taro.setStorageSync('code', code)
-          },
-        })
       } catch (err) {
         console.log('err', err)
         Taro.atMessage({
@@ -71,7 +63,6 @@ export default function WeappLoginButton(props) {
     }
 
     try {
-      const code = Taro.getStorageSync('code')
       Taro.login({
         success(res) {
           const code = res.code
