@@ -9,12 +9,12 @@ import './index.scss'
 import { SET_IS_OPENED } from '../../constants'
 
 export default function Footer(props) {
-  const nickName = useSelector(state => state.user.nickName)
+  const userId = useSelector(state => state.user.userId)
 
   const dispatch = useDispatch()
 
   // 双取反来构造字符串对应的布尔值，用于标志此时是否用户已经登录
-  const isLogged = !!nickName
+  const isLogged = !!userId
 
   // 使用 useSelector Hooks 获取 Redux Store 数据
   const isOpened = useSelector(state => state.user.isOpened)

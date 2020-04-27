@@ -14,9 +14,9 @@ import {
 export default function Index() {
   const posts = useSelector(state => state.post.posts) || []
   const isOpened = useSelector(state => state.post.isOpened)
-  const nickName = useSelector(state => state.user.nickName)
+  const userId = useSelector(state => state.user.userId)
 
-  const isLogged = !!nickName
+  const isLogged = !!userId
 
   const dispatch = useDispatch()
 

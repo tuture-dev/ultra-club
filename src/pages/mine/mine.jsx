@@ -8,9 +8,9 @@ import { SET_LOGIN_INFO } from '../../constants'
 
 export default function Mine() {
   const dispatch = useDispatch()
-  const nickName = useSelector(state => state.user.nickName)
+  const userId = useSelector(state => state.user.userId)
 
-  const isLogged = !!nickName
+  const isLogged = !!userId
 
   useEffect(() => {
     async function getStorage() {
