@@ -1,5 +1,6 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
+const Authing = require('authing-js-sdk')
 
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV,
@@ -11,17 +12,21 @@ const db = cloud.database()
 exports.main = async (event, context) => {
   const { postData, userId } = event
 
-  console.log('event', event)
+  const userPoolId = ''
+  const secret = ''
 
   try {
-    const user = await db
-      .collection('user')
-      .doc(userId)
-      .get()
+    const authing = new Authing({
+      userPoolId,
+      secret,
+    })
+    const userInfo = await authing.user({ id: userId })
+    const { nickname, photo } = userInfo
+
     const { _id } = await db.collection('post').add({
       data: {
         ...postData,
-        user: user.data,
+        user: { nickName: nickname, avatar: photo, _id: userInfo._id },
         createdAt: db.serverDate(),
         updatedAt: db.serverDate(),
       },

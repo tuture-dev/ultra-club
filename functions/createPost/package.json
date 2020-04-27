@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "authing-js-sdk": "^3.18.7",
     "wx-server-sdk": "latest"
   }
 }
