@@ -925,7 +925,7 @@
 
 "@redux-saga/core@^1.1.3":
   version "1.1.3"
-  resolved "http://r.cnpmjs.org/@redux-saga/core/download/@redux-saga/core-1.1.3.tgz#3085097b57a4ea8db5528d58673f20ce0950f6a4"
+  resolved "https://r.cnpmjs.org/@redux-saga/core/download/@redux-saga/core-1.1.3.tgz#3085097b57a4ea8db5528d58673f20ce0950f6a4"
   integrity sha1-MIUJe1ek6o21Uo1YZz8gzglQ9qQ=
   dependencies:
     "@babel/runtime" "^7.6.3"
@@ -939,19 +939,19 @@
 
 "@redux-saga/deferred@^1.1.2":
   version "1.1.2"
-  resolved "http://r.cnpmjs.org/@redux-saga/deferred/download/@redux-saga/deferred-1.1.2.tgz#59937a0eba71fff289f1310233bc518117a71888"
+  resolved "https://r.cnpmjs.org/@redux-saga/deferred/download/@redux-saga/deferred-1.1.2.tgz#59937a0eba71fff289f1310233bc518117a71888"
   integrity sha1-WZN6Drpx//KJ8TECM7xRgRenGIg=
 
 "@redux-saga/delay-p@^1.1.2":
   version "1.1.2"
-  resolved "http://r.cnpmjs.org/@redux-saga/delay-p/download/@redux-saga/delay-p-1.1.2.tgz#8f515f4b009b05b02a37a7c3d0ca9ddc157bb355"
+  resolved "https://r.cnpmjs.org/@redux-saga/delay-p/download/@redux-saga/delay-p-1.1.2.tgz#8f515f4b009b05b02a37a7c3d0ca9ddc157bb355"
   integrity sha1-j1FfSwCbBbAqN6fD0Mqd3BV7s1U=
   dependencies:
     "@redux-saga/symbols" "^1.1.2"
 
 "@redux-saga/is@^1.1.2":
   version "1.1.2"
-  resolved "http://r.cnpmjs.org/@redux-saga/is/download/@redux-saga/is-1.1.2.tgz#ae6c8421f58fcba80faf7cadb7d65b303b97e58e"
+  resolved "https://r.cnpmjs.org/@redux-saga/is/download/@redux-saga/is-1.1.2.tgz#ae6c8421f58fcba80faf7cadb7d65b303b97e58e"
   integrity sha1-rmyEIfWPy6gPr3ytt9ZbMDuX5Y4=
   dependencies:
     "@redux-saga/symbols" "^1.1.2"
@@ -959,12 +959,12 @@
 
 "@redux-saga/symbols@^1.1.2":
   version "1.1.2"
-  resolved "http://r.cnpmjs.org/@redux-saga/symbols/download/@redux-saga/symbols-1.1.2.tgz#216a672a487fc256872b8034835afc22a2d0595d"
+  resolved "https://r.cnpmjs.org/@redux-saga/symbols/download/@redux-saga/symbols-1.1.2.tgz#216a672a487fc256872b8034835afc22a2d0595d"
   integrity sha1-IWpnKkh/wlaHK4A0g1r8IqLQWV0=
 
 "@redux-saga/types@^1.1.0":
   version "1.1.0"
-  resolved "http://r.cnpmjs.org/@redux-saga/types/download/@redux-saga/types-1.1.0.tgz#0e81ce56b4883b4b2a3001ebe1ab298b84237204"
+  resolved "https://r.cnpmjs.org/@redux-saga/types/download/@redux-saga/types-1.1.0.tgz#0e81ce56b4883b4b2a3001ebe1ab298b84237204"
   integrity sha1-DoHOVrSIO0sqMAHr4aspi4QjcgQ=
 
 "@tarojs/components-qa@2.1.6":
@@ -1707,16 +1707,11 @@ acorn-jsx@^5.0.0:
   integrity sha1-KUrbcbVzmLBoABXwo4xWPuHbU4Q=
 
 acorn@^5.0.0, acorn@^5.6.2:
-  version "5.7.3"
-  resolved "https://registry.npm.taobao.org/acorn/download/acorn-5.7.3.tgz#67aa231bf8812974b85235a96771eb6bd07ea279"
-  integrity sha1-Z6ojG/iBKXS4UjWpZ3Hra9B+onk=
+  version "5.7.4"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.4.tgz#3e8d8a9947d0599a1796d10225d7432f4a4acf5e"
+  integrity sha512-1D++VG7BhrtvQpNbBzovKNc1FLGGEE/oGe7b9xJm/RFHMBeUaUGpluV9RLjZa47YFdPcDAenEYuq9pQPcMdLJg==
 
-acorn@^6.0.7:
-  version "6.4.0"
-  resolved "https://registry.npm.taobao.org/acorn/download/acorn-6.4.0.tgz#b659d2ffbafa24baf5db1cdbb2c94a983ecd2784"
-  integrity sha1-tlnS/7r6JLr12xzbsslKmD7NJ4Q=
-
-acorn@^6.2.1:
+acorn@^6.0.7, acorn@^6.2.1:
   version "6.4.1"
   resolved "https://registry.npm.taobao.org/acorn/download/acorn-6.4.1.tgz?cache=0&sync_timestamp=1583796606796&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Facorn%2Fdownload%2Facorn-6.4.1.tgz#531e58ba3f51b9dacb9a6646ca4debf5b14ca474"
   integrity sha1-Ux5Yuj9RudrLmmZGyk3r9bFMpHQ=
@@ -2732,7 +2727,7 @@ babel-plugin-transform-regenerator@^6.22.0:
 
 babel-plugin-transform-runtime@^6.23.0:
   version "6.23.0"
-  resolved "http://r.cnpmjs.org/babel-plugin-transform-runtime/download/babel-plugin-transform-runtime-6.23.0.tgz#88490d446502ea9b8e7efb0fe09ec4d99479b1ee"
+  resolved "https://r.cnpmjs.org/babel-plugin-transform-runtime/download/babel-plugin-transform-runtime-6.23.0.tgz#88490d446502ea9b8e7efb0fe09ec4d99479b1ee"
   integrity sha1-iEkNRGUC6puOfvsP4J7E2ZR5se4=
   dependencies:
     babel-runtime "^6.22.0"
@@ -2942,7 +2937,7 @@ binary-extensions@^2.0.0:
 
 bind-decorator@^1.0.11:
   version "1.0.11"
-  resolved "http://r.cnpmjs.org/bind-decorator/download/bind-decorator-1.0.11.tgz#e41bc06a1f65dd9cec476c91c5daf3978488252f"
+  resolved "https://r.cnpmjs.org/bind-decorator/download/bind-decorator-1.0.11.tgz#e41bc06a1f65dd9cec476c91c5daf3978488252f"
   integrity sha1-5BvAah9l3ZzsR2yRxdrzl4SIJS8=
 
 bindings@^1.5.0:
@@ -4027,7 +4022,7 @@ dashdash@^1.12.0:
 
 dayjs@^1.7.7:
   version "1.8.18"
-  resolved "http://r.cnpmjs.org/dayjs/download/dayjs-1.8.18.tgz#c9b3fcd5a8eca96ed20a907f4491516d6eda15c9"
+  resolved "https://r.cnpmjs.org/dayjs/download/dayjs-1.8.18.tgz#c9b3fcd5a8eca96ed20a907f4491516d6eda15c9"
   integrity sha1-ybP81ajsqW7SCpB/RJFRbW7aFck=
 
 debug@*, debug@^4.0.1, debug@^4.1.0:
@@ -4085,7 +4080,7 @@ decode-uri-component@^0.2.0:
 
 deep-diff@^0.3.5:
   version "0.3.8"
-  resolved "http://r.cnpmjs.org/deep-diff/download/deep-diff-0.3.8.tgz#c01de63efb0eec9798801d40c7e0dae25b582c84"
+  resolved "https://r.cnpmjs.org/deep-diff/download/deep-diff-0.3.8.tgz#c01de63efb0eec9798801d40c7e0dae25b582c84"
   integrity sha1-wB3mPvsO7JeYgB1Ax+Da4ltYLIQ=
 
 deep-equal@^1.0.1:
@@ -5668,7 +5663,7 @@ hmac-drbg@^1.0.0:
 
 hoist-non-react-statics@^2.5.0:
   version "2.5.5"
-  resolved "http://r.cnpmjs.org/hoist-non-react-statics/download/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
+  resolved "https://r.cnpmjs.org/hoist-non-react-statics/download/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
   integrity sha1-xZA89AnA39kI84jmGdhrnBF0y0c=
 
 home-or-tmp@^2.0.0:
@@ -8923,21 +8918,21 @@ redent@^2.0.0:
 
 redux-logger@^3.0.6:
   version "3.0.6"
-  resolved "http://r.cnpmjs.org/redux-logger/download/redux-logger-3.0.6.tgz#f7555966f3098f3c88604c449cf0baf5778274bf"
+  resolved "https://r.cnpmjs.org/redux-logger/download/redux-logger-3.0.6.tgz#f7555966f3098f3c88604c449cf0baf5778274bf"
   integrity sha1-91VZZvMJjzyIYExEnPC69XeCdL8=
   dependencies:
     deep-diff "^0.3.5"
 
 redux-saga@^1.1.3:
   version "1.1.3"
-  resolved "http://r.cnpmjs.org/redux-saga/download/redux-saga-1.1.3.tgz#9f3e6aebd3c994bbc0f6901a625f9a42b51d1112"
+  resolved "https://r.cnpmjs.org/redux-saga/download/redux-saga-1.1.3.tgz#9f3e6aebd3c994bbc0f6901a625f9a42b51d1112"
   integrity sha1-nz5q69PJlLvA9pAaYl+aQrUdERI=
   dependencies:
     "@redux-saga/core" "^1.1.3"
 
 redux@^4.0.4, redux@^4.0.5:
   version "4.0.5"
-  resolved "http://r.cnpmjs.org/redux/download/redux-4.0.5.tgz#4db5de5816e17891de8a80c424232d06f051d93f"
+  resolved "https://r.cnpmjs.org/redux/download/redux-4.0.5.tgz#4db5de5816e17891de8a80c424232d06f051d93f"
   integrity sha1-TbXeWBbheJHeioDEJCMtBvBR2T8=
   dependencies:
     loose-envify "^1.4.0"
@@ -10248,7 +10243,7 @@ swiper@4.4.2:
 
 symbol-observable@^1.2.0:
   version "1.2.0"
-  resolved "http://r.cnpmjs.org/symbol-observable/download/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
+  resolved "https://r.cnpmjs.org/symbol-observable/download/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
   integrity sha1-wiaIrtTqs83C3+rLtWFmBWCgCAQ=
 
 table@^4.0.1:
@@ -10289,7 +10284,7 @@ tar@^2.0.0:
 
 taro-ui@^2.2.4:
   version "2.2.4"
-  resolved "http://r.cnpmjs.org/taro-ui/download/taro-ui-2.2.4.tgz#96a486432e86d6d0d1eda70383c47c3284f5e8e6"
+  resolved "https://r.cnpmjs.org/taro-ui/download/taro-ui-2.2.4.tgz#96a486432e86d6d0d1eda70383c47c3284f5e8e6"
   integrity sha1-lqSGQy6G1tDR7acDg8R8MoT16OY=
   dependencies:
     "@types/react" "^16.7.3"
@@ -10521,19 +10516,19 @@ typedarray@^0.0.6:
 
 typescript-compare@^0.0.2:
   version "0.0.2"
-  resolved "http://r.cnpmjs.org/typescript-compare/download/typescript-compare-0.0.2.tgz#7ee40a400a406c2ea0a7e551efd3309021d5f425"
+  resolved "https://r.cnpmjs.org/typescript-compare/download/typescript-compare-0.0.2.tgz#7ee40a400a406c2ea0a7e551efd3309021d5f425"
   integrity sha1-fuQKQApAbC6gp+VR79MwkCHV9CU=
   dependencies:
     typescript-logic "^0.0.0"
 
 typescript-logic@^0.0.0:
   version "0.0.0"
-  resolved "http://r.cnpmjs.org/typescript-logic/download/typescript-logic-0.0.0.tgz#66ebd82a2548f2b444a43667bec120b496890196"
+  resolved "https://r.cnpmjs.org/typescript-logic/download/typescript-logic-0.0.0.tgz#66ebd82a2548f2b444a43667bec120b496890196"
   integrity sha1-ZuvYKiVI8rREpDZnvsEgtJaJAZY=
 
 typescript-tuple@^2.2.1:
   version "2.2.1"
-  resolved "http://r.cnpmjs.org/typescript-tuple/download/typescript-tuple-2.2.1.tgz#7d9813fb4b355f69ac55032e0363e8bb0f04dad2"
+  resolved "https://r.cnpmjs.org/typescript-tuple/download/typescript-tuple-2.2.1.tgz#7d9813fb4b355f69ac55032e0363e8bb0f04dad2"
   integrity sha1-fZgT+0s1X2msVQMuA2Pouw8E2tI=
   dependencies:
     typescript-compare "^0.0.2"
