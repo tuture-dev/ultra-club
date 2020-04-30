@@ -74,17 +74,6 @@
       "id": "abfd872",
       "created": "2020-02-19T10:16:40.222Z",
       "topics": []
-    },
-    {
-      "id": "vVOVIkttD",
-      "created": "2020-04-28T12:30:41.262Z",
-      "name": "Taro 小程序开发大型实战（七）：使用 Authing 集成完整的用户系统",
-      "topics": [
-        "Taro",
-        "小程序",
-        "进阶"
-      ],
-      "cover": ""
     }
   ],
   "steps": [
@@ -30482,7 +30471,6 @@
     {
       "commit": "4a85cd005d8be613d08c18c25ea1633703e30eba",
       "id": "9615525d",
-      "articleId": "vVOVIkttD",
       "type": "step",
       "children": [
         {
@@ -31230,7 +31218,6 @@
     {
       "commit": "dfea82b0b6e11d1a575d99e95337f72c8a4eb6f9",
       "id": "4a56dd05",
-      "articleId": "vVOVIkttD",
       "type": "step",
       "children": [
         {
@@ -32611,7 +32598,6 @@
     {
       "commit": "a23726a6b28dc78330c794563ee49b7980303266",
       "id": "46d1a46e",
-      "articleId": "vVOVIkttD",
       "type": "step",
       "children": [
         {
@@ -33158,7 +33144,6 @@
     {
       "commit": "29ce05bdb74dd53f6d83b82591186d2d1d10835b",
       "id": "882f88b5",
-      "articleId": "vVOVIkttD",
       "type": "step",
       "children": [
         {
@@ -33474,7 +33459,6 @@
     {
       "commit": "336a60bbad354531b6c875f5f10319ad64a7267d",
       "id": "b7baa91d",
-      "articleId": "vVOVIkttD",
       "type": "step",
       "children": [
         {
@@ -33845,7 +33829,6 @@
     {
       "commit": "c16984d25953ccee3a345815713cb54c9f9bc3fa",
       "id": "e01479e5",
-      "articleId": "vVOVIkttD",
       "type": "step",
       "children": [
         {
