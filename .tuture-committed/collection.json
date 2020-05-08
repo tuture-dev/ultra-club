@@ -19,7 +19,13 @@
       "description": "正当移动互联网进入白热化阶段时，以微信小程序为代表的一类“轻应用”异军突起。它们无需下载，使用方便，“用完即走”，同时功能也较为完备，一经推出即得到了各大平台和及用户的热烈追捧。但是问题也随之而来——开发者们要同时维护 Web 端、移动端、微信小程序、支付宝小程序等等多套用户界面，其维护成本可以想象。作为一个优秀的多端统一开发解决方案，Taro 的出现则改变了这一情况。正值 Taro 2.x 进入 beta 阶段，让我们沏上一杯茶，开始我们的 Taro 多端小程序开发之旅吧。",
       "cover": "https://imgkr.cn-bj.ufileos.com/231f806a-0aeb-43de-850a-c8a71971b2cc.jpg",
       "id": "34a473b9e9e5e3dafcc619ab152750af",
-      "created": "2019-12-26T10:16:40.222Z"
+      "created": "2019-12-26T10:16:40.222Z",
+      "topics": [],
+      "categories": [
+        "小程序",
+        "Taro",
+        "入门"
+      ]
     },
     {
       "name": "Taro 小程序开发大型实战（二）：多页面跳转和 Taro UI 组件库",
@@ -30,7 +36,12 @@
         "Taro UI"
       ],
       "id": "af6922503ad1941b09b324ffa35f33ea",
-      "created": "2019-12-29T10:16:40.222Z"
+      "created": "2019-12-29T10:16:40.222Z",
+      "categories": [
+        "小程序",
+        "Taro",
+        "入门"
+      ]
     },
     {
       "name": "Taro 小程序开发大型实战（三）：实现微信和支付宝多端登录",
@@ -42,7 +53,12 @@
         "Taro",
         "进阶"
       ],
-      "created": "2020-01-06T10:16:40.222Z"
+      "created": "2020-01-06T10:16:40.222Z",
+      "topics": [
+        "Hooks",
+        "Redux",
+        "Redux-Sagas"
+      ]
     },
     {
       "name": "Taro 小程序开发大型实战（四）：使用 Hooks 版的 Redux 实现应用状态管理",
@@ -65,7 +81,17 @@
       "description": "为了将数据持久化存储和高效的查询，我们需要把数据存储到数据库中，为了实现⼩程序端便捷的开发体验，⼀大批⼩程序 Serverless 服务兴起，⽽而微信小程序云正是为了微信小程序的快速开发⽽生的。在这篇文章中，我们将使用微信小程序云作为我们的后端，并讲解如何引⼊和实现 Redux 异步⼯作流来 实现⼩程序端访问小程序云的状态管理。",
       "cover": "https://imgkr.cn-bj.ufileos.com/41da1518-613e-4687-8ce5-02d0865bcd33.jpg",
       "id": "b32362b",
-      "created": "2020-01-17T10:16:40.222Z"
+      "created": "2020-01-17T10:16:40.222Z",
+      "topics": [
+        "微信小程序云",
+        "小程序云开发",
+        "Serverless"
+      ],
+      "categories": [
+        "小程序",
+        "Taro",
+        "进阶"
+      ]
     },
     {
       "name": "Taro 小程序开发大型实战（六）：LeanCloud，一统江湖",
@@ -73,8 +99,15 @@
       "cover": "https://imgkr.cn-bj.ufileos.com/1a812842-e9f7-45b7-9269-e2d6ee5bdf3a.jpg",
       "id": "abfd872",
       "created": "2020-02-19T10:16:40.222Z",
-      "topics": [],
-      "categories": []
+      "topics": [
+        "LeanCloud",
+        "Serverless"
+      ],
+      "categories": [
+        "小程序",
+        "Taro",
+        "进阶"
+      ]
     }
   ],
   "steps": [
