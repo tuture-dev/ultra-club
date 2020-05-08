@@ -3,7 +3,7 @@
   "description": "正当移动互联网进入白热化阶段时，以微信小程序为代表的一类“轻应用”异军突起。它们无需下载，使用方便，“用完即走”，同时功能也较为完备，一经推出即得到了各大平台和及用户的热烈追捧。但是问题也随之而来——开发者们要同时维护 Web 端、移动端、微信小程序、支付宝小程序等等多套用户界面，其维护成本可以想象。作为一个优秀的多端统一开发解决方案，Taro 的出现则改变了这一情况。正值 Taro 2.x 进入 beta 阶段，让我们沏上一杯茶，开始我们的 Taro 多端小程序开发之旅吧。",
   "id": "34a473b9e9e5e3dafcc619ab152750af",
   "created": "2019-12-25T10:16:40.222Z",
-  "github": "https://github.com/tuture-dev/ultra-club.git",
+  "github": "https://github.com/tuture-dev/ultra-club",
   "topics": [
     "Taro"
   ],
@@ -70,10 +70,11 @@
     {
       "name": "Taro 小程序开发大型实战（六）：LeanCloud，一统江湖",
       "description": "在上两篇文章中，我们讲解了使用微信小程序云作为我们的小程序后台，然后我们跑通了我们的注册登录、创建帖子、获取帖子列表、获取帖子详情的全栈流程，如果只想了解微信小程序的全栈开发流程的话，之前的文章已经足够了，如果还想了解跨端开发全栈开发流程的话（当然用 Taro 的同学估计也比较期待跨端的全栈开发流程，手动滑稽）接下来这篇文章就是你的菜了😆",
-      "cover": "/https://imgkr.cn-bj.ufileos.com/24aa4b5e-08a2-41fc-ac7d-137cb55542ed.jpg",
+      "cover": "https://imgkr.cn-bj.ufileos.com/1a812842-e9f7-45b7-9269-e2d6ee5bdf3a.jpg",
       "id": "abfd872",
       "created": "2020-02-19T10:16:40.222Z",
-      "topics": []
+      "topics": [],
+      "categories": []
     }
   ],
   "steps": [
@@ -8313,10 +8314,10 @@
       ]
     },
     {
-      "type": "step",
       "commit": "a3cf715",
       "id": "DKC32tcmSj",
       "articleId": "5e100f78e51d4541493621cd",
+      "type": "step",
       "children": [
         {
           "type": "heading-two",
@@ -8584,10 +8585,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "package.json",
           "display": true,
-          "id": "ktgw6Z-fVE",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -8725,10 +8726,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "src/store/index.js",
           "display": true,
-          "id": "qw3Z7gjJzn",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -8982,10 +8983,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "src/reducers/user.js",
           "display": true,
-          "id": "RHbnxx8xC9",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -9273,10 +9274,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "src/constants/user.js",
           "display": true,
-          "id": "bXmaBQcqIP",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -9348,10 +9349,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "src/reducers/post.js",
           "display": true,
-          "id": "lm1xtTlzru",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -9488,10 +9489,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "src/constants/post.js",
           "display": true,
-          "id": "IhcP7amyiE",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -9556,10 +9557,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "src/constants/index.js",
           "display": true,
-          "id": "lBsyYXJBJf",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -9638,10 +9639,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "src/reducers/index.js",
           "display": true,
-          "id": "CwjhW0qj58",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -9951,10 +9952,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "src/app.jsx",
           "display": true,
-          "id": "ZjoaBKFXyo",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -10111,10 +10112,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "src/components/LoginButton/index.js",
           "display": true,
-          "id": "T6b5E7UXNr",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -10354,10 +10355,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "src/components/WeappLoginButton/index.js",
           "display": true,
-          "id": "eUCJDUfH3i",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -10518,10 +10519,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "src/components/AlipayLoginButton/index.js",
           "display": true,
-          "id": "FVkPDbym_Z",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -10581,10 +10582,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "src/components/LoggedMine/index.jsx",
           "display": true,
-          "id": "fRTtHuykme",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -10980,10 +10981,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "src/components/Header/index.js",
           "display": true,
-          "id": "XHn-6f0gn-",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -11182,10 +11183,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "src/components/Logout/index.js",
           "display": true,
-          "id": "NRNtXjuKqe",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -11489,10 +11490,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "src/components/LoginForm/index.jsx",
           "display": true,
-          "id": "zhlLyIboaR",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -11950,10 +11951,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "src/components/Footer/index.js",
           "display": true,
-          "id": "obkVjC9Ysj",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -12239,10 +12240,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "src/pages/mine/mine.jsx",
           "display": true,
-          "id": "BwF2ZEvHhj",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -12508,10 +12509,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "src/components/PostForm/index.jsx",
           "display": true,
-          "id": "G-bV3AocQP",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -12909,10 +12910,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "src/components/PostCard/index.jsx",
           "display": true,
-          "id": "I_9ywZOJ7Q",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -13191,10 +13192,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "src/components/PostCard/index.scss",
           "display": true,
-          "id": "MtZp-H7YnM",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -13318,10 +13319,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "src/pages/index/index.jsx",
           "display": true,
-          "id": "TrViLkUyHu",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
@@ -13586,10 +13587,10 @@
           ]
         },
         {
-          "type": "file",
           "file": "src/pages/post/post.jsx",
           "display": true,
-          "id": "B5QT5D806s",
+          "commit": "a3cf715",
+          "type": "file",
           "children": [
             {
               "type": "explain",
