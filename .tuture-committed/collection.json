@@ -108,6 +108,28 @@
         "Taro",
         "进阶"
       ]
+    },
+    {
+      "id": "2b5a9f18",
+      "created": "2020-05-17T01:37:06.464Z",
+      "name": "Taro 小程序开发大型实战（七）：打造完整且强大的用户系统",
+      "topics": [
+        "Taro",
+        "用户系统",
+        "鉴权",
+        "认证",
+        "OAuth",
+        "微信登录",
+        "QQ登录",
+        "Github登录"
+      ],
+      "categories": [
+        "小程序",
+        "Taro",
+        "进阶"
+      ],
+      "cover": "https://imgkr.cn-bj.ufileos.com/4006a279-c5b2-4fc2-a7a2-20b9fd91c97a.jpg",
+      "description": "为了让我们的博客看起来更加专业，我们打算给它也加上整上一个专业的用户系统，有了最为核心的用户系统在，我们博客之后的扩展都可以游刃有余，但是据统计，一个应用要想打造一个比较专业的用户系统，至少需要花费几个月时间，还需要花大量的精力去维护打造出来的用户系统，所在在做了一番调研之后，我们将目标放在了一个叫做 Authing 的通用云身份平台，它提供的服务就是帮应用快速集成一个高效、安全的用户系统，而我们这篇教程将会讲解如何借助 Authing 来给我们的之前的小程序博客武装一个专业的用户系统。"
     }
   ],
   "steps": [
@@ -30505,6 +30527,7 @@
     {
       "commit": "4a85cd005d8be613d08c18c25ea1633703e30eba",
       "id": "9615525d",
+      "articleId": "2b5a9f18",
       "type": "step",
       "children": [
         {
@@ -30602,6 +30625,68 @@
               "children": [
                 {
                   "text": "为了让我们的博客看起来更加专业，我们打算给它也加上整上一个专业的用户系统，有了最为核心的用户系统在，我们博客之后的扩展都可以游刃有余，但是据统计，一个应用要想打造一个比较专业的用户系统，至少需要花费几个月时间，还需要花大量的精力去维护打造出来的用户系统，所在在做了一番调研之后，我们将目标放在了一个叫做 Authing 的通用云身份平台，它提供的服务就是帮应用快速集成一个高效、安全的用户系统，而我们这篇教程将会讲解如何借助 Authing 来给我们的之前的小程序博客武装一个专业的用户系统。"
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "首先我们先来看一看完成的效果："
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "\n"
+                }
+              ]
+            },
+            {
+              "type": "image",
+              "url": "https://cdn.nlark.com/yuque/0/2020/gif/123790/1588231679722-a000569d-8acf-4e8c-be6d-e7288dadacb2.gif",
+              "children": [
+                {
+                  "text": ""
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "如果你希望直接从这篇开始，那么可以 Clone 我们为你准备的代码，然后跟着教程补充剩下的部分："
+                }
+              ]
+            },
+            {
+              "type": "code-block",
+              "children": [
+                {
+                  "type": "code-line",
+                  "children": [
+                    {
+                      "text": "git clone -b authing-start https://github.com/tuture-dev/ultra-club.git\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "code-line",
+                  "children": [
+                    {
+                      "text": "# 或者下载 Gitee 上的仓库"
+                    }
+                  ]
+                },
+                {
+                  "type": "code-line",
+                  "children": [
+                    {
+                      "text": "git clone -b authing-start https://gitee.com/tuture/ultra-club.git"
+                    }
+                  ]
                 }
               ]
             }
@@ -31252,6 +31337,7 @@
     {
       "commit": "dfea82b0b6e11d1a575d99e95337f72c8a4eb6f9",
       "id": "4a56dd05",
+      "articleId": "2b5a9f18",
       "type": "step",
       "children": [
         {
@@ -31350,7 +31436,7 @@
                     {
                       "text": " Authing 官网",
                       "link": true,
-                      "url": "https://authing.cn/"
+                      "url": "https://authing.cn/?utm_source=tuture"
                     },
                     {
                       "text": "，我们会看到如下界面："
@@ -31364,7 +31450,15 @@
                       "text": ""
                     }
                   ],
-                  "url": "https://imgkr.cn-bj.ufileos.com/f2c629ae-7807-4568-abe5-9d241bbf2c9f.png"
+                  "url": "https://imgkr.cn-bj.ufileos.com/403c57c4-fa92-477d-bbbb-875faa4a58c8.png"
+                },
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": ""
+                    }
+                  ]
                 },
                 {
                   "type": "paragraph",
@@ -31611,7 +31705,7 @@
                     {
                       "text": "这个链接",
                       "link": true,
-                      "url": "https://docs.authing.cn/authing/sdk/authing-sdk-for-wxapp"
+                      "url": "https://docs.authing.cn/authing/sdk/authing-sdk-for-wxapp?utm_source=tuture"
                     },
                     {
                       "text": "去往小程序开发文档。"
@@ -32632,6 +32726,7 @@
     {
       "commit": "a23726a6b28dc78330c794563ee49b7980303266",
       "id": "46d1a46e",
+      "articleId": "2b5a9f18",
       "type": "step",
       "children": [
         {
@@ -33178,6 +33273,7 @@
     {
       "commit": "29ce05bdb74dd53f6d83b82591186d2d1d10835b",
       "id": "882f88b5",
+      "articleId": "2b5a9f18",
       "type": "step",
       "children": [
         {
@@ -33493,6 +33589,7 @@
     {
       "commit": "336a60bbad354531b6c875f5f10319ad64a7267d",
       "id": "b7baa91d",
+      "articleId": "2b5a9f18",
       "type": "step",
       "children": [
         {
@@ -33863,6 +33960,7 @@
     {
       "commit": "c16984d25953ccee3a345815713cb54c9f9bc3fa",
       "id": "e01479e5",
+      "articleId": "2b5a9f18",
       "type": "step",
       "children": [
         {
