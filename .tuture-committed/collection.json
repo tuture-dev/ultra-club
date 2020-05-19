@@ -30640,9 +30640,18 @@
               "type": "paragraph",
               "children": [
                 {
-                  "text": "\n"
+                  "text": ""
                 }
               ]
+            },
+            {
+              "type": "image",
+              "children": [
+                {
+                  "text": "\n"
+                }
+              ],
+              "url": "https://imgkr.cn-bj.ufileos.com/cf46522f-0513-475e-9e66-cd378cc1b731.gif"
             },
             {
               "type": "image",
@@ -34408,6 +34417,13 @@
   ],
   "version": "v1",
   "remotes": [
+    {
+      "name": "gitee",
+      "refs": {
+        "fetch": "https://gitee.com/tuture/ultra-club.git",
+        "push": "https://gitee.com/tuture/ultra-club.git"
+      }
+    },
     {
       "name": "origin",
       "refs": {
