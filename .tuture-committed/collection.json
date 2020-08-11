@@ -16,10 +16,12 @@
     {
       "name": "Taro 小程序开发大型实战（一）：熟悉的 React，熟悉的 Hooks",
       "description": "正当移动互联网进入白热化阶段时，以微信小程序为代表的一类“轻应用”异军突起。它们无需下载，使用方便，“用完即走”，同时功能也较为完备，一经推出即得到了各大平台和及用户的热烈追捧。但是问题也随之而来——开发者们要同时维护 Web 端、移动端、微信小程序、支付宝小程序等等多套用户界面，其维护成本可以想象。作为一个优秀的多端统一开发解决方案，Taro 的出现则改变了这一情况。正值 Taro 2.x 进入 beta 阶段，让我们沏上一杯茶，开始我们的 Taro 多端小程序开发之旅吧。",
-      "cover": "https://imgkr.cn-bj.ufileos.com/231f806a-0aeb-43de-850a-c8a71971b2cc.jpg",
+      "cover": "https://static.tuture.co/c/34a473b/taro-cover-1.jpg",
       "id": "34a473b9e9e5e3dafcc619ab152750af",
       "created": "2019-12-26T10:16:40.222Z",
-      "topics": [],
+      "topics": [
+        "Taro"
+      ],
       "categories": [
         "小程序",
         "Taro",
@@ -29,7 +31,7 @@
     {
       "name": "Taro 小程序开发大型实战（二）：多页面跳转和 Taro UI 组件库",
       "description": "在上一篇教程中，我们用熟悉的 React 和 Hooks 搞定了“奥特曼俱乐部”的雏形。在这一篇文章中，我们将用 Taro 自带的路由功能实现多页面跳转，并用 Taro UI 组件库升级之前略显简陋的界面。",
-      "cover": "https://imgkr.cn-bj.ufileos.com/552e6ba5-ec56-4aef-a8aa-d53e63943412.jpg",
+      "cover": "https://static.tuture.co/c/34a473b/taro-cover-2.jpg",
       "topics": [
         "Taro",
         "Taro UI"
@@ -45,7 +47,7 @@
     {
       "name": "Taro 小程序开发大型实战（三）：实现微信和支付宝多端登录",
       "description": "能够借助所在平台实现“一键登录”是小程序的一大优势，大大降低了用户的使用门槛，但是各平台处理登录和鉴权的方式又存在较大的差异。在这一篇文章中，我们将带你踩过“多端登录”的“坑”，让用户能够在不同的平台轻松登录我们的应用。",
-      "cover": "https://imgkr.cn-bj.ufileos.com/3ef0e7f9-33c9-4c6b-af6c-0e17f1ebee4b.jpg",
+      "cover": "https://static.tuture.co/c/34a473b/taro-cover-3.jpg",
       "id": "5e10118be51d454165777203",
       "categories": [
         "小程序",
@@ -62,7 +64,7 @@
     {
       "name": "Taro 小程序开发大型实战（四）：使用 Hooks 版的 Redux 实现应用状态管理",
       "description": "随着状态增多，状态提升的操作也随着增多，导致保存这些状态的父组件会臃肿不堪，而且每次状态的改变需要影响很多中间组件，带来极大的性能开销。在这篇长文中，我们将用 Hooks 版的 Redux 来解决状态管理的难题，而让 Taro 专注于渲染用户界面。",
-      "cover": "https://imgkr.cn-bj.ufileos.com/19b14505-1fd9-4069-aa8a-0605d7b9864b.jpg",
+      "cover": "https://static.tuture.co/c/34a473b/taro-cover-4.jpg",
       "id": "5e100f78e51d4541493621cd",
       "topics": [
         "Taro",
@@ -78,7 +80,7 @@
     {
       "name": "Taro 小程序开发大型实战（五）：尝鲜微信小程序云",
       "description": "为了将数据持久化存储和高效的查询，我们需要把数据存储到数据库中，为了实现⼩程序端便捷的开发体验，⼀大批⼩程序 Serverless 服务兴起，⽽而微信小程序云正是为了微信小程序的快速开发⽽生的。在这篇文章中，我们将使用微信小程序云作为我们的后端，并讲解如何引⼊和实现 Redux 异步⼯作流来 实现⼩程序端访问小程序云的状态管理。",
-      "cover": "https://imgkr.cn-bj.ufileos.com/41da1518-613e-4687-8ce5-02d0865bcd33.jpg",
+      "cover": "https://static.tuture.co/c/34a473b/taro-cover-7.jpg",
       "id": "b32362b",
       "created": "2020-01-17T10:16:40.222Z",
       "topics": [
@@ -95,7 +97,7 @@
     {
       "name": "Taro 小程序开发大型实战（六）：LeanCloud，一统江湖",
       "description": "在上两篇文章中，我们讲解了使用微信小程序云作为我们的小程序后台，然后我们跑通了我们的注册登录、创建帖子、获取帖子列表、获取帖子详情的全栈流程，如果只想了解微信小程序的全栈开发流程的话，之前的文章已经足够了，如果还想了解跨端开发全栈开发流程的话（当然用 Taro 的同学估计也比较期待跨端的全栈开发流程，手动滑稽）接下来这篇文章就是你的菜了😆",
-      "cover": "https://imgkr.cn-bj.ufileos.com/1a812842-e9f7-45b7-9269-e2d6ee5bdf3a.jpg",
+      "cover": "https://static.tuture.co/c/34a473b/taro-cover-8.jpg",
       "id": "abfd872",
       "created": "2020-02-19T10:16:40.222Z",
       "topics": [
@@ -127,7 +129,7 @@
         "Taro",
         "进阶"
       ],
-      "cover": "https://imgkr.cn-bj.ufileos.com/4006a279-c5b2-4fc2-a7a2-20b9fd91c97a.jpg",
+      "cover": "https://static.tuture.co/c/34a473b/taro-cover-9.jpg",
       "description": "为了让我们的博客看起来更加专业，我们打算给它也加上整上一个专业的用户系统，有了最为核心的用户系统在，我们博客之后的扩展都可以游刃有余，但是据统计，一个应用要想打造一个比较专业的用户系统，至少需要花费几个月时间，还需要花大量的精力去维护打造出来的用户系统，所在在做了一番调研之后，我们将目标放在了一个叫做 Authing 的通用云身份平台，它提供的服务就是帮应用快速集成一个高效、安全的用户系统，而我们这篇教程将会讲解如何借助 Authing 来给我们的之前的小程序博客武装一个专业的用户系统。"
     },
     {
@@ -149,7 +151,7 @@
         "Taro",
         "进阶"
       ],
-      "cover": "https://imgkr.cn-bj.ufileos.com/4006a279-c5b2-4fc2-a7a2-20b9fd91c97a.jpg",
+      "cover": "https://static.tuture.co/c/34a473b/taro-cover-9.jpg",
       "description": "为了让我们的博客看起来更加专业，我们打算给它也加上整上一个专业的用户系统，有了最为核心的用户系统在，我们博客之后的扩展都可以游刃有余，但是据统计，一个应用要想打造一个比较专业的用户系统，至少需要花费几个月时间，还需要花大量的精力去维护打造出来的用户系统，所在在做了一番调研之后，我们将目标放在了一个叫做 Authing 的通用云身份平台，它提供的服务就是帮应用快速集成一个高效、安全的用户系统，而我们这篇教程将会讲解如何借助 Authing 来给我们的之前的小程序博客武装一个专业的用户系统。"
     }
   ],
