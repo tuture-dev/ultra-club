@@ -56,6 +56,7 @@
       ],
       "created": "2020-01-06T10:16:40.222Z",
       "topics": [
+        "Taro",
         "Hooks",
         "Redux",
         "Redux-Sagas"
@@ -84,6 +85,7 @@
       "id": "b32362b",
       "created": "2020-01-17T10:16:40.222Z",
       "topics": [
+        "Taro",
         "微信小程序云",
         "小程序云开发",
         "Serverless"
@@ -101,6 +103,7 @@
       "id": "abfd872",
       "created": "2020-02-19T10:16:40.222Z",
       "topics": [
+        "Taro",
         "LeanCloud",
         "Serverless"
       ],
