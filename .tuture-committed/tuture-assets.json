@@ -1,0 +1,194 @@
+[
+  {
+    "localPath": ".tuture/assets/taro-init.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/taro-init.png"
+  },
+  {
+    "localPath": ".tuture/assets/dev-weapp.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/dev-weapp.png"
+  },
+  {
+    "localPath": ".tuture/assets/wechat-dev-new.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/wechat-dev-new.png"
+  },
+  {
+    "localPath": ".tuture/assets/import-project.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/import-project.png"
+  },
+  {
+    "localPath": ".tuture/assets/devtool-ui.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/devtool-ui.png"
+  },
+  {
+    "localPath": ".tuture/assets/taro-demo1.gif",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/taro-demo1.gif"
+  },
+  {
+    "localPath": ".tuture/assets/taro-demo2.gif",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/taro-demo2.gif"
+  },
+  {
+    "localPath": ".tuture/assets/taro-demo3.gif",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/taro-demo3.gif"
+  },
+  {
+    "localPath": ".tuture/assets/components.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/components.png"
+  },
+  {
+    "localPath": ".tuture/assets/taro-demo4.gif",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/taro-demo4.gif"
+  },
+  {
+    "localPath": ".tuture/assets/logged-squashed.jpg",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/logged-squashed.jpg"
+  },
+  {
+    "localPath": ".tuture/assets/taro-demo-notlogin.gif",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/taro-demo-notlogin.gif"
+  },
+  {
+    "localPath": ".tuture/assets/taro-demo5.gif",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/taro-demo5.gif"
+  },
+  {
+    "localPath": ".tuture/assets/redux-saga-1.jpg",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/redux-saga-1.jpg"
+  },
+  {
+    "localPath": ".tuture/assets/redux-saga-2.jpg",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/redux-saga-2.jpg"
+  },
+  {
+    "localPath": ".tuture/assets/image-8c48ba740582f334.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/image-8c48ba740582f334.png"
+  },
+  {
+    "localPath": ".tuture/assets/image-4fbfead43855d6a8.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/image-4fbfead43855d6a8.png"
+  },
+  {
+    "localPath": ".tuture/assets/image-5cd0ff3734c50321.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/image-5cd0ff3734c50321.png"
+  },
+  {
+    "localPath": ".tuture/assets/result-11ec1de85de0d7bc.gif",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/result-11ec1de85de0d7bc.gif"
+  },
+  {
+    "localPath": ".tuture/assets/image-b2d6955488ad2756.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/image-b2d6955488ad2756.png"
+  },
+  {
+    "localPath": ".tuture/assets/result7.gif",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/result7.gif"
+  },
+  {
+    "localPath": ".tuture/assets/image-5f006311d35d7ac6.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/image-5f006311d35d7ac6.png"
+  },
+  {
+    "localPath": ".tuture/assets/image-560ef4e2593d9e2d.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/image-560ef4e2593d9e2d.png"
+  },
+  {
+    "localPath": ".tuture/assets/image-7d9f70c8a90700da.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/image-7d9f70c8a90700da.png"
+  },
+  {
+    "localPath": ".tuture/assets/image-d81c7e066a6f0fc0.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/image-d81c7e066a6f0fc0.png"
+  },
+  {
+    "localPath": ".tuture/assets/image-b2a5a398def7e4c3.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/image-b2a5a398def7e4c3.png"
+  },
+  {
+    "localPath": ".tuture/assets/image-ee0be913c4712735.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/image-ee0be913c4712735.png"
+  },
+  {
+    "localPath": ".tuture/assets/image-769acb328cd3a17e.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/image-769acb328cd3a17e.png"
+  },
+  {
+    "localPath": ".tuture/assets/image-215ce2e787202948.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/image-215ce2e787202948.png"
+  },
+  {
+    "localPath": ".tuture/assets/image-6ec3dd64c5753c4d.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/image-6ec3dd64c5753c4d.png"
+  },
+  {
+    "localPath": ".tuture/assets/image-4cb13f15ee12ad44.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/image-4cb13f15ee12ad44.png"
+  },
+  {
+    "localPath": ".tuture/assets/image-d3a09bf272416f22.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/image-d3a09bf272416f22.png"
+  },
+  {
+    "localPath": ".tuture/assets/image-7c77e8f7fbccf648.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/image-7c77e8f7fbccf648.png"
+  },
+  {
+    "localPath": ".tuture/assets/image-7969c02e1badc548.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/image-7969c02e1badc548.png"
+  },
+  {
+    "localPath": ".tuture/assets/leancloud-1-4bf697a564eb0f1a.gif",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/leancloud-1-4bf697a564eb0f1a.gif"
+  },
+  {
+    "localPath": ".tuture/assets/leancloud-2-f1ddd47a26e4d9ae.gif",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/leancloud-2-f1ddd47a26e4d9ae.gif"
+  },
+  {
+    "localPath": ".tuture/assets/image-f017da933d02a499.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/image-f017da933d02a499.png"
+  },
+  {
+    "localPath": ".tuture/assets/leancloud-3.gif",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/leancloud-3.gif"
+  },
+  {
+    "localPath": ".tuture/assets/image-2ae3cfd8008c3e92.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/image-2ae3cfd8008c3e92.png"
+  },
+  {
+    "localPath": ".tuture/assets/image-7c6c55dde66e13a6.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/image-7c6c55dde66e13a6.png"
+  },
+  {
+    "localPath": ".tuture/assets/image-c5fe559acd96a5dd.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/image-c5fe559acd96a5dd.png"
+  },
+  {
+    "localPath": ".tuture/assets/image-3e0e96370de6d1ac.png",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/image-3e0e96370de6d1ac.png"
+  },
+  {
+    "localPath": ".tuture/assets/taro-cover-1.jpg",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/taro-cover-1.jpg"
+  },
+  {
+    "localPath": ".tuture/assets/taro-cover-2.jpg",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/taro-cover-2.jpg"
+  },
+  {
+    "localPath": ".tuture/assets/taro-cover-3.jpg",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/taro-cover-3.jpg"
+  },
+  {
+    "localPath": ".tuture/assets/taro-cover-4.jpg",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/taro-cover-4.jpg"
+  },
+  {
+    "localPath": ".tuture/assets/taro-cover-5.jpg",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/taro-cover-5.jpg"
+  },
+  {
+    "localPath": ".tuture/assets/taro-cover-6.jpg",
+    "hostingUri": "https://static.tuture.co/c/34a473b9e9e5e3dafcc619ab152750af/taro-cover-6.jpg"
+  }
+]
